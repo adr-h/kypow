@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",                // Required for paths to work
+    "paths": {
+      "@foo/*": ["src/*"]      // Example: @foo/bar -> src/foo/bar
+    },
+    "target": "esnext",            // Typical for esbuild usage
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}
