@@ -3,13 +3,14 @@ import express from 'express';
 import { fileURLToPath } from 'url'
 import { createServer as createViteServer } from 'vite';
 import path from 'path';
-import fs from 'fs';
+import fs from 'fs/promises';
 import type { Config } from './config/Config';
 import esbuild from 'esbuild';
+import { externaliseImportsPlugin } from './externaliseImportsPlugin';
 
 const kypanelRoot = fileURLToPath(new URL('..', import.meta.url))
 
-export function setupKypanel(config: Config) {
+export function setup(config: Config) {
    const projectRoot = config.projectRoot;
 
    const run = async () => {
@@ -19,9 +20,10 @@ export function setupKypanel(config: Config) {
          res.json(config);
       })
 
-      app.get('/compile', async (req, res) => {
+      app.get('/exec', async (req, res) => {
          const code = `
             import bar from '@foo/yasm';
+            import { customerQuery } from '@foo/customerQuery';
             import _ from "lodash";
 
             const object = { 'p': [{ 'q': { 'r': 7 } }, 9] };
@@ -31,37 +33,12 @@ export function setupKypanel(config: Config) {
                console.log('presto');
                console.log(at_elem);
                console.log(bar);
+               customerQuery();
+
                return 'wam bam kazam'
             }
          `;
 
-         // const rewriteAndBlockPathsPlugin = {
-         //    name: 'rewrite-and-externalize',
-         //    setup(build) {
-         //       build.onResolve({ filter: /.*/ }, args => {
-         //          if (args.path === '@schema-types') {
-         //             return {
-         //                path: './sample-types',
-         //                external: true,
-         //             };
-         //          }
-
-         //          if (args.path === 'kysely') {
-         //             return {
-         //                path: args.path,
-         //                external: true
-         //             }
-         //          }
-
-         //          return {
-         //             errors: [{
-         //                text: `Illegal import: "${args.path}"`,
-         //                detail: 'The only allowed imports are: [@schema-types]',
-         //             }],
-         //          };
-         //       });
-         //    },
-         // };
 
          const result = await esbuild.build({
             stdin: {
@@ -70,18 +47,16 @@ export function setupKypanel(config: Config) {
                loader: 'ts',
             },
             tsconfig: config.tsConfigPath,
-            // plugins: [rewriteAndBlockPathsPlugin],
-            // 'bundle: true' is required to activate the onResolve hook.
+            plugins: [
+               externaliseImportsPlugin
+            ],
             bundle: true,
-            // 'write: false' returns the output in memory.
             write: false,
-            format: 'esm',
-            alias: {
-               "@foo": "./src"  // TODO: auto transform using tsConfigPath instead of hardcoding
-            }
+            platform: 'node',
+            format: 'esm'
          });
 
-         await fs.promises.writeFile(`${projectRoot}/.kypanel/build/_temp.ts`, result.outputFiles[0].text);
+         await fs.writeFile(`${projectRoot}/.kypanel/build/_temp.ts`, result.outputFiles[0].text);
          const { exec } = await import (`${projectRoot}/.kypanel/build/_temp.ts`);
          const payload = exec();
 
@@ -97,7 +72,7 @@ export function setupKypanel(config: Config) {
          plugins: [{
             name: 'kypanel-override',
             transformIndexHtml() {
-               return fs.readFileSync(path.join(kypanelRoot, 'index.html'), 'utf-8');
+               return fs.readFile(path.join(kypanelRoot, 'index.html'), 'utf-8');
             },
 
             // TODO: resolveId and transformIndexHtml might not be necessary anymore if we're just using root:kypanelRoot
