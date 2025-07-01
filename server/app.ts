@@ -48,6 +48,8 @@ export function setup(config: Config) {
             },
             tsconfig: config.tsConfigPath,
             plugins: [
+               // TODO: this leaves alias imports untouched - may still need to transform them
+               // alternatively just use vite-node or tsx permanently?
                externaliseImportsPlugin
             ],
             bundle: true,
