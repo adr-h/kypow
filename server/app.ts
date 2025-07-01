@@ -53,10 +53,11 @@ export function setup(config: Config) {
             bundle: true,
             write: false,
             platform: 'node',
-            format: 'esm'
+            format: config.moduleFormat
          });
 
-         await fs.writeFile(`${projectRoot}/.kypanel/build/_temp.ts`, result.outputFiles[0].text);
+         const outputCode = result.outputFiles[0].text;
+         await fs.writeFile(`${projectRoot}/.kypanel/build/_temp.ts`, outputCode);
          const { exec } = await import (`${projectRoot}/.kypanel/build/_temp.ts`);
          const payload = exec();
 
