@@ -3,4 +3,5 @@ export type Config = {
    projectRoot: string;
    tsConfigPath: string;
    esBuildOptions?: any;
+   moduleFormat: 'esm' | 'cjs' | 'iife';
 }
