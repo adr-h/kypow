@@ -16,13 +16,17 @@ importers:
         version: 0.28.2
       kysely-codegen:
         specifier: ^0.18.5
-        version: 0.18.5(better-sqlite3@11.10.0)(kysely@0.28.2)
+        version: 0.18.5(better-sqlite3@11.10.0)(kysely@0.28.2)(typescript@5.8.3)
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
       sqlite3:
         specifier: ^5.1.7
         version: 5.1.7
+    devDependencies:
+      '@types/lodash':
+        specifier: ^4.17.20
+        version: 4.17.20
 
 packages:
 
@@ -48,6 +52,9 @@ packages:
   '@tootallnate/once@1.1.2':
     resolution: {integrity: sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==}
     engines: {node: '>= 6'}
+
+  '@types/lodash@4.17.20':
+    resolution: {integrity: sha512-H3MHACvFUEiujabxhaI/ImO6gUrd8oOurg7LQtS7mbwIXA/cUqWrvBsaeJ23aZEPk1TAYkurjfMbSELfoCXlGA==}
 
   abbrev@1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
@@ -701,6 +708,11 @@ packages:
   tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
 
+  typescript@5.8.3:
+    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
   unique-filename@1.1.1:
     resolution: {integrity: sha512-Vmp0jIp2ln35UTXuryvjzkjGdRyf9b2lTXuSYUiPmzRcl3FDtYqAwOnTJkAngD9SWhnoJzDbTKwaOrZ+STtxNQ==}
 
@@ -754,6 +766,8 @@ snapshots:
 
   '@tootallnate/once@1.1.2':
     optional: true
+
+  '@types/lodash@4.17.20': {}
 
   abbrev@1.1.1:
     optional: true
@@ -895,12 +909,14 @@ snapshots:
   console-control-strings@1.1.0:
     optional: true
 
-  cosmiconfig@9.0.0:
+  cosmiconfig@9.0.0(typescript@5.8.3):
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
       js-yaml: 4.1.0
       parse-json: 5.2.0
+    optionalDependencies:
+      typescript: 5.8.3
 
   debug@4.4.1:
     dependencies:
@@ -1103,10 +1119,10 @@ snapshots:
 
   json-parse-even-better-errors@2.3.1: {}
 
-  kysely-codegen@0.18.5(better-sqlite3@11.10.0)(kysely@0.28.2):
+  kysely-codegen@0.18.5(better-sqlite3@11.10.0)(kysely@0.28.2)(typescript@5.8.3):
     dependencies:
       chalk: 4.1.2
-      cosmiconfig: 9.0.0
+      cosmiconfig: 9.0.0(typescript@5.8.3)
       dotenv: 16.6.1
       dotenv-expand: 12.0.2
       git-diff: 2.0.6
@@ -1475,6 +1491,9 @@ snapshots:
   tunnel-agent@0.6.0:
     dependencies:
       safe-buffer: 5.2.1
+
+  typescript@5.8.3:
+    optional: true
 
   unique-filename@1.1.1:
     dependencies:
