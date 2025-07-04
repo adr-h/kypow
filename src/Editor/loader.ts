@@ -1,6 +1,6 @@
 import { loader as monacoLoader } from '@monaco-editor/react';
 
-import * as monaco from 'monaco-editor';
+import * as monacoInstance from 'monaco-editor';
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
 import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
 import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
@@ -25,6 +25,8 @@ self.MonacoEnvironment = {
    },
 };
 
-monacoLoader.config({ monaco });
-
+export const monaco = monacoInstance;
 export const loader = monacoLoader;
+
+monacoLoader.config({ monaco: monacoInstance });
+
