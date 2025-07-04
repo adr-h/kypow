@@ -7,6 +7,7 @@ import fs from 'fs/promises';
 import type { Config } from './config/Config';
 import esbuild from 'esbuild';
 import { externaliseImportsPlugin } from './externaliseImportsPlugin';
+import { getTypedefs, type TypeDefFile } from './services/type-system';
 
 const kypanelRoot = fileURLToPath(new URL('..', import.meta.url))
 
@@ -19,6 +20,30 @@ export function setup(config: Config) {
       app.get('/config', (req, res) => {
          res.json(config);
       })
+
+      app.get('/typedefs', async (req, res) => {
+         console.log('hit this path');
+         const pathParam = req.query.path as string | undefined;
+         const virtualRootParam = req.query.root as string | undefined;
+
+
+         if (!pathParam || !virtualRootParam) {
+            res.json({"why": ":("})
+            return;
+         }
+
+         let typedefs: TypeDefFile[] = [];
+         if (pathParam.startsWith('@kypanel')) {
+            const kypanelRelativePath = pathParam.replace('@kypanel', kypanelRoot);
+
+            typedefs = await getTypedefs(kypanelRelativePath, virtualRootParam);
+         } else {
+            // TODO: alias resolution with the projectRoot's tsconfig maaaaay be necessary
+            typedefs = await getTypedefs(pathParam, virtualRootParam);
+         }
+
+         res.json(typedefs);
+      });
 
       app.get('/exec', async (req, res) => {
          const code = `
