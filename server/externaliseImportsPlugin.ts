@@ -1,4 +1,4 @@
-export const externaliseImportsPlugin = {
+export const externaliseImportsPlugin = () => ({
    name: 'externalize',
    setup(build) {
       build.onResolve({ filter: /.*/ }, args => {
@@ -24,4 +24,4 @@ export const externaliseImportsPlugin = {
          };
       });
    },
-};
+});

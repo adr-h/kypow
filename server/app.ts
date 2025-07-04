@@ -2,12 +2,17 @@
 import express from 'express';
 import { fileURLToPath } from 'url'
 import { createServer as createViteServer } from 'vite';
-import path from 'path';
+import path, { resolve } from 'path';
 import fs from 'fs/promises';
 import type { Config } from './config/Config';
 import esbuild from 'esbuild';
 import { externaliseImportsPlugin } from './externaliseImportsPlugin';
+
 import { getTypedefs, type TypeDefFile } from './services/type-system';
+// import {Generator} from 'npm-dts'
+import { generateDtsBundle } from 'dts-bundle-generator';
+
+// const { dtsPlugin } = require("esbuild-plugin-d.ts");
 
 const kypanelRoot = fileURLToPath(new URL('..', import.meta.url))
 
@@ -28,7 +33,7 @@ export function setup(config: Config) {
 
 
          if (!pathParam || !virtualRootParam) {
-            res.json({"why": ":("})
+            res.json({ "why": ":(" })
             return;
          }
 
@@ -46,19 +51,20 @@ export function setup(config: Config) {
       });
 
       app.get('/exec', async (req, res) => {
-         const code = `
-            import bar from '@foo/yasm';
-            import { customerQuery } from '@foo/customerQuery';
+         const inputCode = `
+            // import bar from '@foo/yasm';
+            // import { customerQuery } from '@foo/customerQuery';
             import _ from "lodash";
+            import idk from 'kysely-codegen';
 
             const object = { 'p': [{ 'q': { 'r': 7 } }, 9] };
             const at_elem = _.at(object, ['p[0].q.r', 'p[1]']);
 
-            export function exec() {
+            export function exec(foo: typeof _) {
                console.log('presto');
                console.log(at_elem);
-               console.log(bar);
-               customerQuery();
+               // console.log(bar);
+               // customerQuery();
 
                return 'wam bam kazam'
             }
@@ -67,7 +73,7 @@ export function setup(config: Config) {
 
          const result = await esbuild.build({
             stdin: {
-               contents: code,
+               contents: inputCode,
                resolveDir: projectRoot,  // for resolving node_modules
                loader: 'ts',
             },
@@ -75,7 +81,7 @@ export function setup(config: Config) {
             plugins: [
                // TODO: this leaves alias imports untouched - may still need to transform them
                // alternatively just use vite-node or tsx permanently?
-               externaliseImportsPlugin
+               externaliseImportsPlugin()
             ],
             bundle: true,
             write: false,
@@ -84,10 +90,34 @@ export function setup(config: Config) {
          });
 
          const outputCode = result.outputFiles[0].text;
-         await fs.writeFile(`${projectRoot}/.kypanel/build/_temp.ts`, outputCode);
-         const { exec } = await import (`${projectRoot}/.kypanel/build/_temp.ts`);
-         const payload = exec();
+         await fs.writeFile(`${projectRoot}/.kypanel/build/_temp.ts`, inputCode);
+         await fs.writeFile(`${projectRoot}/.kypanel/build/_temp.js`, outputCode);
 
+         const getDeclarationFiles = async () => {
+            const bundled = generateDtsBundle([
+               {
+                  filePath: `${projectRoot}/.kypanel/build/_temp.ts`,
+                  noCheck: true, // this is exposed in the CLI tool as a public arg, but not in the TS typing. I should make a PR for this lib...
+                  output: {
+                     noBanner: true,
+                     exportReferencedTypes: true, // Pulls referenced types inline
+                  },
+                  libraries: {
+                     inlinedLibraries: ['lodash']
+                  }
+               },
+            ], {
+
+               preferredConfigPath: config.tsConfigPath
+            });
+            console.log('dts bundle', bundled[0]);  // Your complete `.d.ts` content as string
+
+            await fs.writeFile(`${projectRoot}/.kypanel/build/_temp.d.ts`, bundled[0])
+         };
+         getDeclarationFiles();
+
+         const { exec } = await import(`${projectRoot}/.kypanel/build/_temp.js`);
+         const payload = exec();
          res.send(payload);
       })
 

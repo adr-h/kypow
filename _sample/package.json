@@ -14,5 +14,8 @@
     "kysely-codegen": "^0.18.5",
     "lodash": "^4.17.21",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.20"
   }
 }

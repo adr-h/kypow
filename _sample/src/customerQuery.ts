@@ -1,7 +1,7 @@
 import { db } from './db';
 
 export async function customerQuery() {
-   const res = await db.selectFrom('Customers').select('first_name').executeTakeFirst();
+   const res = await db.selectFrom('Customers').select('first_name').execute();
 
    console.log('res is', res);
 
