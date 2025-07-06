@@ -14,3 +14,5 @@ export const db = new Kysely<DB>({
       database: new SQLite(dbPath),
    })
 });
+
+export const dbIsOk = true;

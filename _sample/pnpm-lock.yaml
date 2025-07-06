@@ -11,9 +11,9 @@ importers:
       better-sqlite3:
         specifier: ^11.10.0
         version: 11.10.0
-      kysely:
-        specifier: ^0.28.2
-        version: 0.28.2
+      kypanel:
+        specifier: link:/home/adrian/Code/kypanel
+        version: link:..
       kysely-codegen:
         specifier: ^0.18.5
         version: 0.18.5(better-sqlite3@11.10.0)(kysely@0.28.2)(typescript@5.8.3)
