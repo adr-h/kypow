@@ -6,11 +6,12 @@ import path, { resolve } from 'path';
 import fs from 'fs/promises';
 import type { Config } from './config/Config';
 import esbuild from 'esbuild';
-import { externaliseImportsPlugin } from './externaliseImportsPlugin';
+import { resolveRelativeImports } from './services/build/resolveRelativeImports';
 
 import { getTypedefs, type TypeDefFile } from './services/type-system';
 // import {Generator} from 'npm-dts'
 import { generateDtsBundle } from 'dts-bundle-generator';
+import { mockDbModulePlugin } from './services/build/mockDbModulePlugin';
 
 // const { dtsPlugin } = require("esbuild-plugin-d.ts");
 
@@ -24,6 +25,11 @@ export function setup(config: Config) {
 
       app.get('/config', (req, res) => {
          res.json(config);
+      })
+
+      app.get('/compile-query', (req, res) => {
+         const pathParam = req.query.path as string | undefined;
+
       })
 
       app.get('/typedefs', async (req, res) => {
@@ -60,7 +66,7 @@ export function setup(config: Config) {
 
             // relative to 'src'
             import {mayonaise, much, gah2} from './fiz';
-
+            import {db} from './db';
 
             import _ from "lodash";
             import idk from 'kysely-codegen';
@@ -68,7 +74,7 @@ export function setup(config: Config) {
             const object = { 'p': [{ 'q': { 'r': 7 } }, 9] };
             const at_elem = _.at(object, ['p[0].q.r', 'p[1]']);
 
-            export function exec(foo: typeof _) {
+            export async function exec(foo: typeof _) {
                console.log('presto');
                console.log(at_elem);
                console.log('mayonaise is', much, mayonaise, gah2)
@@ -78,10 +84,13 @@ export function setup(config: Config) {
                // console.log(bar);
                // customerQuery();
 
-               return 'wam bam kazam'
+               const res = await db.selectFrom('customers').limit(1).execute();
+               return res;
             }
          `;
 
+
+         const projectRelativeFileDir = `${projectRoot}/src`;
 
          const result = await esbuild.build({
             stdin: {
@@ -91,7 +100,10 @@ export function setup(config: Config) {
             },
             tsconfig: config.tsConfigPath,
             plugins: [
-               externaliseImportsPlugin(`${projectRoot}/src`)
+               ...config.compileMode.dbModules.map(({ source, destination }) => mockDbModulePlugin({
+                  source, destination, projectRoot, projectRelativeFileDir
+               })),
+               resolveRelativeImports(`${projectRoot}/src`)
             ],
             bundle: true,
             write: false,
@@ -126,8 +138,11 @@ export function setup(config: Config) {
          // getDeclarationFiles();
 
          const { exec } = await import(`${projectRoot}/.kypanel/build/_temp.js`);
-         const payload = exec();
-         res.send(payload);
+         const payload = await exec();
+
+         const compiledQuery = payload?.[Symbol.for('kypanelCompiledQuery')];
+
+         res.send({ ...payload, compiledQuery });
       })
 
 
