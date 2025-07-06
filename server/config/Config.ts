@@ -4,4 +4,13 @@ export type Config = {
    tsConfigPath: string;
    esBuildOptions?: any;
    moduleFormat: 'esm' | 'cjs' | 'iife';
+
+   compileMode: {
+      dbModules: [
+         {
+            source: string;
+            destination: string;
+         }
+      ]
+   }
 }

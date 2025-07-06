@@ -8,5 +8,14 @@ setup({
    foo: 'baz',
    projectRoot: process.env.PROJECT_ROOT || '', //TODO: just make this the workingdir?
    tsConfigPath: '/home/adrian/Code/kypanel/_sample/tsconfig.json',
-   moduleFormat: 'esm'
+   moduleFormat: 'esm',
+   compileMode: {
+      dbModules: [
+         // source and destination should be defined with paths relative to the project root, unless they are node_module imports
+         {
+            source: './src/db',
+            destination: './.kypanel/defaultMock.ts'
+         }
+      ]
+   }
 });

@@ -1,27 +1,14 @@
 export * from 'kysely';
 import { Kysely as ActualKysely, type TableExpressionOrList } from 'kysely';
+import { DummyConnection } from '../dummies/DummyConnection';
 
 type ConstructorArgs<T> = ConstructorParameters<typeof ActualKysely<T>>;
-
-// TODO: move to like, a singleton event bus or something?
-function dispatch (a:any) {
-   console.log('dispatch called with', a);
-}
 
 function proxify<T extends object>(selector: T) {
    const res = new Proxy(selector, {
       get(target, prop, receiver) {
-         if (prop === "execute" || prop === 'executeTakeFirst' || prop === 'executeTakeFirstOrThrow') {
-            dispatch({
-               event: prop,
-               query: (target as any).compile()
-            })
-
-            if (prop === 'execute') {
-               return Promise.resolve({})
-            } else {
-               return Promise.resolve([])
-            }
+         if (prop === 'acquireConnection') {
+            return () => Promise.resolve(new DummyConnection());
          }
 
          const value = Reflect.get(target, prop, receiver);
@@ -51,7 +38,7 @@ class KyselyCompileImposter<T> extends ActualKysely<T> {
    }
 
    // @ts-expect-error: will unfungle the parameter types later
-   selectFrom(...args: Parameters<ActualKysely<T>['selectFrom']) {
+   selectFrom(...args: Parameters<ActualKysely<T>['selectFrom']>) {
       const selector = super.selectFrom(...args);
 
       return proxify(selector);
