@@ -13,8 +13,8 @@ setup({
       dbModules: [
          // source and destination should be defined with paths relative to the project root, unless they are node_module imports
          {
-            source: './src/db',
-            destination: './.kypanel/defaultMock.ts'
+            pathToOriginalModule: './src/db.ts',
+            pathToMockModule: './.kypanel/defaultMock.ts'
          }
       ]
    }

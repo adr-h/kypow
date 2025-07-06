@@ -8,8 +8,8 @@ export type Config = {
    compileMode: {
       dbModules: [
          {
-            source: string;
-            destination: string;
+            pathToOriginalModule: string;
+            pathToMockModule: string;
          }
       ]
    }

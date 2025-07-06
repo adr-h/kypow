@@ -3,8 +3,8 @@ import path, { resolve } from 'path';
 import fs from 'fs/promises';
 
 type MockDbInstancePluginParams = {
-  source: string;
-  destination: string;
+  pathToOriginalModule: string;
+  pathToMockModule: string;
   projectRoot: string;
 
   projectRelativeFileDir: string;
@@ -25,12 +25,16 @@ function hasFileExtension(filePath: string) {
   return Boolean(path.extname(filePath));
 }
 
-export const mockDbModulePlugin = ({ source: initialSource, destination: initialDestination, projectRoot, projectRelativeFileDir }: MockDbInstancePluginParams): Plugin => {
-  const finalSource = isRelativeImport(initialSource) ? path.resolve(projectRoot, initialSource) : initialSource;
-  const absoluteMockPath = isRelativeImport(initialDestination) ? path.resolve(projectRoot, initialDestination) : initialDestination;
+export const mockDbModulePlugin = ({ pathToOriginalModule, pathToMockModule, projectRoot, projectRelativeFileDir }: MockDbInstancePluginParams): Plugin => {
+  if (!hasFileExtension(pathToOriginalModule) || !hasFileExtension(pathToMockModule)) {
+    throw new Error("Both mock and original module paths must have file extensions!");
+  }
+
+  const absolutePathToOriginalModule = isRelativeImport(pathToOriginalModule) ? path.resolve(projectRoot, pathToOriginalModule) : pathToOriginalModule;
+  const absoluteMockPath = isRelativeImport(pathToMockModule) ? path.resolve(projectRoot, pathToMockModule) : pathToMockModule;
 
   // Filter matches relative imports ending with 'foo' or 'foo.ts'
-  const filter = new RegExp(`${path.basename(initialSource)}(\\.[^/]+)?$`)
+  const filter = new RegExp(`${stripFileExtension(path.basename(pathToOriginalModule))}(\\.[^/]+)?$`)
 
   return {
     name: 'mock-db-module',
@@ -41,57 +45,21 @@ export const mockDbModulePlugin = ({ source: initialSource, destination: initial
         // TODO: also need to check if isImportingMock
         // TOOD: the resolvedImportPath is wrong...
         if (isImporterTheMockItself && isRelativeImport(args.path)) {
-          // const routeToOriginalModuleDir = path.relative(absoluteMockPath, projectRelativeFileDir);
-          // const originalModuleDirectory = path.resolve(args.resolveDir, routeToOriginalModuleDir)
           const dirOfMock = path.dirname(absoluteMockPath);
           const resolvedImportPath = path.resolve(dirOfMock, args.path);
-
-          const isImportingMock = stripFileExtension(resolvedImportPath) === stripFileExtension(finalSource);
-          console.log('mock: resolvedSourcePath', resolvedImportPath);
-          console.log('mock: final source', finalSource)
-          console.log('mock: absoluteMockPath', absoluteMockPath)
-          // console.log('mock: originalModuleDirectory', originalModuleDirectory)
-          console.log('mock: args.path', args.path);
+          const isImportingMock = stripFileExtension(resolvedImportPath) === stripFileExtension(absolutePathToOriginalModule);
 
           if (!isImportingMock) {
             return;
           }
 
-          if (hasFileExtension(finalSource)) {
-            return { path: finalSource, external: true }
-          }
-
-          const candidates = [
-              path.resolve(finalSource + ".d.ts"),
-              path.resolve(finalSource + ".ts"),
-              path.resolve(finalSource + ".js"),
-              path.resolve(finalSource + ".tsx"),
-              path.resolve(finalSource + ".jsx"),
-              // path.resolve(finalSource + ".json"),
-
-              path.resolve(finalSource + "index.d.ts"),
-              path.resolve(finalSource, "index.ts"),
-              path.resolve(finalSource, "index.js"),
-              path.resolve(finalSource, "index.jsx"),
-              path.resolve(finalSource, "index.tsx"),
-          ];
-          for (const file of candidates) {
-              try {
-                // console.log('finding', file,'. its resolverdir was', args.resolveDir);
-                if (await fs.stat(file)) {
-                    // console.log('found', file);
-                    return { path: file };
-                }
-              } catch(_ex) {}
-          }
-
-          return;
+          return { path: absolutePathToOriginalModule, external: false }
         }
 
         const routeToOriginalModuleDir = path.relative(args.resolveDir, projectRelativeFileDir);
         const originalModuleDirectory = path.resolve(args.resolveDir, routeToOriginalModuleDir)
         const resolvedImportPath = path.resolve(originalModuleDirectory, args.path);
-        const isImportingMock = stripFileExtension(resolvedImportPath) === stripFileExtension(finalSource);
+        const isImportingMock = stripFileExtension(resolvedImportPath) === stripFileExtension(absolutePathToOriginalModule);
 
         if (isImportingMock) {
           return { path: absoluteMockPath };
