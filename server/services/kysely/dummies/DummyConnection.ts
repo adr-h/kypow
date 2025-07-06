@@ -1,14 +1,15 @@
 import type { CompiledQuery, DatabaseConnection } from "kysely";
 
 export class DummyConnection implements DatabaseConnection {
-
-   constructor() {
-   }
+   constructor() {}
 
    executeQuery(compiledQuery: CompiledQuery) {
-      return Promise.resolve({
-         rows: [],
+      const res: any = {
          [Symbol.for('kypanelCompiledQuery')]: compiledQuery
+      };
+
+      return Promise.resolve({
+         rows: [res]
       });
    }
 
@@ -16,10 +17,13 @@ export class DummyConnection implements DatabaseConnection {
       compiledQuery: CompiledQuery,
       _chunkSize?: number | undefined,
    ) {
+      const res: any = {
+         [Symbol.for('kypanelCompiledQuery')]: compiledQuery
+      };
+
       return (async function*() {
          yield {
-            rows: [],
-            [Symbol.for('kypanelCompiledQuery')]: compiledQuery
+            rows: [res],
          };
       })();
   }

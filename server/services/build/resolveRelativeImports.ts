@@ -29,9 +29,9 @@ export const resolveRelativeImports = (projectRelativeFileDir: string): Plugin =
 
             for (const file of candidates) {
                try {
-                  console.log('finding', file,'. its resolverdir was', args.resolveDir);
+                  // console.log('finding', file,'. its resolverdir was', args.resolveDir);
                   if (await fs.stat(file)) {
-                     console.log('found', file);
+                     // console.log('found', file);
                      return { path: file };
                   }
                } catch(_ex) {}
