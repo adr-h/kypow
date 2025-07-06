@@ -62,8 +62,8 @@ export function setup(config: Config) {
             },
             tsconfig: config.tsConfigPath,
             plugins: [
-               ...config.compileMode.dbModules.map(({ source, destination }) => mockDbModulePlugin({
-                  source, destination, projectRoot, projectRelativeFileDir
+               ...config.compileMode.dbModules.map(({ pathToOriginalModule, pathToMockModule }) => mockDbModulePlugin({
+                  pathToOriginalModule, pathToMockModule, projectRoot, projectRelativeFileDir
                })),
                resolveRelativeImports(projectRelativeFileDir)
             ],
@@ -179,8 +179,8 @@ export function setup(config: Config) {
             },
             tsconfig: config.tsConfigPath,
             plugins: [
-               ...config.compileMode.dbModules.map(({ source, destination }) => mockDbModulePlugin({
-                  source, destination, projectRoot, projectRelativeFileDir
+               ...config.compileMode.dbModules.map(({ pathToOriginalModule: source, pathToMockModule: destination }) => mockDbModulePlugin({
+                  pathToOriginalModule: source, pathToMockModule: destination, projectRoot, projectRelativeFileDir
                })),
                resolveRelativeImports(projectRelativeFileDir)
             ],
