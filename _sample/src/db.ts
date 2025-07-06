@@ -15,4 +15,4 @@ export const db = new Kysely<DB>({
    })
 });
 
-export const dbIsOk = true;
+export const dbIsOk = 'DB STATUS: maybe';
