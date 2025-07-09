@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@monaco-editor/react": "4.7.0-rc.0",
-    "dts-bundle-generator": "^9.5.1",
-    "esbuild": "^0.25.5",
     "express": "^5.1.0",
     "kysely": "^0.28.2",
     "monaco-editor": "^0.52.2",
