@@ -5,12 +5,10 @@ export type Config = {
    esBuildOptions?: any;
    moduleFormat: 'esm' | 'cjs' | 'iife';
 
-   compileMode: {
-      dbModules: [
-         {
-            pathToOriginalModule: string;
-            pathToMockModule: string;
-         }
-      ]
-   }
+   mocks: [
+      {
+         pathToOriginalModule: string;
+         pathToMockModule: string;
+      }
+   ]
 }

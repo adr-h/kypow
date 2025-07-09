@@ -1,5 +1,7 @@
 import { db, dbIsOk } from '../db';
 
+export const sampleConst = "this is a sample export";
+
 export async function customerNameQuery(limit: number) {
    const res = await db.selectFrom('Customers').select('first_name').limit(limit).execute();
 
