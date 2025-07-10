@@ -1,4 +1,4 @@
-import { setup } from 'kypanel/server/app';
+import { setup } from 'kypanel/app/app';
 // import bar from '@foo/yasm';
 import _ from 'lodash';
 
