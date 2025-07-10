@@ -5,6 +5,7 @@ import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import { redirectModuleImport } from './buildPlugins/redirectModuleImport';
 import { getQueryExecutionEmitter } from './kysely/QueryExecutionEmitter';
+import { randomUUID } from 'crypto';
 
 Error.stackTraceLimit = 1000;
 
@@ -41,11 +42,16 @@ export async function setup(config: Config) {
       const modulePath = "./src/queries/customerQuery.ts";
       const importResult = await vite.ssrLoadModule(modulePath)
 
+
+      // Proof of concept - very rough
+      const queryExecutionId = randomUUID();
+      const fn = async () => { await importResult.customerNameQuery(); };
+      Object.defineProperty(fn, 'name', { value: queryExecutionId, configurable: true });
       const queryPromise = getQueryExecutionEmitter().onceQueryExecuted();
-
-      await importResult.customerNameQuery(1);
-
+      fn();
       const queryResult = await queryPromise;
+      console.log(queryResult.stackTrace);
+      console.log('has query execution ID?', queryResult.stackTrace.includes(queryExecutionId));
 
       // TODO: wouldn't something like this be cool? it might help that the callback function below
       // would have its stack context "within" runInQueryContext, which we might be able to use to do
