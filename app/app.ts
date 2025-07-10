@@ -48,15 +48,16 @@ export async function setup(config: Config) {
       const queryResult = await queryPromise;
 
       // TODO: wouldn't something like this be cool? it might help that the callback function below
-      // would have its stack context "within" runInQueryScope, which we might be able to use to do
+      // would have its stack context "within" runInQueryContext, which we might be able to use to do
       // something cool like determine if this is the _exact_ stack that the query was triggered from
-      // probably by doing something magic like having runInQueryScope spawn an object with a getter and
+      // probably by doing something magic like having runInQueryContext spawn an object with a getter and
       // having that getter execute the callback, and then triggering that getter with a randomly generated ID
       // and then when we get back the result from onceQueryExecuted internally it will compare to see if the
       // stack trace in it has the same randomly generated ID
-      // const {compiledQuery} = await runInQueryScope(() => {
+      // const {compiledQuery} = await runInQueryContext(() => {
       //    importResult.customerNameQuery(1);
       // })
+      // possible names: runInExecutionContext, runInExecutionScope, withExecutionContext, withExecutionScope, etc
 
       res.json({
          sampleConst: importResult.sampleConst,
