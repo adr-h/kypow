@@ -43,7 +43,8 @@ export async function setup(config: Config) {
       const importResult = await vite.ssrLoadModule(modulePath)
 
 
-      // Proof of concept - very rough
+      // Proof of concept - very rough. Probably shouldn't do a "once()" anymore either, or if there are multiple
+      // concurrent requests they'll remove each other
       const queryExecutionId = randomUUID();
       const fn = async () => { await importResult.customerNameQuery(); };
       Object.defineProperty(fn, 'name', { value: queryExecutionId, configurable: true });
