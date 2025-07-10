@@ -4,6 +4,7 @@ import type { Config } from './config/Config';
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import { redirectModuleImport } from './buildPlugins/redirectModuleImport';
+import { getQueryExecutionEmitter } from './kysely/dummy/QueryExecutionEmitter';
 
 const kypanelRoot = fileURLToPath(new URL('..', import.meta.url))
 
@@ -11,6 +12,7 @@ export async function setup(config: Config) {
    const projectRoot = config.projectRoot;
 
    const vite = await createViteServer({
+      appType: 'custom',
       root: projectRoot, // Working directory is Vite's root
       server: {
          middlewareMode: true,
@@ -35,18 +37,20 @@ export async function setup(config: Config) {
 
    app.get('/api/execute-module', async (req, res) => {
       const modulePath = "./src/queries/customerQuery.ts";
-      const result = await vite.ssrLoadModule(modulePath)
+      const importResult = await vite.ssrLoadModule(modulePath)
 
-      // res.json({ transformed: result.sampleConst });
+      const queryPromise = getQueryExecutionEmitter().onceQueryExecuted();
 
-      const queryResult = await result.customerNameQuery(1);
+      await importResult.customerNameQuery(1);
 
-      const compiledQuery = queryResult[Symbol.for('kypanelCompiledQuery')];
+      const queryResult = await queryPromise;
 
       res.json({
-         sampleConst: result.sampleConst,
-         compiledQuery: compiledQuery,
+         sampleConst: importResult.sampleConst,
+         compiledQuery: queryResult.compiledQuery,
+         stack: queryResult.stackTrace
       })
+
       return;
    });
 
