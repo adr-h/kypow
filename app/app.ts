@@ -4,7 +4,7 @@ import type { Config } from './config/Config';
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import { redirectModuleImport } from './buildPlugins/redirectModuleImport';
-import { getQueryExecutionEmitter } from './kysely/dummy/QueryExecutionEmitter';
+import { getQueryExecutionEmitter } from './kysely/QueryExecutionEmitter';
 
 const kypanelRoot = fileURLToPath(new URL('..', import.meta.url))
 
@@ -44,6 +44,17 @@ export async function setup(config: Config) {
       await importResult.customerNameQuery(1);
 
       const queryResult = await queryPromise;
+
+      // TODO: wouldn't something like this be cool? it might help that the callback function below
+      // would have its stack context "within" runInQueryScope, which we might be able to use to do
+      // something cool like determine if this is the _exact_ stack that the query was triggered from
+      // probably by doing something magic like having runInQueryScope spawn an object with a getter and
+      // having that getter execute the callback, and then triggering that getter with a randomly generated ID
+      // and then when we get back the result from onceQueryExecuted internally it will compare to see if the
+      // stack trace in it has the same randomly generated ID
+      // const {compiledQuery} = await runInQueryScope(() => {
+      //    importResult.customerNameQuery(1);
+      // })
 
       res.json({
          sampleConst: importResult.sampleConst,
