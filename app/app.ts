@@ -5,8 +5,6 @@ import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import { redirectModuleImport } from './buildPlugins/redirectModuleImport';
 
-
-// const { dtsPlugin } = require("esbuild-plugin-d.ts");
 const kypanelRoot = fileURLToPath(new URL('..', import.meta.url))
 
 export async function setup(config: Config) {
@@ -60,9 +58,6 @@ export async function setup(config: Config) {
 
    // Example: transform & serve backend modules manually
 
-   app.listen(3000, () => console.log('Server running'))
-
-
-
+   app.listen(3000, () => console.log('Server running'));
 }
 
