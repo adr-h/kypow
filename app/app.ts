@@ -6,6 +6,8 @@ import { createServer as createViteServer } from 'vite';
 import { redirectModuleImport } from './buildPlugins/redirectModuleImport';
 import { getQueryExecutionEmitter } from './kysely/QueryExecutionEmitter';
 
+Error.stackTraceLimit = 1000;
+
 const kypanelRoot = fileURLToPath(new URL('..', import.meta.url))
 
 export async function setup(config: Config) {
