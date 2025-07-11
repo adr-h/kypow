@@ -4,8 +4,7 @@ import type { Config } from './config/Config';
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import { redirectModuleImport } from './buildPlugins/redirectModuleImport';
-import { getQueryExecutionEmitter } from './kysely/QueryExecutionEmitter';
-import { randomUUID } from 'crypto';
+import { listenForCompiledQuery } from './kysely';
 
 Error.stackTraceLimit = 1000;
 
@@ -40,39 +39,16 @@ export async function setup(config: Config) {
 
    app.get('/api/execute-module', async (req, res) => {
       const modulePath = "./src/queries/customerQuery.ts";
-      const importResult = await vite.ssrLoadModule(modulePath)
+      const importedModule = await vite.ssrLoadModule(modulePath)
 
-
-      // Proof of concept - very rough. Probably shouldn't do a "once()" anymore either, or if there are multiple
-      // concurrent requests they'll remove each other
-      const queryExecutionId = randomUUID();
-      const fn = async () => { await importResult.customerNameQuery(); };
-      Object.defineProperty(fn, 'name', { value: queryExecutionId, configurable: true });
-      const queryPromise = getQueryExecutionEmitter().onceQueryExecuted();
-      fn();
-      const queryResult = await queryPromise;
-      console.log(queryResult.stackTrace);
-      console.log('has query execution ID?', queryResult.stackTrace.includes(queryExecutionId));
-
-      // TODO: wouldn't something like this be cool? it might help that the callback function below
-      // would have its stack context "within" runInQueryContext, which we might be able to use to do
-      // something cool like determine if this is the _exact_ stack that the query was triggered from
-      // probably by doing something magic like having runInQueryContext spawn an object with a getter and
-      // having that getter execute the callback, and then triggering that getter with a randomly generated ID
-      // and then when we get back the result from onceQueryExecuted internally it will compare to see if the
-      // stack trace in it has the same randomly generated ID
-      // const {compiledQuery} = await runInQueryContext(() => {
-      //    importResult.customerNameQuery(1);
-      // })
-      // possible names: runInExecutionContext, runInExecutionScope, withExecutionContext, withExecutionScope, etc
+      const { compiledQuery } = await listenForCompiledQuery(
+         () => importedModule.customerNameQuery(1)
+      );
 
       res.json({
-         sampleConst: importResult.sampleConst,
-         compiledQuery: queryResult.compiledQuery,
-         stack: queryResult.stackTrace
+         sampleConst: importedModule.sampleConst,
+         compiledQuery
       })
-
-      return;
    });
 
    app.use(vite.middlewares)
