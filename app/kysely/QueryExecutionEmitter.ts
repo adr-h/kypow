@@ -6,9 +6,19 @@ type EventMap = {
    'queryExecuted': [QueryExecutedEventProps];
 }
 
+type ListenUntilQueryExecutedCallback = (
+   props: QueryExecutedEventProps,
+   resolve: (a: QueryExecutedEventProps) => void,
+   reject: (a: any) => void
+) => void
+
 export const ErrorCode = {
-   Timeout: 'TIMEOUT_ERR'
+   Timeout: '__KYPANEL_LISTEN_UNTIL_QUERY_EXECUTED_TIMEOUT__'
 } as const;
+
+export function isListenUntilQueryExecutedTimeout (err: any) {
+   return err.message === ErrorCode.Timeout;
+}
 
 class QueryExecutionEmitter extends EventEmitter<EventMap> {
    constructor() {
@@ -24,16 +34,19 @@ class QueryExecutionEmitter extends EventEmitter<EventMap> {
       });
    }
 
-   async onceQueryExecuted({ timeout } = { timeout: 5000 }): Promise<QueryExecutedEventProps> {
+   async listenUntilQueryExecutedEvent(callback: ListenUntilQueryExecutedCallback, timeout = 5000): Promise<QueryExecutedEventProps> {
       return new Promise((resolve, reject) => {
          const emitter = getQueryExecutionEmitter();
 
-         emitter.once('queryExecuted', ({ stackTrace: stack, compiledQuery}) => {
+         const listener = ({ stackTrace, compiledQuery }: QueryExecutedEventProps) => {
             console.log('event received');
-            resolve({ stackTrace: stack, compiledQuery});
-         });
+            callback({ stackTrace, compiledQuery }, resolve, reject);
+         };
+
+         emitter.on('queryExecuted', listener);
 
          setTimeout(() => {
+            emitter.off('queryExecuted', listener);
             reject(ErrorCode.Timeout);
          }, timeout);
 
