@@ -9,6 +9,7 @@ setup({
    projectRoot: process.env.PROJECT_ROOT || '', //TODO: just make this the workingdir?
    tsConfigPath: '/home/adrian/Code/kypanel/_sample/tsconfig.json',
    moduleFormat: 'esm',
+   dialect: 'sqlite',
    mocks: [
       // TODO: maybe use TS to ensure that relative imports always have leading './'
       // E.g:
