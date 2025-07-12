@@ -8,8 +8,8 @@ import {
   SqliteQueryCompiler,
 } from 'kysely'
 import { DummyDriver } from './DummyDriver';
+import type { RecognisedDialects } from '../sql';
 
-type RecognisedDialects = 'postgres' | 'sqlite' | 'mysql' | 'mssql';
 type CreateDummyKyselyFactoryParams = {
   dialect: RecognisedDialects;
 }

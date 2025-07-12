@@ -41,13 +41,15 @@ export async function setup(config: Config) {
       const modulePath = "./src/queries/customerQuery.ts";
       const importedModule = await vite.ssrLoadModule(modulePath)
 
-      const { compiledQuery } = await listenForCompiledQuery(
-         () => importedModule.customerNameQuery(1)
+      const { compiledQuery, interpolatedQuery } = await listenForCompiledQuery(
+         () => importedModule.customerNameQuery('bob', 1),
+         'sqlite'
       );
 
       res.json({
          sampleConst: importedModule.sampleConst,
-         compiledQuery
+         interpolatedQuery,
+         compiledQuery,
       })
    });
 
