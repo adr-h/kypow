@@ -1,9 +1,8 @@
 import { randomUUID } from "crypto";
 import { getQueryExecutionEmitter, isListenUntilQueryExecutedTimeout } from "./QueryExecutionEmitter";
-import { interpolateSql, type RecognisedDialects } from "../sql";
+import { type RecognisedDialects } from "../sql";
 
-
-export async function listenForCompiledQuery(callback: () => any, dialect: RecognisedDialects, timeout = 5000) {
+export async function listenForCompiledQuery(callback: () => any, timeout = 5000) {
    // generate a unique ID, for instance: abcd-1234-efgh-5678
    const queryExecutionId = `kypanel_${randomUUID()}`;
 
@@ -32,13 +31,6 @@ export async function listenForCompiledQuery(callback: () => any, dialect: Recog
 
       return {
          compiledQuery: compiledQuery,
-
-         // TODO: move this out of this file. This should only be listening for compiledQuery; any processing can happen by the consumer
-         interpolatedQuery: interpolateSql(
-            compiledQuery.sql,
-            compiledQuery.parameters as any,
-            dialect
-         )
       };
    } catch (ex: any) {
       if (isListenUntilQueryExecutedTimeout(ex)) {

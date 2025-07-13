@@ -5,6 +5,7 @@ import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import { redirectModuleImport } from './buildPlugins/redirectModuleImport';
 import { listenForCompiledQuery } from './kysely';
+import { resolveDialectPlugin } from './sql/resolveDialectPlugin';
 
 Error.stackTraceLimit = 1000;
 
@@ -41,10 +42,12 @@ export async function setup(config: Config) {
       const modulePath = "./src/queries/customerQuery.ts";
       const importedModule = await vite.ssrLoadModule(modulePath)
 
-      const { compiledQuery, interpolatedQuery } = await listenForCompiledQuery(
+      const { compiledQuery } = await listenForCompiledQuery(
          () => importedModule.customerNameQuery('bob', 1),
-         'sqlite'
       );
+
+      const dialect = resolveDialectPlugin(config.dialect);
+      const interpolatedQuery = dialect.interpolateSql(compiledQuery.sql, compiledQuery.parameters);
 
       res.json({
          sampleConst: importedModule.sampleConst,

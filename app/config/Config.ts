@@ -1,9 +1,9 @@
-import type { RecognisedDialects } from "../sql";
+import type { DialectPlugin, RecognisedDialects } from "../sql";
 
 export type Config = {
    foo: string;
    projectRoot: string;
-   dialect: RecognisedDialects;
+   dialect: RecognisedDialects | DialectPlugin;
    tsConfigPath: string;
    esBuildOptions?: any;
    moduleFormat: 'esm' | 'cjs' | 'iife';
