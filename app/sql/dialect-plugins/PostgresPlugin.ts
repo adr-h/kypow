@@ -3,7 +3,7 @@ import type { DialectPlugin } from "./DialectPlugin";
 
 export const PostgresPlugin: DialectPlugin = {
    name: 'postgres',
-   interpolateSql(rawSql: string, queryParams: any[]) {
+   interpolateSql(rawSql: string, queryParams: any[] | readonly any[]) {
       const matcher = /\$\d+/;
 
       let finalSql = rawSql;

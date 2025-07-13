@@ -3,7 +3,7 @@ import type { DialectPlugin } from "./DialectPlugin";
 
 export const MySqlPlugin: DialectPlugin = {
    name: 'mysql',
-   interpolateSql(rawSql: string, queryParams: any[]) {
+   interpolateSql(rawSql: string, queryParams: any[] | readonly any[]) {
       const matcher = /\?/;
 
       let finalSql = rawSql;
