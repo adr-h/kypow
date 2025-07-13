@@ -3,7 +3,7 @@ import type { DialectPlugin } from "./DialectPlugin";
 
 export const MssqlPlugin: DialectPlugin = {
    name: 'mssql',
-   interpolateSql(rawSql: string, queryParams: any[]) {
+   interpolateSql(rawSql: string, queryParams: any[] | readonly any[]) {
       const matcher = /@\d+/;
 
       let finalSql = rawSql;

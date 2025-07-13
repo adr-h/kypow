@@ -3,7 +3,7 @@ import type { DialectPlugin } from "./DialectPlugin";
 
 export const SqlitePlugin: DialectPlugin = {
    name: 'sqlite',
-   interpolateSql(rawSql: string, queryParams: any[]) {
+   interpolateSql(rawSql: string, queryParams: any[] | readonly any[]) {
       const matcher = /\?/;
 
       let finalSql = rawSql;
