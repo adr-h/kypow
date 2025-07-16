@@ -1,0 +1,1 @@
+export { getQueryFunctionsDetails } from './getQueryFunctionsDetails';
