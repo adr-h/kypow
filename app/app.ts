@@ -1,11 +1,12 @@
 // src/server.ts
 import { fileURLToPath } from 'url'
-import type { Config } from './config/Config';
+import type { Config } from './Config';
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
-import { redirectModuleImport } from './buildPlugins/redirectModuleImport';
+import { redirectModuleImport } from './vite-plugins/redirectModuleImport';
 import { listenForCompiledQuery } from './kysely';
 import { resolveDialectPlugin } from './sql/resolveDialectPlugin';
+import { getQueryFunctionsDetails } from './type-system';
 
 Error.stackTraceLimit = 1000;
 
@@ -49,10 +50,14 @@ export async function setup(config: Config) {
       const dialect = resolveDialectPlugin(config.dialect);
       const interpolatedQuery = dialect.interpolateSql(compiledQuery.sql, compiledQuery.parameters);
 
+      const functionDetails = getQueryFunctionsDetails({ tsconfig: config.tsConfigPath, modulePath })
+                  .find(f=> f.functionName === 'customerNameQuery');
+
       res.json({
          sampleConst: importedModule.sampleConst,
          interpolatedQuery,
          compiledQuery,
+         functionDetails
       })
    });
 
