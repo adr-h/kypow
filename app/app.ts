@@ -1,18 +1,18 @@
-// src/server.ts
-import { fileURLToPath } from 'url'
 import type { Config } from './Config';
-import express from 'express';
-import { createServer as createViteServer } from 'vite';
+import { fileURLToPath } from 'url'
+import { createServer as createViteServer, type ViteDevServer } from 'vite';
 import { redirectModuleImport } from './vite-plugins/redirectModuleImport';
 import { listenForCompiledQuery } from './kysely';
 import { resolveDialectPlugin } from './sql/resolveDialectPlugin';
-import { getQueryFunctionsDetails } from './type-system';
+import { getFunctionMeta } from './type-system/getFunctionMeta';
 
 Error.stackTraceLimit = 1000;
 
 const kypanelRoot = fileURLToPath(new URL('..', import.meta.url))
 
-export async function setup(config: Config) {
+export type App = Awaited<ReturnType<typeof createApp>>
+
+export async function createApp(config: Config) {
    const projectRoot = config.projectRoot;
 
    const vite = await createViteServer({
@@ -25,9 +25,7 @@ export async function setup(config: Config) {
          }
       },
       resolve: {
-         alias: {
-            '@frontend': kypanelRoot
-         }
+         alias: { '@frontend': kypanelRoot }
       },
       plugins: [
          redirectModuleImport({
@@ -36,39 +34,58 @@ export async function setup(config: Config) {
          })
       ]
    })
+   const sqlDialect = resolveDialectPlugin(config.dialect);
 
-   const app = express();
 
-   app.get('/api/execute-module', async (req, res) => {
-      const modulePath = "./src/queries/customerQuery.ts";
+   type GetQueryParams = {
+      modulePath: string;
+      functionName: string;
+      invokeParams?: any[];
+   }
+   async function getQuery(params: GetQueryParams) {
+      const modulePath = params.modulePath || "./src/queries/customerQuery.ts";
+      const functionName = params.functionName || 'customerNameQuery';
+
+      const functionMeta = await getFunctionMeta({
+         modulePath, functionName, tsconfig: config.tsConfigPath
+      });
+
+      const executionParams = ['bob', 1] //TODO: invokeParams || functionMetadata.sampleParams
       const importedModule = await vite.ssrLoadModule(modulePath)
-
       const { compiledQuery } = await listenForCompiledQuery(
-         () => importedModule.customerNameQuery('bob', 1),
+         () => importedModule[functionName](...executionParams),
       );
 
-      const dialect = resolveDialectPlugin(config.dialect);
-      const interpolatedQuery = dialect.interpolateSql(compiledQuery.sql, compiledQuery.parameters);
+      const parametizedQuery = compiledQuery.sql;
+      const queryParameters = compiledQuery.parameters;
+      const interpolatedQuery = sqlDialect.interpolateSql(parametizedQuery, queryParameters);
 
-      const functionDetails = getQueryFunctionsDetails({ tsconfig: config.tsConfigPath, modulePath })
-                  .find(f=> f.functionName === 'customerNameQuery');
-
-      res.json({
-         sampleConst: importedModule.sampleConst,
+      return {
+         // sampleConst: importedModule.sampleConst,
+         name: functionMeta.name,
+         description: functionMeta.description,
          interpolatedQuery,
-         compiledQuery,
-         functionDetails
-      })
-   });
+         parametizedQuery,
+         queryParamsUsed: executionParams,
+      }
+   }
 
-   app.use(vite.middlewares)
+   async function getModule() {
+      // e.g:
+      //    {
+      //       module: 'path/to/module.ts',
+      //       queries: [
+      //          'getCustomer',
+      //          'getSale'
+      //       ]
+      //    }
+      //
 
-   // Serve frontend files via Express
-   // TODO: serve these via Vite server as well, or HMR will not work
-   // app.use('/', express.static(kypanelRoot))
+      return [];
+   }
 
-   // Example: transform & serve backend modules manually
-
-   app.listen(3000, () => console.log('Server running'));
+   return {
+      vite,
+      getQuery
+   }
 }
-

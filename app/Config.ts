@@ -1,4 +1,4 @@
-import type { DialectPlugin, RecognisedDialects } from "../sql";
+import type { DialectPlugin, RecognisedDialects } from "./sql";
 
 export type Config = {
    foo: string;

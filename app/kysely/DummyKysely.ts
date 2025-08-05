@@ -1,8 +1,14 @@
-// TODO: this file should be generated, so we can:
-// - inject the Schema type
-// - select the right dialect
 import {
   Kysely,
+  MssqlAdapter,
+  MssqlIntrospector,
+  MssqlQueryCompiler,
+  MysqlAdapter,
+  MysqlIntrospector,
+  MysqlQueryCompiler,
+  PostgresAdapter,
+  PostgresIntrospector,
+  PostgresQueryCompiler,
   SqliteAdapter,
   SqliteIntrospector,
   SqliteQueryCompiler,
@@ -30,8 +36,32 @@ export function createDummyKysely<S = void>({ dialect }: CreateDummyKyselyFactor
         },
       });
     case 'postgres':
+      return new Kysely<S>({
+        dialect: {
+          createAdapter: () => new PostgresAdapter(),
+          createDriver: () => new DummyDriver(),
+          createIntrospector: (db) => new PostgresIntrospector(db),
+          createQueryCompiler: () => new PostgresQueryCompiler(),
+        },
+      });
     case 'mysql':
+      return new Kysely<S>({
+        dialect: {
+          createAdapter: () => new MysqlAdapter(),
+          createDriver: () => new DummyDriver(),
+          createIntrospector: (db) => new MysqlIntrospector(db),
+          createQueryCompiler: () => new MysqlQueryCompiler(),
+        },
+      });
     case 'mssql':
+      return new Kysely<S>({
+        dialect: {
+          createAdapter: () => new MssqlAdapter(),
+          createDriver: () => new DummyDriver(),
+          createIntrospector: (db) => new MssqlIntrospector(db),
+          createQueryCompiler: () => new MssqlQueryCompiler(),
+        },
+      });
     default:
       throw new Error(`Unsupported dialect ${dialect}. Please implement your own mock`);
   }
