@@ -17,9 +17,10 @@
     "monaco-editor": "^0.52.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "ts-json-schema-generator": "^2.4.0",
+    "ts-json-schema-generator": "github:adr-h/ts-json-schema-generator#next",
     "ts-morph": "^26.0.0",
-    "tsconfck": "^3.1.6"
+    "tsconfck": "^3.1.6",
+    "typescript": "^5.9.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
