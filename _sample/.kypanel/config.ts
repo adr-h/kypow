@@ -1,15 +1,12 @@
-import { setup } from 'kypanel/app/app';
+import { Config } from 'kypanel/app/Config';
 // import bar from '@foo/yasm';
-import _ from 'lodash';
 
-// console.log('bar is', bar);
-
-setup({
+export const config: Config = {
    foo: 'baz',
    projectRoot: process.env.PROJECT_ROOT || '', //TODO: just make this the workingdir?
    tsConfigPath: '/home/adrian/Code/kypanel/_sample/tsconfig.json',
    moduleFormat: 'esm',
-   dialect: 'sqlite',
+   dialect: 'sqlite', // TODO: very awkward that both the mock and the config need to define the dialect and both be in sync.
    mocks: [
       // TODO: maybe use TS to ensure that relative imports always have leading './'
       // E.g:
@@ -28,4 +25,15 @@ setup({
          pathToMockModule: '/home/adrian/Code/kypanel/_sample/.kypanel/defaultMock.ts'
       }
    ]
-});
+   // TODO: one alternative to needing users to bring their own separate mock module is to do jest-style mock setups:
+   // mocks: [
+   //    (mocker, dummyKyselyWithRightDialect) => {
+   //       mocker.mock('path/to/original/module.ts', () => {
+   //          return {
+   //             // allow them to re-export the rest of the module as-is
+   //             db: dummyKyselyWithRightDialect
+   //          }
+   //       })
+   //    }
+   // ]
+};

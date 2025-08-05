@@ -19,12 +19,17 @@ type ParameterMeta = {
    description: string;
 }
 
-export async function getFunctionMeta(params: GetFunctionMetaParams) {
+export async function getFunctionMeta(params: GetFunctionMetaParams): Promise<FunctionMeta> {
    const { modulePath, functionName, tsconfig } = params;
 
    const functionSchema = getFunctionSchema({modulePath, functionName, tsconfig});
 
-   return functionSchema;
+   return {
+      name: params.functionName,
+      description: functionSchema.$comment || '',
+      params: [], // TODO
+      sampleParams: [] // TODO
+   };
 }
 
 function getFunctionSchema(params: GetFunctionMetaParams) {
