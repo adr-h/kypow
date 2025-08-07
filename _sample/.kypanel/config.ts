@@ -3,7 +3,7 @@ import { Config } from 'kypanel/app/Config';
 
 export const config: Config = {
    foo: 'baz',
-   projectRoot: process.env.PROJECT_ROOT || '', //TODO: just make this the workingdir?
+   projectRoot: "/home/adrian/Code/kypanel/_sample", //TODO: just make this the workingdir?
    tsConfigPath: '/home/adrian/Code/kypanel/_sample/tsconfig.json',
    moduleFormat: 'esm',
    dialect: 'sqlite', // TODO: very awkward that both the mock and the config need to define the dialect and both be in sync.
