@@ -11,6 +11,7 @@
   "dependencies": {
     "better-sqlite3": "^11.10.0",
     "kypanel": "link:/home/adrian/Code/kypanel",
+    "kysely": "^0.28.4",
     "kysely-codegen": "^0.18.5",
     "lodash": "^4.17.21",
     "sqlite3": "^5.1.7"

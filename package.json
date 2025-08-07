@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "bin": { "kypanel": "./bin/bin.ts" },
+  "bin": { "kypanel": "./bin/bin.mjs", "kypanel-loader": "./bin/my-loader.mjs" },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

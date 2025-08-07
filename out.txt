@@ -1,0 +1,1876 @@
+{
+  specifier: 'tsx',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/'
+  }
+}
+{
+  specifier: './get-pipe-path-BHW2eJdv.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: './esm/index.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: 'module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: './temporary-directory-CwHp0_NW.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: 'node:os',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: 'node:worker_threads',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: './node-features-_8ZFwP_x.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: './register-B7jrtLTO.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: 'node:module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: './register-CFH5oNdT.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: 'node:url',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: 'get-tsconfig',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: 'node:fs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: './index-7AaEi15b.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: 'esbuild',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: 'node:crypto',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: './client-BQVF1NaW.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: 'node:net',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: 'node:util',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: './index-gbaejti9.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: './require-DQxpCAr4.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: 'node:fs/promises',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/loader.mjs'
+  }
+}
+{
+  specifier: 'module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/get-pipe-path-BHW2eJdv.mjs'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/get-pipe-path-BHW2eJdv.mjs'
+  }
+}
+{
+  specifier: './temporary-directory-CwHp0_NW.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/get-pipe-path-BHW2eJdv.mjs'
+  }
+}
+{
+  specifier: 'node:worker_threads',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: '../node-features-_8ZFwP_x.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: '../register-B7jrtLTO.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: '../get-pipe-path-BHW2eJdv.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: 'node:module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: 'node:url',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: 'get-tsconfig',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: '../register-CFH5oNdT.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: 'node:fs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: 'esbuild',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: 'node:crypto',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: '../index-7AaEi15b.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: '../client-BQVF1NaW.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: '../require-DQxpCAr4.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: 'node:fs/promises',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: 'module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: '../temporary-directory-CwHp0_NW.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: 'node:os',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: 'node:util',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: '../index-gbaejti9.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: 'node:net',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/temporary-directory-CwHp0_NW.mjs'
+  }
+}
+{
+  specifier: 'node:os',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/temporary-directory-CwHp0_NW.mjs'
+  }
+}
+{
+  specifier: 'node:module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-B7jrtLTO.mjs'
+  }
+}
+{
+  specifier: 'node:worker_threads',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-B7jrtLTO.mjs'
+  }
+}
+{
+  specifier: './register-CFH5oNdT.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-B7jrtLTO.mjs'
+  }
+}
+{
+  specifier: 'node:url',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-B7jrtLTO.mjs'
+  }
+}
+{
+  specifier: './get-pipe-path-BHW2eJdv.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: 'node:module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: 'node:url',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: 'get-tsconfig',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: 'node:fs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: './index-7AaEi15b.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: './client-BQVF1NaW.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: 'node:util',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: './index-gbaejti9.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/get-tsconfig@4.10.1/node_modules/get-tsconfig/dist/index.mjs'
+  }
+}
+{
+  specifier: 'node:fs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/get-tsconfig@4.10.1/node_modules/get-tsconfig/dist/index.mjs'
+  }
+}
+{
+  specifier: 'node:module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/get-tsconfig@4.10.1/node_modules/get-tsconfig/dist/index.mjs'
+  }
+}
+{
+  specifier: 'resolve-pkg-maps',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/get-tsconfig@4.10.1/node_modules/get-tsconfig/dist/index.mjs'
+  }
+}
+{
+  specifier: 'fs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/get-tsconfig@4.10.1/node_modules/get-tsconfig/dist/index.mjs'
+  }
+}
+{
+  specifier: 'node:url',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: 'esbuild',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: 'node:crypto',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: 'node:fs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: 'node:os',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: './temporary-directory-CwHp0_NW.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: 'node:net',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/client-BQVF1NaW.mjs'
+  }
+}
+{
+  specifier: './get-pipe-path-BHW2eJdv.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/client-BQVF1NaW.mjs'
+  }
+}
+{
+  specifier: './get-pipe-path-BHW2eJdv.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/require-DQxpCAr4.mjs'
+  }
+}
+{
+  specifier: './register-CFH5oNdT.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/require-DQxpCAr4.mjs'
+  }
+}
+{
+  specifier: './lexer-DQCqS3nf.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: './esm/index.mjs?1754583389890',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-B7jrtLTO.mjs'
+  }
+}
+{
+  specifier: 'node:worker_threads',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: '../node-features-_8ZFwP_x.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: '../register-B7jrtLTO.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: '../get-pipe-path-BHW2eJdv.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: 'node:module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: 'node:url',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: 'get-tsconfig',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: '../register-CFH5oNdT.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: 'node:fs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: 'esbuild',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: 'node:crypto',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: '../index-7AaEi15b.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: '../client-BQVF1NaW.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: '../require-DQxpCAr4.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: 'node:fs/promises',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: 'module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: '../temporary-directory-CwHp0_NW.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: 'node:os',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: 'node:util',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: '../index-gbaejti9.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: 'node:net',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/esm/index.mjs?1754583389890'
+  }
+}
+{
+  specifier: 'node:module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-B7jrtLTO.mjs'
+  }
+}
+{
+  specifier: 'node:worker_threads',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-B7jrtLTO.mjs'
+  }
+}
+{
+  specifier: './register-CFH5oNdT.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-B7jrtLTO.mjs'
+  }
+}
+{
+  specifier: 'node:url',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-B7jrtLTO.mjs'
+  }
+}
+{
+  specifier: 'module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/get-pipe-path-BHW2eJdv.mjs'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/get-pipe-path-BHW2eJdv.mjs'
+  }
+}
+{
+  specifier: './temporary-directory-CwHp0_NW.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/get-pipe-path-BHW2eJdv.mjs'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/get-tsconfig@4.10.1/node_modules/get-tsconfig/dist/index.mjs'
+  }
+}
+{
+  specifier: 'node:fs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/get-tsconfig@4.10.1/node_modules/get-tsconfig/dist/index.mjs'
+  }
+}
+{
+  specifier: 'node:module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/get-tsconfig@4.10.1/node_modules/get-tsconfig/dist/index.mjs'
+  }
+}
+{
+  specifier: 'resolve-pkg-maps',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/get-tsconfig@4.10.1/node_modules/get-tsconfig/dist/index.mjs'
+  }
+}
+{
+  specifier: 'fs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/get-tsconfig@4.10.1/node_modules/get-tsconfig/dist/index.mjs'
+  }
+}
+{
+  specifier: './get-pipe-path-BHW2eJdv.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: 'node:module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: 'node:url',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: 'get-tsconfig',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: 'node:fs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: './index-7AaEi15b.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: './client-BQVF1NaW.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: 'node:util',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: './index-gbaejti9.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/register-CFH5oNdT.mjs'
+  }
+}
+{
+  specifier: 'node:url',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: 'esbuild',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: 'node:crypto',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: 'node:fs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: 'node:os',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: './temporary-directory-CwHp0_NW.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: 'node:net',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/client-BQVF1NaW.mjs'
+  }
+}
+{
+  specifier: './get-pipe-path-BHW2eJdv.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/client-BQVF1NaW.mjs'
+  }
+}
+{
+  specifier: './get-pipe-path-BHW2eJdv.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/require-DQxpCAr4.mjs'
+  }
+}
+{
+  specifier: './register-CFH5oNdT.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/require-DQxpCAr4.mjs'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/temporary-directory-CwHp0_NW.mjs'
+  }
+}
+{
+  specifier: 'node:os',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/temporary-directory-CwHp0_NW.mjs'
+  }
+}
+{
+  specifier: './lexer-DQCqS3nf.mjs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: [Object: null prototype] {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tsx@4.20.3/node_modules/tsx/dist/index-7AaEi15b.mjs'
+  }
+}
+{
+  specifier: 'file:///home/adrian/Code/kypanel/app/cli.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: undefined
+  }
+}
+{
+  specifier: 'path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/cli.ts'
+  }
+}
+{
+  specifier: './app.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/cli.ts'
+  }
+}
+{
+  specifier: './server.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/cli.ts'
+  }
+}
+{
+  specifier: 'url',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/app.ts'
+  }
+}
+{
+  specifier: 'vite',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/app.ts'
+  }
+}
+{
+  specifier: './kysely-utils.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/app.ts'
+  }
+}
+{
+  specifier: './kysely-utils.tsx',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/app.ts'
+  }
+}
+{
+  specifier: './kysely-utils.jsx',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/app.ts'
+  }
+}
+{
+  specifier: './kysely-utils.js',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/app.ts'
+  }
+}
+{
+  specifier: './kysely-utils.json',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/app.ts'
+  }
+}
+{
+  specifier: './kysely-utils',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/app.ts'
+  }
+}
+{
+  specifier: 'file:///home/adrian/Code/kypanel/app/kysely-utils/index.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/app.ts'
+  }
+}
+{
+  specifier: './sql/resolveDialectPlugin.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/app.ts'
+  }
+}
+{
+  specifier: './type-system/getFunctionMeta.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/app.ts'
+  }
+}
+{
+  specifier: 'express',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/server.ts'
+  }
+}
+{
+  specifier: 'module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/index.js'
+  }
+}
+{
+  specifier: './chunks/dep-Bsx9IwL8.js',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/index.js'
+  }
+}
+{
+  specifier: './chunks/dep-Ctugieod.js',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/index.js'
+  }
+}
+{
+  specifier: 'rollup/parseAst',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/index.js'
+  }
+}
+{
+  specifier: 'esbuild',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/index.js'
+  }
+}
+{
+  specifier: './QueryExecutionEmitter.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/kysely-utils/index.ts'
+  }
+}
+{
+  specifier: './listenForCompiledQuery.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/kysely-utils/index.ts'
+  }
+}
+{
+  specifier: './dialect-plugins.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/resolveDialectPlugin.ts'
+  }
+}
+{
+  specifier: './dialect-plugins.tsx',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/resolveDialectPlugin.ts'
+  }
+}
+{
+  specifier: './dialect-plugins.jsx',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/resolveDialectPlugin.ts'
+  }
+}
+{
+  specifier: './dialect-plugins.js',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/resolveDialectPlugin.ts'
+  }
+}
+{
+  specifier: './dialect-plugins.json',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/resolveDialectPlugin.ts'
+  }
+}
+{
+  specifier: './dialect-plugins',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/resolveDialectPlugin.ts'
+  }
+}
+{
+  specifier: 'file:///home/adrian/Code/kypanel/app/sql/dialect-plugins/index.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/resolveDialectPlugin.ts'
+  }
+}
+{
+  specifier: 'ts-json-schema-generator',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/type-system/getFunctionMeta.ts'
+  }
+}
+{
+  specifier: 'module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Ctugieod.js'
+  }
+}
+{
+  specifier: 'node:fs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Ctugieod.js'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Ctugieod.js'
+  }
+}
+{
+  specifier: 'node:url',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Ctugieod.js'
+  }
+}
+{
+  specifier: '../native.js',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/rollup@4.44.1/node_modules/rollup/dist/es/parseAst.js'
+  }
+}
+{
+  specifier: './shared/parseAst.js',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/rollup@4.44.1/node_modules/rollup/dist/es/parseAst.js'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/rollup@4.44.1/node_modules/rollup/dist/es/parseAst.js'
+  }
+}
+{
+  specifier: 'node:events',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/kysely-utils/QueryExecutionEmitter.ts'
+  }
+}
+{
+  specifier: 'crypto',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/kysely-utils/listenForCompiledQuery.ts'
+  }
+}
+{
+  specifier: './QueryExecutionEmitter.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/kysely-utils/listenForCompiledQuery.ts'
+  }
+}
+{
+  specifier: './MssqlPlugin.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/dialect-plugins/index.ts'
+  }
+}
+{
+  specifier: './MySqlPlugin.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/dialect-plugins/index.ts'
+  }
+}
+{
+  specifier: './PostgresPlugin.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/dialect-plugins/index.ts'
+  }
+}
+{
+  specifier: './SqlitePlugin.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/dialect-plugins/index.ts'
+  }
+}
+{
+  specifier: 'module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: './dep-Drtntmtt.js',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: './dep-Ctugieod.js',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'rollup/parseAst',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:fs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:fs/promises',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:url',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:util',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:perf_hooks',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:crypto',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'picomatch',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'esbuild',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:os',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:net',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:child_process',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:dns',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'fs',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'fdir',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:zlib',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:readline',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:worker_threads',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:buffer',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'tinyglobby',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:assert',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:process',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:v8',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:events',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:http',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:https',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'vite/module-runner',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'zlib',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: 'node:querystring',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Bsx9IwL8.js'
+  }
+}
+{
+  specifier: '../../native.js',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/rollup@4.44.1/node_modules/rollup/dist/es/shared/parseAst.js'
+  }
+}
+{
+  specifier: 'node:path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/rollup@4.44.1/node_modules/rollup/dist/es/shared/parseAst.js'
+  }
+}
+{
+  specifier: '../formatSqlParam.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/dialect-plugins/MssqlPlugin.ts'
+  }
+}
+{
+  specifier: '../formatSqlParam.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/dialect-plugins/MySqlPlugin.ts'
+  }
+}
+{
+  specifier: '../formatSqlParam.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/dialect-plugins/PostgresPlugin.ts'
+  }
+}
+{
+  specifier: '../formatSqlParam.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/sql/dialect-plugins/SqlitePlugin.ts'
+  }
+}
+{
+  specifier: 'module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Drtntmtt.js'
+  }
+}
+{
+  specifier: 'node:module',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/vite@7.0.0_@types+node@24.0.7_tsx@4.20.3/node_modules/vite/dist/node/chunks/dep-Drtntmtt.js'
+  }
+}
+{
+  specifier: 'path',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tinyglobby@0.2.14/node_modules/tinyglobby/dist/index.mjs'
+  }
+}
+cli.ts
+{
+  specifier: 'fdir',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tinyglobby@0.2.14/node_modules/tinyglobby/dist/index.mjs'
+  }
+}
+{
+  specifier: 'picomatch',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/node_modules/.pnpm/tinyglobby@0.2.14/node_modules/tinyglobby/dist/index.mjs'
+  }
+}
+{
+  specifier: '/home/adrian/Code/kypanel/_sample/.kypanel/config.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/cli.ts'
+  }
+}
+{
+  specifier: '/home/adrian/Code/kypanel/_sample/./src/queries/customerQuery.ts',
+  context: {
+    conditions: [ 'node', 'import', 'module-sync', 'node-addons' ],
+    importAttributes: {},
+    parentURL: 'file:///home/adrian/Code/kypanel/app/app.ts'
+  }
+}
+Initialised once
+db status DB STATUS: maybe
+res is []

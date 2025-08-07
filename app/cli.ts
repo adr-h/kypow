@@ -1,7 +1,7 @@
 import path from 'path';
 import { createApp } from './app';
 import { setupServer } from './server';
-
+console.log('cli.ts');
 async function main() {
    // TODO: allow this path to be overriden
    const configPath = path.join(process.cwd(), '.kypanel', 'config.ts')
@@ -13,6 +13,7 @@ async function main() {
    const command = process.argv[2];
 
    if (command == 'dump') {
+      // console.log('running dump');
       // TOOD: get from CLI
       const modulePath = "./src/queries/customerQuery.ts";
       const functionName = 'customerNameQuery';

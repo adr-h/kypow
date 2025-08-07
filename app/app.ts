@@ -1,11 +1,11 @@
 import type { Config } from './Config';
 import { fileURLToPath } from 'url'
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
-import { redirectModuleImport } from './vite-plugins/redirectModuleImport';
-import { listenForCompiledQuery } from './kysely';
+// import { redirectModuleImport } from './vite-plugins/redirectModuleImport';
+import { listenForCompiledQuery } from './kysely-utils';
 import { resolveDialectPlugin } from './sql/resolveDialectPlugin';
 import { getFunctionMeta } from './type-system/getFunctionMeta';
-
+import { Kysely } from 'kysely';
 Error.stackTraceLimit = 1000;
 
 const kypanelRoot = fileURLToPath(new URL('..', import.meta.url))
@@ -28,10 +28,10 @@ export async function createApp(config: Config) {
          alias: { '@frontend': kypanelRoot }
       },
       plugins: [
-         redirectModuleImport({
-            mockModuleAbsolutePath: config.mocks[0]?.pathToMockModule,
-            originalModuleAbsolutePath: config.mocks[0]?.pathToOriginalModule
-         })
+         // redirectModuleImport({
+         //    mockModuleAbsolutePath: config.mocks[0]?.pathToMockModule,
+         //    originalModuleAbsolutePath: config.mocks[0]?.pathToOriginalModule
+         // })
       ]
    })
    const sqlDialect = resolveDialectPlugin(config.dialect);
@@ -43,7 +43,7 @@ export async function createApp(config: Config) {
       invokeParams?: any[];
    }
    async function getQuery(params: GetQueryParams) {
-      const modulePath = params.modulePath || "./src/queries/customerQuery.ts";
+      const modulePath = params.modulePath || "./src/queries/db.ts";
       const functionName = params.functionName || 'customerNameQuery';
 
       const functionMeta = await getFunctionMeta({
@@ -51,7 +51,9 @@ export async function createApp(config: Config) {
       });
 
       const executionParams = ['bob', 1] //TODO: invokeParams || functionMetadata.sampleParams
-      const importedModule = await vite.ssrLoadModule(modulePath)
+      // const importedModule = await vite.ssrLoadModule(modulePath)
+      const importedModule = await import(`${projectRoot}/${modulePath}`);
+
       const { compiledQuery } = await listenForCompiledQuery(
          () => importedModule[functionName](...executionParams),
       );
