@@ -14,14 +14,14 @@ export type App = Awaited<ReturnType<typeof createApp>>
 
 export async function createApp(config: Config) {
    const projectRoot = config.projectRoot;
-   const imposterKyselyPackagePath = path.join(kypanelRoot, 'app', 'kysely', 'ImposterKyselyPackage.ts');
+   const fakeKyselyPath = path.join(kypanelRoot, 'src', 'kysely', 'ImposterKyselyPackage.ts');
    const tsconfig = config.tsConfigPath;
    const sqlDialect = resolveDialectPlugin(config.dialect);
 
    const vite = await createMockingViteServer({
       projectRoot,
       kypanelRoot,
-      fakeKyselyPath: imposterKyselyPackagePath
+      fakeKyselyPath
    })
 
    type GetQueryParams = {
