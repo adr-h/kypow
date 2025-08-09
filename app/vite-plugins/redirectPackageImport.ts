@@ -3,18 +3,19 @@ import * as fs from 'fs';
 import path from "path";
 
 type RedirectPackageImportProps = {
-  packageName: string,
+  packageName: string;
   mockPath: string;
+  cwd?: string;
 };
 
 export function redirectPackageImport ({
-  packageName, mockPath
+  packageName, mockPath, cwd = process.cwd()
 }: RedirectPackageImportProps): Plugin {
 
   // absolute filesystem path to the mock file
   const mockAbsolute = path.isAbsolute(mockPath)
     ? mockPath
-    : path.resolve(process.cwd(), mockPath);
+    : path.resolve(cwd, mockPath);
 
   return {
       name: 'redirect-package-import',

@@ -22,7 +22,9 @@ async function main() {
          functionName
       })
 
-      console.log(JSON.stringify(queryDetails, null, 2));
+      const queryModules = await app.getQueryModules();
+
+      console.log(JSON.stringify({queryDetails, queryModules}, null, 2));
       process.exit();
    } else if (command == 'serve') {
       setupServer(app)

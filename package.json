@@ -3,7 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "bin": { "kypanel": "./bin/bin.ts" },
+  "bin": {
+    "kypanel": "./bin/bin.ts"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -14,6 +16,9 @@
   "dependencies": {
     "@monaco-editor/react": "4.7.0-rc.0",
     "express": "^5.1.0",
+    "fast-glob": "^3.3.3",
+    "globby": "^14.1.0",
+    "json-schema-faker": "^0.5.9",
     "kysely": "^0.28.2",
     "monaco-editor": "^0.52.2",
     "react": "^19.1.0",
