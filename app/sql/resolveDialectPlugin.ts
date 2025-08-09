@@ -1,6 +1,4 @@
-import { MssqlPlugin, MySqlPlugin, PostgresPlugin, SqlitePlugin, type DialectPlugin } from "./dialect-plugins";
-import type { RecognisedDialects } from "./RecognisedDialects";
-
+import { MssqlPlugin, MySqlPlugin, PostgresPlugin, SqlitePlugin, type DialectPlugin, type RecognisedDialects } from "./dialect-plugins";
 
 export function resolveDialectPlugin(dialect: RecognisedDialects | DialectPlugin) {
    if (dialect === 'mysql') {

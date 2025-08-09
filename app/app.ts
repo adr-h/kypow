@@ -1,12 +1,10 @@
 import type { Config } from './Config';
 import { fileURLToPath } from 'url'
-import { createServer as createViteServer } from 'vite';
-import { redirectPackageImport } from './vite-plugins/redirectPackageImport';
-import { listenForCompiledQuery } from './kysely';
 import { resolveDialectPlugin } from './sql/resolveDialectPlugin';
 import { getFunctionMeta } from './type-system/getFunctionMeta';
 import path from 'path';
-import { searchFiles } from './file_system/searchFiles';
+import * as query from './query';
+import { createMockingViteServer } from './vite/createMockingViteServer';
 
 Error.stackTraceLimit = 1000;
 
@@ -17,27 +15,14 @@ export type App = Awaited<ReturnType<typeof createApp>>
 export async function createApp(config: Config) {
    const projectRoot = config.projectRoot;
    const imposterKyselyPackagePath = path.join(kypanelRoot, 'app', 'kysely', 'ImposterKyselyPackage.ts');
-
-   const vite = await createViteServer({
-      appType: 'custom',
-      root: projectRoot, // Working directory is Vite's root
-      ssr: {
-         noExternal:  ['kysely', ...(config.noExternal || [])]
-      },
-      server: {
-         middlewareMode: true,
-         fs: {
-            allow: [projectRoot, kypanelRoot] // Allow both dirs to resolve modules
-         }
-      },
-      plugins: [
-         redirectPackageImport({
-            packageName: 'kysely',
-            mockPath: imposterKyselyPackagePath
-         })
-      ]
-   })
+   const tsconfig = config.tsConfigPath;
    const sqlDialect = resolveDialectPlugin(config.dialect);
+
+   const vite = await createMockingViteServer({
+      projectRoot,
+      kypanelRoot,
+      fakeKyselyPath: imposterKyselyPackagePath
+   })
 
    type GetQueryParams = {
       modulePath: string;
@@ -45,38 +30,52 @@ export async function createApp(config: Config) {
    }
    async function getQuery({modulePath, functionName}: GetQueryParams) {
       const functionMeta = await getFunctionMeta({
-         modulePath, functionName, tsconfig: config.tsConfigPath
+         modulePath, functionName, tsconfig
       });
 
-      const importedModule = await vite.ssrLoadModule(modulePath)
-      const { compiledQuery } = await listenForCompiledQuery(
-         () => importedModule[functionName](...functionMeta.sampleParams),
-      );
-
-      const parametizedQuery = compiledQuery.sql;
-      const interpolatedQuery = sqlDialect.interpolateSql(parametizedQuery, compiledQuery.parameters);
+      const { interpolatedSql, parametizedSql } = await query.getSqlForQuery({
+         modulePath,
+         functionName,
+         params: functionMeta.sampleParams,
+         sqlDialect,
+         vite, // :(
+      });
 
       return {
          name: functionMeta.name,
          description: functionMeta.description,
          params: functionMeta.paramsMeta,
-         query: parametizedQuery,
-         sampleQuery: interpolatedQuery,
+         sql: parametizedSql,
+         sampleSql:interpolatedSql,
       }
    }
 
-   async function getQueryModules() {
-      const files = searchFiles({
+   async function listModulesWithQueries() {
+      const modules = await query.listModulesWithQueries({
          searchPaths: ['**/**.ts', '**/**.js', '!node_modules', '!dist'],
-         needle: '@isQuery',
          cwd: projectRoot
       });
-      return files;
+
+      return modules;
    }
+
+   type ListQueriesInModuleParams = {
+      modulePath: string;
+   }
+   async function listQueriesInModule({ modulePath }: ListQueriesInModuleParams) {
+      const queryNames = query.listQueriesInModule({
+         modulePath, tsconfig
+      })
+
+      return queryNames;
+   }
+
+   // vite.watcher.
 
    return {
       vite,
       getQuery,
-      getQueryModules
+      listModulesWithQueries,
+      listQueriesInModule
    }
 }
