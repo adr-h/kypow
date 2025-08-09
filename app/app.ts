@@ -42,13 +42,12 @@ export async function createApp(config: Config) {
    type GetQueryParams = {
       modulePath: string;
       functionName: string;
-      invokeParams?: any[];
    }
    async function getQuery({modulePath, functionName, invokeParams}: GetQueryParams) {
       const functionMeta = await getFunctionMeta({
          modulePath, functionName, tsconfig: config.tsConfigPath
       });
-      const executionParams = invokeParams || functionMeta.params.map(param => param.sample);
+      const executionParams = functionMeta.params.map(param => param.sample);
 
       const importedModule = await vite.ssrLoadModule(modulePath)
       const { compiledQuery } = await listenForCompiledQuery(
@@ -69,7 +68,7 @@ export async function createApp(config: Config) {
 
    async function getQueryModules() {
       const files = searchFiles({
-         searchPaths: ['**/**.ts', '!node_modules'],
+         searchPaths: ['**/**.ts', '**/**.js', '!node_modules', '!dist'],
          needle: '@isQuery',
          cwd: projectRoot
       });
