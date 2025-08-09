@@ -1,10 +1,11 @@
 import type { Config } from './Config';
 import { fileURLToPath } from 'url'
-import { createServer as createViteServer, type ViteDevServer } from 'vite';
-import { redirectModuleImport } from './vite-plugins/redirectModuleImport';
+import { createServer as createViteServer } from 'vite';
+import { redirectPackageImport } from './vite-plugins/redirectPackageImport';
 import { listenForCompiledQuery } from './kysely';
 import { resolveDialectPlugin } from './sql/resolveDialectPlugin';
 import { getFunctionMeta } from './type-system/getFunctionMeta';
+import path from 'path';
 
 Error.stackTraceLimit = 1000;
 
@@ -15,22 +16,24 @@ export type App = Awaited<ReturnType<typeof createApp>>
 export async function createApp(config: Config) {
    const projectRoot = config.projectRoot;
 
+   const imposterKyselyPackagePath = path.join(kypanelRoot, 'app', 'kysely', 'ImposterKyselyPackage.ts');
+
    const vite = await createViteServer({
       appType: 'custom',
       root: projectRoot, // Working directory is Vite's root
+      ssr: {
+         noExternal:  ['kysely', ...(config.noExternal || [])]
+      },
       server: {
          middlewareMode: true,
          fs: {
             allow: [projectRoot, kypanelRoot] // Allow both dirs to resolve modules
          }
       },
-      resolve: {
-         alias: { '@frontend': kypanelRoot }
-      },
       plugins: [
-         redirectModuleImport({
-            mockModuleAbsolutePath: config.mocks[0]?.pathToMockModule,
-            originalModuleAbsolutePath: config.mocks[0]?.pathToOriginalModule
+         redirectPackageImport({
+            packageName: 'kysely',
+            mockPath: imposterKyselyPackagePath
          })
       ]
    })
@@ -52,6 +55,7 @@ export async function createApp(config: Config) {
 
       const executionParams = ['bob', 1] //TODO: invokeParams || functionMetadata.sampleParams
       const importedModule = await vite.ssrLoadModule(modulePath)
+      console.log('importedMOdule', importedModule);
       const { compiledQuery } = await listenForCompiledQuery(
          () => importedModule[functionName](...executionParams),
       );
@@ -70,7 +74,7 @@ export async function createApp(config: Config) {
       }
    }
 
-   async function getModule() {
+   async function getQueries() {
       // e.g:
       //    {
       //       module: 'path/to/module.ts',
