@@ -43,15 +43,14 @@ export async function createApp(config: Config) {
       modulePath: string;
       functionName: string;
    }
-   async function getQuery({modulePath, functionName, invokeParams}: GetQueryParams) {
+   async function getQuery({modulePath, functionName}: GetQueryParams) {
       const functionMeta = await getFunctionMeta({
          modulePath, functionName, tsconfig: config.tsConfigPath
       });
-      const executionParams = functionMeta.params.map(param => param.sample);
 
       const importedModule = await vite.ssrLoadModule(modulePath)
       const { compiledQuery } = await listenForCompiledQuery(
-         () => importedModule[functionName](...executionParams),
+         () => importedModule[functionName](...functionMeta.sampleParams),
       );
 
       const parametizedQuery = compiledQuery.sql;
@@ -60,7 +59,7 @@ export async function createApp(config: Config) {
       return {
          name: functionMeta.name,
          description: functionMeta.description,
-         paramsMeta: functionMeta.params,
+         params: functionMeta.paramsMeta,
          query: parametizedQuery,
          sampleQuery: interpolatedQuery,
       }
