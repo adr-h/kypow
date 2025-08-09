@@ -7,7 +7,6 @@ import { DB } from './schema';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const dbPath = path.join(__dirname, 'db.sqlite');
-// createDatabaseIfNotExists(dbPath);
 
 export const db = new Kysely<DB>({
    dialect: new SqliteDialect({

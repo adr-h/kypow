@@ -8,10 +8,6 @@ export type Config = {
    esBuildOptions?: any;
    moduleFormat: 'esm' | 'cjs' | 'iife';
 
-   mocks: [
-      {
-         pathToOriginalModule: string;
-         pathToMockModule: string;
-      }
-   ]
+   // if your Kysely instance is being created by another node package (e.g: "import { db } from bar"), you will need to add that package to this list
+   noExternal?: string[],
 }
