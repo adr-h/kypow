@@ -1,4 +1,4 @@
-import { searchFiles } from "../file_system/searchFiles";
+import { searchFiles } from "../../lib/file_system/searchFiles";
 import { IS_QUERY_TAG } from "./constants";
 
 type ModulesWithQueryTagParams = {
@@ -6,7 +6,7 @@ type ModulesWithQueryTagParams = {
    cwd?: string
 }
 export async function listModulesWithQueries({ searchPaths, cwd }: ModulesWithQueryTagParams) {
-   const files = searchFiles({
+   const files = await searchFiles({
       searchPaths,
       needle: IS_QUERY_TAG,
       cwd

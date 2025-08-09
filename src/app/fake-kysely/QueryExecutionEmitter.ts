@@ -38,18 +38,20 @@ class QueryExecutionEmitter extends EventEmitter<EventMap> {
       return new Promise((resolve, reject) => {
          const emitter = getQueryExecutionEmitter();
 
+         let isSuccess = false;
          const listener = ({ stackTrace, compiledQuery }: QueryExecutedEventProps) => {
-            console.log('event received');
             callback({ stackTrace, compiledQuery }, resolve, reject);
+            isSuccess = true;
          };
 
          emitter.on('queryExecuted', listener);
 
          setTimeout(() => {
+            if (isSuccess) return;
+
             emitter.off('queryExecuted', listener);
             reject(ErrorCode.Timeout);
          }, timeout);
-
       });
    }
 }

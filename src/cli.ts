@@ -1,6 +1,5 @@
 import path from 'path';
 import { createApp } from './app';
-import { setupServer } from './server';
 
 async function main() {
    // TODO: allow this path to be overriden
@@ -34,8 +33,6 @@ async function main() {
 
       console.log(JSON.stringify({queryDetails, queryModules, queriesInModule}, null, 2));
       process.exit();
-   } else if (command == 'serve') {
-      setupServer(app)
    } else {
       console.error('Unknown command: ', command);
    }

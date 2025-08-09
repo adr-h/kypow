@@ -1,13 +1,10 @@
 import { FunctionDeclaration, Project } from "ts-morph";
-import { IS_QUERY_TAG } from "../query/constants";
 
 type SearchFunctionExportsInModuleParams = {
    modulePath: string;
    tsconfig: string;
    searchFunction: (f: FunctionDeclaration) => boolean;
 }
-
-
 
 export async function filterFunctionsInModule({ modulePath, tsconfig, searchFunction }: SearchFunctionExportsInModuleParams) {
    const project = new Project({

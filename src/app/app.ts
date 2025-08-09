@@ -1,10 +1,10 @@
 import type { Config } from './Config';
 import { fileURLToPath } from 'url'
-import { resolveDialectPlugin } from './sql/resolveDialectPlugin';
-import { getFunctionMeta } from './type-system/getFunctionMeta';
-import path from 'path';
+import { resolveDialectPlugin } from '../lib/sql/resolveDialectPlugin';
+import { getFunctionMeta } from '../lib/type-system/getFunctionMeta';
 import * as query from './query';
-import { createMockingViteServer } from './vite/createMockingViteServer';
+import { createViteWithKyselyImposter } from './createViteWithKyselyImposter';
+import { KyselyImposterPath } from './fake-kysely';
 
 Error.stackTraceLimit = 1000;
 
@@ -14,14 +14,13 @@ export type App = Awaited<ReturnType<typeof createApp>>
 
 export async function createApp(config: Config) {
    const projectRoot = config.projectRoot;
-   const fakeKyselyPath = path.join(kypanelRoot, 'src', 'kysely', 'ImposterKyselyPackage.ts');
    const tsconfig = config.tsConfigPath;
    const sqlDialect = resolveDialectPlugin(config.dialect);
 
-   const vite = await createMockingViteServer({
+   const vite = await createViteWithKyselyImposter({
       projectRoot,
       kypanelRoot,
-      fakeKyselyPath
+      kyselyImposterModule: KyselyImposterPath
    })
 
    type GetQueryParams = {
