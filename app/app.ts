@@ -6,6 +6,7 @@ import { listenForCompiledQuery } from './kysely';
 import { resolveDialectPlugin } from './sql/resolveDialectPlugin';
 import { getFunctionMeta } from './type-system/getFunctionMeta';
 import path from 'path';
+import { searchFiles } from './file_system/searchFiles';
 
 Error.stackTraceLimit = 1000;
 
@@ -15,7 +16,6 @@ export type App = Awaited<ReturnType<typeof createApp>>
 
 export async function createApp(config: Config) {
    const projectRoot = config.projectRoot;
-
    const imposterKyselyPackagePath = path.join(kypanelRoot, 'app', 'kysely', 'ImposterKyselyPackage.ts');
 
    const vite = await createViteServer({
@@ -39,57 +39,46 @@ export async function createApp(config: Config) {
    })
    const sqlDialect = resolveDialectPlugin(config.dialect);
 
-
    type GetQueryParams = {
       modulePath: string;
       functionName: string;
       invokeParams?: any[];
    }
-   async function getQuery(params: GetQueryParams) {
-      const modulePath = params.modulePath || "./src/queries/customerQuery.ts";
-      const functionName = params.functionName || 'customerNameQuery';
-
+   async function getQuery({modulePath, functionName, invokeParams}: GetQueryParams) {
       const functionMeta = await getFunctionMeta({
          modulePath, functionName, tsconfig: config.tsConfigPath
       });
+      const executionParams = invokeParams || functionMeta.params.map(param => param.sample);
 
-      const executionParams = ['bob', 1] //TODO: invokeParams || functionMetadata.sampleParams
       const importedModule = await vite.ssrLoadModule(modulePath)
-      console.log('importedMOdule', importedModule);
       const { compiledQuery } = await listenForCompiledQuery(
          () => importedModule[functionName](...executionParams),
       );
 
       const parametizedQuery = compiledQuery.sql;
-      const queryParameters = compiledQuery.parameters;
-      const interpolatedQuery = sqlDialect.interpolateSql(parametizedQuery, queryParameters);
+      const interpolatedQuery = sqlDialect.interpolateSql(parametizedQuery, compiledQuery.parameters);
 
       return {
-         // sampleConst: importedModule.sampleConst,
          name: functionMeta.name,
          description: functionMeta.description,
-         interpolatedQuery,
-         parametizedQuery,
-         queryParamsUsed: executionParams,
+         paramsMeta: functionMeta.params,
+         query: parametizedQuery,
+         sampleQuery: interpolatedQuery,
       }
    }
 
-   async function getQueries() {
-      // e.g:
-      //    {
-      //       module: 'path/to/module.ts',
-      //       queries: [
-      //          'getCustomer',
-      //          'getSale'
-      //       ]
-      //    }
-      //
-
-      return [];
+   async function getQueryModules() {
+      const files = searchFiles({
+         searchPaths: ['**/**.ts', '!node_modules'],
+         needle: '@isQuery',
+         cwd: projectRoot
+      });
+      return files;
    }
 
    return {
       vite,
-      getQuery
+      getQuery,
+      getQueryModules
    }
 }
