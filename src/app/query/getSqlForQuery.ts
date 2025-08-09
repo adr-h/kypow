@@ -1,6 +1,6 @@
 import type { ViteDevServer } from "vite";
-import { listenForCompiledQuery } from "../kysely/listenForCompiledQuery";
-import type { DialectPlugin } from "../sql";
+import { listenForCompiledQuery } from "../fake-kysely/listenForCompiledQuery";
+import type { DialectPlugin } from "../../lib/sql";
 
 type ExecuteQueryParams = {
    modulePath: string;

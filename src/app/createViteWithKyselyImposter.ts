@@ -1,20 +1,21 @@
 import { createServer } from 'vite';
-import { redirectPackageImport } from './redirectPackageImport';
+import { redirectPackageImportPlugin } from '../lib/vite/redirectPackageImportPlugin';
 
 type Params = {
    projectRoot: string;
    kypanelRoot: string;
-   fakeKyselyPath: string;
+   kyselyImposterModule: string;
+   noExternal?: string[];
 }
 
-export async function createMockingViteServer({
-   projectRoot, kypanelRoot, fakeKyselyPath
+export async function createViteWithKyselyImposter({
+   projectRoot, kypanelRoot, kyselyImposterModule, noExternal = []
 }: Params) {
    const vite = await createServer({
       appType: 'custom',
       root: projectRoot, // Working directory is Vite's root
       ssr: {
-         noExternal:  ['kysely']
+         noExternal:  ['kysely', ...noExternal]
       },
       server: {
          middlewareMode: true,
@@ -23,9 +24,9 @@ export async function createMockingViteServer({
          }
       },
       plugins: [
-         redirectPackageImport({
+         redirectPackageImportPlugin({
             packageName: 'kysely',
-            mockPath: fakeKyselyPath
+            mockPath: kyselyImposterModule
          })
       ]
    })

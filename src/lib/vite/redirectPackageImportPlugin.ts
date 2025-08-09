@@ -8,7 +8,7 @@ type RedirectPackageImportProps = {
   cwd?: string;
 };
 
-export function redirectPackageImport ({
+export function redirectPackageImportPlugin ({
   packageName, mockPath, cwd = process.cwd()
 }: RedirectPackageImportProps): Plugin {
 

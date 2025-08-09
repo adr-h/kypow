@@ -1,4 +1,4 @@
-import { filterFunctionsInModule } from "../type-system/filterFunctionsInModule";
+import { filterFunctionsInModule } from "../../lib/type-system/filterFunctionsInModule";
 import { IS_QUERY_TAG } from "./constants";
 
 
