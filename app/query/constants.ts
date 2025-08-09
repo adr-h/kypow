@@ -1,0 +1,1 @@
+export const IS_QUERY_TAG = '@isQuery';

@@ -30,6 +30,7 @@ export function redirectPackageImport ({
       },
 
       async resolveId(importee, importer) {
+        // console.log('resolving import', { importee, importer})
         // only mock exact package imports like `import ... from "foo"`
         if (importee !== packageName) return null;
 
@@ -37,11 +38,13 @@ export function redirectPackageImport ({
         if (importer) {
           const importerResolved = path.resolve(importer);
           if (importerResolved === path.resolve(mockAbsolute)) {
+            // console.log('normal resolution occuring');
             // let normal resolution proceed for imports inside the mock file
             return null;
           }
         }
 
+        // console.log('mock resolution occuring');
         return mockAbsolute;
       }
     }

@@ -17,14 +17,22 @@ async function main() {
       const modulePath = "./src/queries/customerQuery.ts";
       const functionName = 'customerNameQuery';
 
+      // console.time('getQuery');
       const queryDetails = await app.getQuery({
          modulePath,
          functionName
       })
+      // console.timeEnd('getQuery');
 
-      const queryModules = await app.getQueryModules();
+      // console.time('getQueryModules');
+      const queryModules = await app.listModulesWithQueries();
+      // console.timeEnd('getQueryModules');
 
-      console.log(JSON.stringify({queryDetails, queryModules}, null, 2));
+      // console.time('listQueriesInModule');
+      const queriesInModule = await app.listQueriesInModule({ modulePath })
+      // console.timeEnd('listQueriesInModule');
+
+      console.log(JSON.stringify({queryDetails, queryModules, queriesInModule}, null, 2));
       process.exit();
    } else if (command == 'serve') {
       setupServer(app)

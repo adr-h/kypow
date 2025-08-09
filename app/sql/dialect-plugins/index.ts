@@ -1,3 +1,4 @@
+export type { RecognisedDialects } from './RecognisedDialects';
 export type { DialectPlugin } from './DialectPlugin';
 export { MssqlPlugin } from './MssqlPlugin';
 export { MySqlPlugin } from './MySqlPlugin';
