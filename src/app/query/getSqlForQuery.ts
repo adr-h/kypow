@@ -4,12 +4,12 @@ import type { DialectPlugin } from "../../lib/sql";
 
 type ExecuteQueryParams = {
    modulePath: string;
-   functionName: string;
+   queryFunctionName: string;
    params: any[];
    sqlDialect: DialectPlugin;
    vite: ViteDevServer; // eww. But also, awkward to refactor this. Come back later.
 }
-export async function getSqlForQuery({modulePath, functionName, params, sqlDialect, vite}: ExecuteQueryParams) {
+export async function getSqlForQuery({modulePath, queryFunctionName: functionName, params, sqlDialect, vite}: ExecuteQueryParams) {
    const importedModule = await vite.ssrLoadModule(modulePath)
    const { compiledQuery } = await listenForCompiledQuery(
       () => importedModule[functionName](params),
