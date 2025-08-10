@@ -12,13 +12,13 @@ export async function createViteWithKyselyImposter({
    projectRoot, kypanelRoot, kyselyImposterModule, noExternal = []
 }: Params) {
    const vite = await createServer({
+      mode: 'dev',
       appType: 'custom',
       root: projectRoot, // Working directory is Vite's root
       ssr: {
          noExternal:  ['kysely', ...noExternal]
       },
       server: {
-         middlewareMode: true,
          fs: {
             allow: [projectRoot, kypanelRoot] // Allow both dirs to resolve modules
          }

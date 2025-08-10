@@ -26,7 +26,7 @@ export async function customerNameQuery({ name, limit, date }: Param) {
       .limit(limit).execute();
 
    console.log('db status', dbIsOk);
-   console.log('res is', res, );
+   console.log('res is', res, '');
 
    return res;
 }

@@ -5,6 +5,7 @@ import { getFunctionMeta } from '../lib/type-system/getFunctionMeta';
 import * as query from './query';
 import { createViteWithKyselyImposter } from './createViteWithKyselyImposter';
 import { KyselyImposterPath } from './fake-kysely';
+import { createWatcher } from '../lib/file_system';
 
 Error.stackTraceLimit = 1000;
 
@@ -17,11 +18,18 @@ export async function createApp(config: Config) {
    const tsconfig = config.tsConfigPath;
    const sqlDialect = resolveDialectPlugin(config.dialect);
 
+   // TODO: customisable
+   const searchPaths = ['src/**/**.ts', 'src/**/*.js'];
+   const ignorePaths = ['node_modules']
+
+   // const watcher = createWatcher({ searchPaths, ignorePaths, cwd: projectRoot });
    const vite = await createViteWithKyselyImposter({
       projectRoot,
       kypanelRoot,
       kyselyImposterModule: KyselyImposterPath
    })
+
+   createWatcher({ searchPaths, ignorePaths, cwd: projectRoot })
 
    type GetQueryParams = {
       modulePath: string;
@@ -34,7 +42,7 @@ export async function createApp(config: Config) {
 
       const { interpolatedSql, parametizedSql } = await query.getSqlForQuery({
          modulePath,
-         functionName,
+         queryFunctionName: functionName,
          params: functionMeta.sampleParams,
          sqlDialect,
          vite, // :(
@@ -51,7 +59,8 @@ export async function createApp(config: Config) {
 
    async function listModulesWithQueries() {
       const modules = await query.listModulesWithQueries({
-         searchPaths: ['**/**.ts', '**/**.js', '!node_modules', '!dist'],
+         searchPaths,
+         ignorePaths,
          cwd: projectRoot
       });
 
@@ -68,8 +77,6 @@ export async function createApp(config: Config) {
 
       return queryNames;
    }
-
-   // vite.watcher.
 
    return {
       vite,

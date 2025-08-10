@@ -11,6 +11,9 @@ importers:
       '@monaco-editor/react':
         specifier: 4.7.0-rc.0
         version: 4.7.0-rc.0(monaco-editor@0.52.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      chokidar:
+        specifier: ^4.0.3
+        version: 4.0.3
       express:
         specifier: ^5.1.0
         version: 5.1.0
@@ -37,7 +40,7 @@ importers:
         version: 19.1.0(react@19.1.0)
       ts-json-schema-generator:
         specifier: github:adr-h/ts-json-schema-generator#next
-        version: https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/bdd8970f3eaaf705e579ebb09c3ac260fe8d442f
+        version: https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/50ef7e6ffa70f5411569f474c3fdd8540e6d2f72
       ts-morph:
         specifier: ^26.0.0
         version: 26.0.0
@@ -1171,6 +1174,10 @@ packages:
     resolution: {integrity: sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==}
     engines: {node: '>=10'}
 
+  chokidar@4.0.3:
+    resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
+    engines: {node: '>= 14.16.0'}
+
   ci-info@4.3.0:
     resolution: {integrity: sha512-l+2bNRMiQgcfILUi33labAZYIWlH1kWDp+ecNo5iisRKrbm0xcRyCww71/YU0Fkw0mAFpz9bJayXPjey6vkmaQ==}
     engines: {node: '>=8'}
@@ -2172,6 +2179,10 @@ packages:
     resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
     engines: {node: '>=0.10.0'}
 
+  readdirp@4.1.2:
+    resolution: {integrity: sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==}
+    engines: {node: '>= 14.18.0'}
+
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
@@ -2404,8 +2415,8 @@ packages:
       jest-util:
         optional: true
 
-  ts-json-schema-generator@https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/bdd8970f3eaaf705e579ebb09c3ac260fe8d442f:
-    resolution: {tarball: https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/bdd8970f3eaaf705e579ebb09c3ac260fe8d442f}
+  ts-json-schema-generator@https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/50ef7e6ffa70f5411569f474c3fdd8540e6d2f72:
+    resolution: {tarball: https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/50ef7e6ffa70f5411569f474c3fdd8540e6d2f72}
     version: 2.0.0
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -3724,6 +3735,10 @@ snapshots:
 
   char-regex@1.0.2: {}
 
+  chokidar@4.0.3:
+    dependencies:
+      readdirp: 4.1.2
+
   ci-info@4.3.0: {}
 
   cjs-module-lexer@2.1.0: {}
@@ -4881,6 +4896,8 @@ snapshots:
 
   react@19.1.0: {}
 
+  readdirp@4.1.2: {}
+
   require-directory@2.1.1: {}
 
   resolve-cwd@3.0.0:
@@ -5123,7 +5140,7 @@ snapshots:
       babel-jest: 30.0.4(@babel/core@7.27.7)
       jest-util: 30.0.2
 
-  ts-json-schema-generator@https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/bdd8970f3eaaf705e579ebb09c3ac260fe8d442f:
+  ts-json-schema-generator@https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/50ef7e6ffa70f5411569f474c3fdd8540e6d2f72:
     dependencies:
       '@types/json-schema': 7.0.15
       commander: 14.0.0

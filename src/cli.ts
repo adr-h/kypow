@@ -32,7 +32,7 @@ async function main() {
       // console.timeEnd('listQueriesInModule');
 
       console.log(JSON.stringify({queryDetails, queryModules, queriesInModule}, null, 2));
-      process.exit();
+      // process.exit();
    } else {
       console.error('Unknown command: ', command);
    }
