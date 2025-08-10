@@ -23,12 +23,12 @@ export function createWatcher({ searchPaths, ignorePaths, cwd = process.cwd()}: 
       cwd
    })
 
-   watcher
-      .on('ready', () => console.log('Watcher ready', watcher.getWatched()))
-      .on('add', path => console.log('File added:', path))
-      .on('change', path => console.log('File changed:', path))
-      .on('unlink', path => console.log('File removed:', path))
-      .on('error', err => console.error('Watcher error:', err));
+   // watcher
+   //    .on('ready', () => console.log('Watcher ready', watcher.getWatched()))
+   //    .on('add', path => console.log('File added:', path))
+   //    .on('change', path => console.log('File changed:', path))
+   //    .on('unlink', path => console.log('File removed:', path))
+   //    .on('error', err => console.error('Watcher error:', err));
 
    return watcher;
 }
