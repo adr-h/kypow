@@ -13,8 +13,6 @@ export function createWatcher({ searchPaths, ignorePaths, cwd = process.cwd()}: 
       persistent: true,
       ignoreInitial: true,
       ignored: ignorePaths,
-      usePolling: true,
-      interval: 100, // try small to ensure detection
       cwd
    });
 
