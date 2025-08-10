@@ -24,14 +24,20 @@ async function main() {
       // console.timeEnd('getQuery');
 
       // console.time('getQueryModules');
-      const queryModules = await app.listModulesWithQueries();
+      // const queryModules = await app.listModulesWithQueries();
       // console.timeEnd('getQueryModules');
 
       // console.time('listQueriesInModule');
-      const queriesInModule = await app.listQueriesInModule({ modulePath })
+      // const queriesInModule = await app.listQueriesInModule({ modulePath })
       // console.timeEnd('listQueriesInModule');
 
-      console.log(JSON.stringify({queryDetails, queryModules, queriesInModule}, null, 2));
+      console.log(JSON.stringify({queryDetails}, null, 2));
+
+      queryDetails.addUpdateListener(async () => {
+         console.log('Query module updated; new values:')
+         const queryDetails = await app.getQuery({ modulePath, functionName });
+         console.log(queryDetails);
+      })
       // process.exit();
    } else {
       console.error('Unknown command: ', command);

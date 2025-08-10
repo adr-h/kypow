@@ -5,7 +5,7 @@ import { getFunctionMeta } from '../lib/type-system/getFunctionMeta';
 import * as query from './query';
 import { createViteWithKyselyImposter } from './createViteWithKyselyImposter';
 import { KyselyImposterPath } from './fake-kysely';
-import { createWatcher } from '../lib/file_system';
+import { createWatcher, isSameRelativePath } from '../lib/file_system';
 
 Error.stackTraceLimit = 1000;
 
@@ -29,7 +29,7 @@ export async function createApp(config: Config) {
       kyselyImposterModule: KyselyImposterPath
    })
 
-   createWatcher({ searchPaths, ignorePaths, cwd: projectRoot })
+   const watcher = createWatcher({ searchPaths, ignorePaths, cwd: projectRoot })
 
    type GetQueryParams = {
       modulePath: string;
@@ -54,6 +54,20 @@ export async function createApp(config: Config) {
          params: functionMeta.paramsMeta,
          sql: parametizedSql,
          sampleSql:interpolatedSql,
+         addUpdateListener: (callback: (removeListener: Function) => void) => {
+            const listener = (changedFile: string) => isSameRelativePath(changedFile, modulePath) && callback(removeListener);
+
+            const removeListener = () => {
+               watcher.off('change', listener);
+               watcher.off('unlink', listener);
+            }
+            watcher.on('change', listener);
+            watcher.on('unlink', listener);
+
+            return {
+               removeListener
+            }
+         }
       }
    }
 
