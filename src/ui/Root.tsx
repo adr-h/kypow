@@ -15,7 +15,7 @@ export function Root ({ app }: RootProps) {
       props: {}
    });
 
-   // WIP: discriminated-union based workaround because I'm too lazy to implement routing for now
+   // WIP: discriminated-union based workaround because I'm too lazy to implement real routing for now
    function changeScreen(s: ScreenSelection) {
       setSelected(s);
    }

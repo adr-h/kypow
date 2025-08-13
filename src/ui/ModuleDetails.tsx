@@ -59,5 +59,7 @@ export function ModuleDetails (props: ModuleDetailProps) {
       <Box>
          <SelectInput items={items} onSelect={handleSelect} />
       </Box>
+
+      <Text> [ESC] Back </Text>
    </>;
 }

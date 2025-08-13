@@ -84,5 +84,7 @@ ${queryMeta.description}
       <Box>
          <Text>{text}</Text>
       </Box>
+
+      <Text> [ESC] Back | [R] Reload Query </Text>
    </>;
 }
