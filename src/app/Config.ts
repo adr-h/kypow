@@ -1,7 +1,6 @@
 import type { RecognisedDialects } from "../lib/sql";
 
 export type Config = {
-   foo: string;
    projectRoot: string;
    dialect: RecognisedDialects;
    tsConfigPath: string;
