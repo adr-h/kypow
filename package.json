@@ -14,26 +14,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@monaco-editor/react": "4.7.0-rc.0",
     "arg": "^5.0.2",
     "chokidar": "^3.6.0",
-    "express": "^5.1.0",
     "fast-glob": "^3.3.3",
-    "globby": "^14.1.0",
     "json-schema-faker": "^0.5.9",
     "kysely": "^0.28.2",
-    "monaco-editor": "^0.52.2",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
     "ts-json-schema-generator": "github:adr-h/ts-json-schema-generator#next",
     "ts-morph": "^26.0.0",
-    "tsconfck": "^3.1.6",
     "typescript": "^5.9.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
-    "@types/express": "^5.0.3",
-    "@types/jest": "^30.0.0",
     "@types/node": "^24.0.7",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
