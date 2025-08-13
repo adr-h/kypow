@@ -26,10 +26,11 @@
     "json-schema-faker": "^0.5.9",
     "kysely": "^0.28.2",
     "react": "^19.1.0",
+    "sql-formatter": "^15.6.6",
     "ts-json-schema-generator": "github:adr-h/ts-json-schema-generator#next",
     "ts-morph": "^26.0.0",
-    "typescript": "^5.9.2",
     "tsx": "^4.20.3",
+    "typescript": "^5.9.2",
     "vite": "^7.0.0"
   },
   "devDependencies": {

@@ -67,8 +67,7 @@ export function QueryDetails (props: QueryDetailsProps) {
 ${queryMeta.description}
 
 ## SQL
-- Parametized SQL:
-   ${queryMeta.sql}
+${queryMeta.sql}
 `
 
 // - Sample SQL:
