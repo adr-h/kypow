@@ -2,70 +2,36 @@
 
 A Storybook-like tool for Kysely-powered apps.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Basic usage
 
-Currently, two official plugins are available:
+1. Run `npx github:adr-h/kypow --dialect postgres --moduleType esm`
+2. If the Kysely instance your app uses is exported by another package (e.g: "@zurg/db-service"), you will need to pass an additional "--externalPackage" flag for that package: `npx github:adr-h/kypow --dialect postgres --moduleType esm --externalPackage "@zurg/db-service"`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+If you have any "Queries" in your project, they should then be picked up and listed. See [Queries](#queries) for details.
 
-## Expanding the ESLint configuration
+## Queries
+A valid "Query" as defined by this tool, is any function in a module that:
+   - is exported
+   - has a "@isQuery" JSDoc tag
+   - runs a Kysely instance's execute() function
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+A simple, valid query function might look like this:
+```typescript
+import { db } from 'somewhere';
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+/**
+ * customerQuery - a very, very simple query that gets a customer based on their ID.
+ * @isQuery
+ * @returns
+ */
+export async function customerQuery({ id, limit }: { id: string; limit: number}) {
+   const res = await db.selectFrom('Customers')
+      .select('first_name')
+      .where('id', '==', id)
+      .limit(limit)
+      .execute();
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+   return res;
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
