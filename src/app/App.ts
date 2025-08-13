@@ -22,6 +22,7 @@ export class App {
    searchPaths: string[];
    ignorePaths: string[];
    noExternal: string[];
+   queryTimeout: number;
 
    private watcher: FSWatcher;
    private _vite?: ViteDevServer;
@@ -32,6 +33,7 @@ export class App {
       this.tsconfig = config.tsConfigPath;
       this.sqlDialect = resolveDialectPlugin(config.dialect);
       this.noExternal = config.noExternal || [];
+      this.queryTimeout = config.queryTimeout;
 
       // TODO: customisable
       this.searchPaths = ['**/**.ts', '**/*.js'];
@@ -69,6 +71,7 @@ export class App {
          tsconfig: this.tsconfig,
          sqlDialect: this.sqlDialect,
          loadModule: this.loadModule.bind(this),
+         timeout: this.queryTimeout
       });
 
       return {

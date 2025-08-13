@@ -68,6 +68,7 @@ function parseConfig(): Config {
       '--tsConfig': String,
       '--moduleType': String,
       '--externalPackage': [String],
+      '--queryTimeout': Number
    }, {
       permissive: true,
       argv: process.argv
@@ -76,6 +77,7 @@ function parseConfig(): Config {
    const projectRoot = res['--project-root'] || process.cwd();
    const tsConfigPath = res['--tsConfig'] ? path.join(process.cwd(), res['--tsConfig']) : path.join(process.cwd(), 'tsconfig.json');
    const noExternal = res['--externalPackage'] || [];
+   const queryTimeout = res['--queryTimeout'] || 20000;
 
    const dialect = res['--dialect'];
    if (
@@ -100,7 +102,8 @@ function parseConfig(): Config {
       dialect,
       tsConfigPath,
       moduleFormat,
-      noExternal
+      noExternal,
+      queryTimeout
    }
 
    return parsedConfig;

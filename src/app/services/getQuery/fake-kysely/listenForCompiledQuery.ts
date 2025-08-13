@@ -1,7 +1,7 @@
 import { randomUUID } from "crypto";
 import { getQueryExecutionEmitter, isListenUntilQueryExecutedTimeout } from "./QueryExecutionEmitter";
 
-export async function listenForCompiledQuery(callback: () => any, timeout = 5000) {
+export async function listenForCompiledQuery(callback: () => any, timeout?: number) {
    // generate a unique ID, for instance: abcd-1234-efgh-5678
    const queryExecutionId = `kypow_${randomUUID()}`;
 

@@ -14,8 +14,9 @@ type GetQueryParams = {
    tsconfig: string;
    sqlDialect: DialectPlugin;
    loadModule: ModuleLoader;
+   timeout: number;
 }
-export async function getQueryService({modulePath, functionName, tsconfig, sqlDialect, loadModule}: GetQueryParams) {
+export async function getQueryService({modulePath, functionName, tsconfig, sqlDialect, timeout, loadModule}: GetQueryParams) {
    const functionMeta = await getFunctionMeta({
       modulePath, functionName, tsconfig
    });
@@ -26,6 +27,7 @@ export async function getQueryService({modulePath, functionName, tsconfig, sqlDi
       params: functionMeta.sampleParams,
       sqlDialect,
       loadModule, // :(
+      timeout
    });
 
    return {
