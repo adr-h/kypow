@@ -34,7 +34,7 @@ class QueryExecutionEmitter extends EventEmitter<EventMap> {
       });
    }
 
-   async listenUntilQueryExecutedEvent(callback: ListenUntilQueryExecutedCallback, timeout = 5000): Promise<QueryExecutedEventProps> {
+   async listenUntilQueryExecutedEvent(callback: ListenUntilQueryExecutedCallback, timeout = 20000): Promise<QueryExecutedEventProps> {
       return new Promise((resolve, reject) => {
          const emitter = getQueryExecutionEmitter();
 
