@@ -3,14 +3,14 @@ import { getQueryExecutionEmitter, isListenUntilQueryExecutedTimeout } from "./Q
 
 export async function listenForCompiledQuery(callback: () => any, timeout = 5000) {
    // generate a unique ID, for instance: abcd-1234-efgh-5678
-   const queryExecutionId = `kypanel_${randomUUID()}`;
+   const queryExecutionId = `kypow_${randomUUID()}`;
 
    // execute callback() inside of a wrapperFn that's named after the unique ID.
-   // this causes any stacktrace produced within callback() to include `at async kypanel_abcd-1234-efgh-5678...`
+   // this causes any stacktrace produced within callback() to include `at async kypow_abcd-1234-efgh-5678...`
    const wrapperFn = wrapWithNamedFunction(callback, queryExecutionId);
 
    // start listening for queryExecuted events, and only resolve if the stackTrace of the event
-   // includes `at async kypanel_abcd-1234-efgh-5678...`
+   // includes `at async kypow_abcd-1234-efgh-5678...`
    const listenerPromise = getQueryExecutionEmitter().listenUntilQueryExecutedEvent(
       (event, resolve) => {
          if (event.stackTrace.includes(queryExecutionId)) {

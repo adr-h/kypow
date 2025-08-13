@@ -3,13 +3,13 @@ import { redirectPackageImportPlugin } from '../lib/vite/redirectPackageImportPl
 
 type Params = {
    projectRoot: string;
-   kypanelRoot: string;
+   kypowRoot: string;
    kyselyImposterModule: string;
    noExternal?: string[];
 }
 
 export async function createViteWithKyselyImposter({
-   projectRoot, kypanelRoot, kyselyImposterModule, noExternal = []
+   projectRoot, kypowRoot, kyselyImposterModule, noExternal = []
 }: Params) {
    const vite = await createServer({
       mode: 'dev',
@@ -20,7 +20,7 @@ export async function createViteWithKyselyImposter({
       },
       server: {
          fs: {
-            allow: [projectRoot, kypanelRoot] // Allow both dirs to resolve modules
+            allow: [projectRoot, kypowRoot] // Allow both dirs to resolve modules
          }
       },
       plugins: [

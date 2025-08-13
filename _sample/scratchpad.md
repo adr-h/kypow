@@ -1,6 +1,6 @@
 # Testing
-- pnpm exec kypanel dump --dialect postgres --moduleType esm
+- pnpm exec kypow dump --dialect postgres --moduleType esm
 
-<!-- PROJECT_ROOT="$(pwd)" npx tsx .kypanel/entry.ts -->
-<!-- npx kypanel -->
-<!-- PROJECT_ROOT="$(pwd)" npx tsx .kypanel/entry.ts -->
+<!-- PROJECT_ROOT="$(pwd)" npx tsx .kypow/entry.ts -->
+<!-- npx kypow -->
+<!-- PROJECT_ROOT="$(pwd)" npx tsx .kypow/entry.ts -->

@@ -13,7 +13,7 @@ type ListenUntilQueryExecutedCallback = (
 ) => void
 
 export const ErrorCode = {
-   Timeout: '__KYPANEL_LISTEN_UNTIL_QUERY_EXECUTED_TIMEOUT__'
+   Timeout: '__KYPOW_LISTEN_UNTIL_QUERY_EXECUTED_TIMEOUT__'
 } as const;
 
 export function isListenUntilQueryExecutedTimeout (err: any) {
@@ -57,10 +57,10 @@ class QueryExecutionEmitter extends EventEmitter<EventMap> {
 }
 
 export function getQueryExecutionEmitter(): QueryExecutionEmitter {
-   if (!(globalThis as any).kypanelQueryExectionEmitter) {
-      (globalThis as any).kypanelQueryExectionEmitter = new QueryExecutionEmitter();
+   if (!(globalThis as any).kypowQueryExectionEmitter) {
+      (globalThis as any).kypowQueryExectionEmitter = new QueryExecutionEmitter();
    };
 
-   return (globalThis as any).kypanelQueryExectionEmitter
+   return (globalThis as any).kypowQueryExectionEmitter
 }
 
