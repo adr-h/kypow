@@ -14,7 +14,7 @@ type Param = {
 }
 
 /**
- * customerNameQuery - a very simple query that gets a customer based on their first name.
+ * customerNameQuery - a very, very simple query that gets a customer based on their first name.
  * Not terribly useful. But useful enough for a simple demo
  * @isQuery
  * @returns

@@ -3,7 +3,7 @@ import { App } from './app';
 import arg from 'arg';
 import type { Config } from './app/Config';
 import { banner } from './cliBanner';
-
+import { renderRoot } from './ui/Root';
 
 async function main() {
    console.log(banner)
@@ -19,33 +19,24 @@ async function main() {
 
    const parsedConfig = parseConfig();
 
-   // TODO either start server or dump
    const app = new App(parsedConfig);
+   renderRoot(app);
 
    // TOOD: get from CLI
-   const modulePath = "./src/queries/customerQuery.ts";
-   const functionName = 'customerNameQuery';
-   const queryDetails = await app.getQuery({
-      modulePath,
-      functionName
-   })
-   // console.timeEnd('getQuery');
+   // const modulePath = "./src/queries/customerQuery.ts";
+   // const functionName = 'customerNameQuery';
+   // const queryDetails = await app.getQuery({
+   //    modulePath,
+   //    functionName
+   // })
 
-   // console.time('getQueryModules');
-   // const queryModules = await app.listModulesWithQueries();
-   // console.timeEnd('getQueryModules');
+   // console.log(queryDetails);
 
-   // console.time('listQueriesInModule');
-   // const queriesInModule = await app.listQueriesInModule({ modulePath })
-   // console.timeEnd('listQueriesInModule');
-
-   console.log(queryDetails);
-
-   queryDetails.addUpdateListener(async () => {
-      console.log('Query module updated; new values:')
-      const queryDetails = await app.getQuery({ modulePath, functionName });
-      console.log(queryDetails);
-   })
+   // queryDetails.addUpdateListener(async () => {
+   //    console.log('Query module updated; new values:')
+   //    const queryDetails = await app.getQuery({ modulePath, functionName });
+   //    console.log(queryDetails);
+   // })
 }
 
 

@@ -15,5 +15,5 @@ export async function filterFunctionsInModule({ modulePath, tsconfig, searchFunc
    const functions = sourceFile?.getFunctions() || [];
    const filteredFunctions = functions.filter(searchFunction)
 
-   return filteredFunctions.map(f => f.getName())
+   return filteredFunctions.map(f => f.getName()).filter(name => name !== undefined);
 }

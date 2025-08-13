@@ -7,8 +7,6 @@ type CreateWatcherParams = {
    cwd?: string
 }
 export function createWatcher({ searchPaths, ignorePaths, cwd = process.cwd()}: CreateWatcherParams) {
-   // const searchPaths = ['**/*.ts', '**/*.js'];
-
    const watcher = chokidar.watch(searchPaths, {
       persistent: true,
       ignoreInitial: true,
