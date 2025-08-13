@@ -1,10 +1,13 @@
 import path from 'path';
 import { App } from './app';
-import type { Config } from './app/Config';
 import arg from 'arg';
+import type { Config } from './app/Config';
+import { banner } from './cliBanner';
 
 
 async function main() {
+   console.log(banner)
+
    const chosenCommand = parseCommandFlags();
    if (chosenCommand === 'help') {
       return console.log('TODO: help text');

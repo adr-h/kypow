@@ -56,45 +56,74 @@ export class App {
 
    private async loadModule(modulePath: string) {
       const vite = await this.getVite();
-
       return vite.ssrLoadModule(modulePath);
-   }
-
-   private registerModuleListener(modulePath: string, callback: (removeListener: Function) => void) {
-      const listener = (changedFile: string) => isSameRelativePath(changedFile, modulePath) && callback(removeListener);
-
-      const removeListener = () => {
-         this.watcher.off('change', listener);
-         this.watcher.off('unlink', listener);
-      }
-      this.watcher.on('change', listener);
-      this.watcher.on('unlink', listener);
-
-      return {
-         removeListener
-      }
    }
 
    async getQuery({modulePath, functionName}: {
       modulePath: string;
       functionName: string;
    }) {
-      return getQueryService({
+      const query = await getQueryService({
          modulePath,
          functionName,
          tsconfig: this.tsconfig,
          sqlDialect: this.sqlDialect,
          loadModule: this.loadModule.bind(this),
-         registerModuleListener: this.registerModuleListener.bind(this)
-      })
+      });
+
+      return {
+         name: query.name,
+         description: query.description,
+         params: query.params,
+         sql: query.sql,
+         sampleSql: query.sampleSql,
+
+         // TOOD: messy.
+         addUpdateListener: (callback: (newQuery: ReturnType<App['getQuery']>) => void) => {
+            const listener = (changedFile: string) => {
+               if (!isSameRelativePath(changedFile, modulePath)) return;
+               callback(this.getQuery({modulePath, functionName}));
+            };
+
+            const removeListener = () => {
+               this.watcher.off('change', listener);
+               this.watcher.off('unlink', listener);
+            }
+            this.watcher.on('change', listener);
+            this.watcher.on('unlink', listener);
+
+            return {
+               removeListener
+            }
+         }
+      }
    }
 
    async listQueryModules() {
-      return listQueryModulesService({
-         searchPaths: this.searchPaths,
-         ignorePaths: this.ignorePaths,
-         cwd: this.projectRoot
-      })
+      return {
+         modules: await listQueryModulesService({
+            searchPaths: this.searchPaths,
+            ignorePaths: this.ignorePaths,
+            cwd: this.projectRoot
+         }),
+
+         // TODO: messy.
+         addUpdateListener: (callback: (newList: ReturnType<App['listQueryModules']>) => void) => {
+            const listener = (_changedFile: string) => callback(this.listQueryModules());
+            const removeListener = () => {
+               this.watcher.off('add', listener);
+               this.watcher.off('change', listener);
+               this.watcher.off('unlink', listener);
+            }
+            this.watcher.on('add', listener);
+            this.watcher.on('change', listener);
+            this.watcher.on('unlink', listener);
+
+            return {
+               removeListener
+            }
+         }
+      }
    }
 
    async listQueries({ modulePath }: { modulePath: string}) {

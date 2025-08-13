@@ -14,9 +14,8 @@ type GetQueryParams = {
    tsconfig: string;
    sqlDialect: DialectPlugin;
    loadModule: ModuleLoader;
-   registerModuleListener: ModuleListenerRegistrar;
 }
-export async function getQueryService({modulePath, functionName, tsconfig, sqlDialect, loadModule, registerModuleListener}: GetQueryParams) {
+export async function getQueryService({modulePath, functionName, tsconfig, sqlDialect, loadModule}: GetQueryParams) {
    const functionMeta = await getFunctionMeta({
       modulePath, functionName, tsconfig
    });
@@ -34,7 +33,6 @@ export async function getQueryService({modulePath, functionName, tsconfig, sqlDi
       description: functionMeta.description,
       params: functionMeta.paramsMeta,
       sql: parametizedSql,
-      sampleSql:interpolatedSql,
-      addUpdateListener: (callback: (removeListener: Function) => void) => registerModuleListener(modulePath, callback)
+      sampleSql:interpolatedSql
    }
 }
