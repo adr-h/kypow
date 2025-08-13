@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Text, Box, Spacer, Newline} from 'ink'
+import {Text, Box, Spacer, Newline, useInput} from 'ink'
 import SelectInput from 'ink-select-input';
 import type { ScreenSelection } from './ScreenSelection';
 // import { QuickSearch } from 'ink-quicksearch-input';
@@ -11,6 +11,12 @@ type ModuleBrowserProps = {
 
 export function ModuleBrowser (props: ModuleBrowserProps) {
    const [ modules, setModules ] = useState<string[]>([]);
+
+   useInput((input, key) => {
+		if (key.escape) {
+         process.exit(0);
+		}
+	});
 
    useEffect(() => {
       props.listQueryModules()
@@ -48,5 +54,6 @@ export function ModuleBrowser (props: ModuleBrowserProps) {
       </Box>
       {/* <QuickSearch items={items} onSelect={handleSelect} /> */}
 
+      <Text> [ESC] Exit app </Text>
    </>;
 }
