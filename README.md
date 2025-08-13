@@ -1,4 +1,6 @@
-# React + TypeScript + Vite
+# Kypow
+
+A Storybook-like tool for Kysely-powered apps.
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
