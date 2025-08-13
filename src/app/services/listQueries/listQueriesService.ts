@@ -1,12 +1,11 @@
-import { filterFunctionsInModule } from "../../lib/type-system/filterFunctionsInModule";
-import { IS_QUERY_TAG } from "./constants";
-
+import { filterFunctionsInModule } from "../../../lib/type-system/filterFunctionsInModule";
+import { IS_QUERY_TAG } from "../../constants";
 
 type GetQueryFunctionsInModuleParams = {
    modulePath: string;
    tsconfig: string;
 }
-export async function listQueriesInModule({modulePath, tsconfig}: GetQueryFunctionsInModuleParams) {
+export async function listQueriesService({modulePath, tsconfig}: GetQueryFunctionsInModuleParams) {
    const functionNames = await filterFunctionsInModule({
       modulePath,
       tsconfig,

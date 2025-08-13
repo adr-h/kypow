@@ -1,1 +1,1 @@
-export { createApp } from './app';
+export { App } from './KypanelApp';
