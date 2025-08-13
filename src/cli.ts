@@ -1,5 +1,5 @@
 import path from 'path';
-import { createApp } from './app';
+import { App } from './app';
 
 async function main() {
    // TODO: allow this path to be overriden
@@ -8,7 +8,7 @@ async function main() {
    const {config} = await import(configPath);
 
    // TODO either start server or dump
-   const app = await createApp(config);
+   const app = new App(config);
    const command = process.argv[2];
 
    if (command == 'dump') {
