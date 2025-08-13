@@ -22,12 +22,12 @@ export function isListenUntilQueryExecutedTimeout (err: any) {
 
 class QueryExecutionEmitter extends EventEmitter<EventMap> {
    constructor() {
-      console.log('Initialised once')
+      console.log('QueryExecutionEmitter initiated')
       super();
    }
 
    emitQueryExecuted(compiledQuery: CompiledQuery) {
-      console.log('emitting events');
+      console.log('Emitting queryExecuted');
       this.emit('queryExecuted', {
          compiledQuery,
          stackTrace: new Error().stack || ''
