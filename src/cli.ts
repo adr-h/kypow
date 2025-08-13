@@ -80,7 +80,7 @@ function parseConfig(): Config {
    })
 
    const projectRoot = res['--project-root'] || process.cwd();
-   const tsConfigPath = res['--tsConfig'] || path.join(process.cwd(), 'tsconfig.json')
+   const tsConfigPath = res['--tsConfig'] ? path.join(process.cwd(), res['--tsConfig']) : path.join(process.cwd(), 'tsconfig.json');
    const noExternal = res['--externalPackage'] || [];
 
    const dialect = res['--dialect'];
