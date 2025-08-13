@@ -14,6 +14,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vitejs/plugin-react": "^4.5.2",
     "arg": "^5.0.2",
     "chokidar": "^3.6.0",
     "dedent": "^1.6.0",
@@ -27,23 +28,22 @@
     "react": "^19.1.0",
     "ts-json-schema-generator": "github:adr-h/ts-json-schema-generator#next",
     "ts-morph": "^26.0.0",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "tsx": "^4.20.3",
+    "vite": "^7.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
     "@types/node": "^24.0.7",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^4.5.2",
     "eslint": "^9.29.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.2.0",
     "jest": "^30.0.4",
     "ts-jest": "^29.4.0",
-    "tsx": "^4.20.3",
-    "typescript-eslint": "^8.34.1",
-    "vite": "^7.0.0"
+    "typescript-eslint": "^8.34.1"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
