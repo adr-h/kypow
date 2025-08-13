@@ -12,11 +12,11 @@ import { fileURLToPath } from "url";
 import { listQueriesService } from "./services/listQueries";
 
 Error.stackTraceLimit = 1000;
-const kypanelRoot = fileURLToPath(new URL('..', import.meta.url))
+const kypowRoot = fileURLToPath(new URL('..', import.meta.url))
 
 export class App {
    projectRoot: string;
-   kypanelRoot: any;
+   kypowRoot: any;
    tsconfig: string;
    sqlDialect: DialectPlugin;
    searchPaths: string[];
@@ -28,7 +28,7 @@ export class App {
 
    constructor(config: Config) {
       this.projectRoot = config.projectRoot;
-      this.kypanelRoot = kypanelRoot;
+      this.kypowRoot = kypowRoot;
       this.tsconfig = config.tsConfigPath;
       this.sqlDialect = resolveDialectPlugin(config.dialect);
       this.noExternal = config.noExternal || [];
@@ -45,7 +45,7 @@ export class App {
          // const watcher = createWatcher({ searchPaths, ignorePaths, cwd: projectRoot });
          this._vite = await createViteWithKyselyImposter({
             projectRoot: this.projectRoot,
-            kypanelRoot: this.kypanelRoot,
+            kypowRoot: this.kypowRoot,
             noExternal: this.noExternal,
             kyselyImposterModule: KyselyImposterPath,
          })
