@@ -4,13 +4,12 @@ A Storybook-like tool for Kysely-powered apps.
 https://github.com/user-attachments/assets/1a5111cb-481f-4ffc-92dc-8d858e748009
 
 
-
 ## Disclaimer
 Warning: I built this for my own personal usage; therefore, it may not be entirely ready for general prime time use yet:
-- it currently does not build its own TS files (instead, all code is run via `tsx`)
-- it wastefully reprocesses the entire TS project whenever it parses any module, causing slow downs
 - it does not handle for Queries that use executeTakeFirstOrThrow()
+- it reprocesses the target TS project whenever it parses any module, causing slow downs
 - it may or may not handle your project's aliased imports correctly
+- all code is currently being run through `tsx` instead of being compiled
 - ... and probably many other scenarios
 
 ## Basic usage
