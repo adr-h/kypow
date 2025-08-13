@@ -9,13 +9,14 @@ type ExecuteQueryParams = {
    params: any[];
    sqlDialect: DialectPlugin;
    loadModule: ModuleLoader;
-   // vite: ViteDevServer; // eww. But also, awkward to refactor this. Come back later.
+   timeout: number;
 }
-export async function getSqlForQuery({modulePath, queryFunctionName: functionName, params, sqlDialect, loadModule}: ExecuteQueryParams) {
+export async function getSqlForQuery({modulePath, queryFunctionName: functionName, params, sqlDialect, timeout, loadModule}: ExecuteQueryParams) {
    // const importedModule = await vite.ssrLoadModule(modulePath)
    const importedModule = await loadModule(modulePath);
    const { compiledQuery } = await listenForCompiledQuery(
       () => importedModule[functionName](params),
+      timeout
    );
 
    const parametizedSql = compiledQuery.sql;
