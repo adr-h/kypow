@@ -14,12 +14,12 @@ export function createWatcher({ searchPaths, ignorePaths, cwd = process.cwd()}: 
       cwd
    });
 
-   console.log('initialised watcher with', searchPaths, {
-      persistent: true,
-      ignoreInitial: true,
-      ignored: ignorePaths,
-      cwd
-   })
+   // console.log('initialised watcher with', searchPaths, {
+   //    persistent: true,
+   //    ignoreInitial: true,
+   //    ignored: ignorePaths,
+   //    cwd
+   // })
 
    // watcher
    //    .on('ready', () => console.log('Watcher ready', watcher.getWatched()))
