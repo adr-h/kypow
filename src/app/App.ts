@@ -78,24 +78,24 @@ export class App {
          sql: query.sql,
          sampleSql: query.sampleSql,
 
-         // TOOD: messy.
-         addUpdateListener: (callback: (newQuery: ReturnType<App['getQuery']>) => void) => {
-            const listener = (changedFile: string) => {
-               if (!isSameRelativePath(changedFile, modulePath)) return;
-               callback(this.getQuery({modulePath, functionName}));
-            };
+         // TODO: messy. come back and rethink this
+         // addUpdateListener: (callback: () => void) => {
+         //    const listener = (changedFile: string) => {
+         //       if (!isSameRelativePath(changedFile, modulePath)) return;
+         //       callback();
+         //    };
 
-            const removeListener = () => {
-               this.watcher.off('change', listener);
-               this.watcher.off('unlink', listener);
-            }
-            this.watcher.on('change', listener);
-            this.watcher.on('unlink', listener);
+         //    const removeListener = () => {
+         //       this.watcher.off('change', listener);
+         //       this.watcher.off('unlink', listener);
+         //    }
+         //    this.watcher.on('change', listener);
+         //    this.watcher.on('unlink', listener);
 
-            return {
-               removeListener
-            }
-         }
+         //    return {
+         //       removeListener
+         //    }
+         // }
       }
    }
 
@@ -107,30 +107,32 @@ export class App {
             cwd: this.projectRoot
          }),
 
-         // TODO: messy.
-         addUpdateListener: (callback: (newList: ReturnType<App['listQueryModules']>) => void) => {
-            const listener = (_changedFile: string) => callback(this.listQueryModules());
-            const removeListener = () => {
-               this.watcher.off('add', listener);
-               this.watcher.off('change', listener);
-               this.watcher.off('unlink', listener);
-            }
-            this.watcher.on('add', listener);
-            this.watcher.on('change', listener);
-            this.watcher.on('unlink', listener);
+         // TODO: messy. come back and rethink this
+         // addUpdateListener: (callback: () => void) => {
+         //    const listener = (_changedFile: string) => callback();
+         //    const removeListener = () => {
+         //       // this.watcher.off('add', listener);
+         //       this.watcher.off('change', listener);
+         //       this.watcher.off('unlink', listener);
+         //    }
+         //    // this.watcher.on('add', listener);
+         //    this.watcher.on('change', listener);
+         //    this.watcher.on('unlink', listener);
 
-            return {
-               removeListener
-            }
-         }
+         //    return {
+         //       removeListener
+         //    }
+         // }
       }
    }
 
    async listQueries({ modulePath }: { modulePath: string}) {
-      return listQueriesService({
+      const results: string[] = await listQueriesService({
          modulePath,
          tsconfig: this.tsconfig
       });
+
+      return results;
    }
 
 }
