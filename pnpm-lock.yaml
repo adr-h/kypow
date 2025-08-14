@@ -48,8 +48,8 @@ importers:
         specifier: ^15.6.6
         version: 15.6.6
       ts-json-schema-generator:
-        specifier: github:adr-h/ts-json-schema-generator#next
-        version: https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/50ef7e6ffa70f5411569f474c3fdd8540e6d2f72
+        specifier: github:adr-h/ts-json-schema-generator#fd252f0
+        version: https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/fd252f0
       ts-morph:
         specifier: ^26.0.0
         version: 26.0.0
@@ -2405,8 +2405,8 @@ packages:
       jest-util:
         optional: true
 
-  ts-json-schema-generator@https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/50ef7e6ffa70f5411569f474c3fdd8540e6d2f72:
-    resolution: {tarball: https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/50ef7e6ffa70f5411569f474c3fdd8540e6d2f72}
+  ts-json-schema-generator@https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/fd252f0:
+    resolution: {tarball: https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/fd252f0}
     version: 2.0.0
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -5074,7 +5074,7 @@ snapshots:
       babel-jest: 30.0.4(@babel/core@7.27.7)
       jest-util: 30.0.2
 
-  ts-json-schema-generator@https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/50ef7e6ffa70f5411569f474c3fdd8540e6d2f72:
+  ts-json-schema-generator@https://codeload.github.com/adr-h/ts-json-schema-generator/tar.gz/fd252f0:
     dependencies:
       '@types/json-schema': 7.0.15
       commander: 14.0.0
