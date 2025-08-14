@@ -33,14 +33,9 @@ export class WatchedTypeScriptProject {
       this.setupListeners();
    }
 
-   async getSafeTsMorphProject() {
+   async getSafeProject() {
       await this.queue.waitForEmpty();
       return this.project;
-   }
-
-   async getSafeTypeScriptProgram() {
-      await this.queue.waitForEmpty();
-      return this.project.getProgram();
    }
 
    private setupListeners() {
