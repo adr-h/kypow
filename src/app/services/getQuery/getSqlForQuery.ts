@@ -1,7 +1,6 @@
 // import type { ViteDevServer } from "vite";
 import { listenForCompiledQuery } from "./fake-kysely/listenForCompiledQuery";
 import type { DialectPlugin } from "../../../lib/sql";
-import { format } from 'sql-formatter';
 
 type ModuleLoader = (path: string) => Promise<Record<string, any>>;
 type ExecuteQueryParams = {
@@ -24,7 +23,7 @@ export async function getSqlForQuery({modulePath, queryFunctionName: functionNam
    const interpolatedSql = sqlDialect.interpolateSql(parametizedSql, compiledQuery.parameters);
 
    return {
-      parametizedSql: format(parametizedSql),
-      interpolatedSql: format(interpolatedSql),
+      parametizedSql,
+      interpolatedSql
    }
 }
