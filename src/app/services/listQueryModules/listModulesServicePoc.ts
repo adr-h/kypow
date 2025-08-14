@@ -1,6 +1,6 @@
 // wip Poc to try to list "query modules" using the Typescript AST instead of grepping for a JSDoc tag
 // code will be a mess. will clean up later
-import { Node, type Expression, type Project } from "ts-morph";
+import { Node, Type, type Expression, type Project } from "ts-morph";
 
 type Params = {
    tsProject: Project
@@ -24,13 +24,12 @@ export async function listQueryModulesService({ tsProject }: Params) {
             // Look for .execute()
             if (
                Node.isPropertyAccessExpression(expr)
-                  && ['execute', 'executeTakeFirst', 'executeTakeFirstOrThrow'].includes(expr.getName())
+               && ['execute', 'executeTakeFirst', 'executeTakeFirstOrThrow'].includes(expr.getName())
             ) {
                const rootExpr = getRootExpression(expr);
                const rootType = rootExpr.getType();
-               const symbol = rootType.getSymbol();
 
-               if (symbol?.getName() === "Kysely") {
+               if (isKyselyType(rootType)) {
                   // console.log("Found:", node.getText());
                   const filePath = source.getFilePath();
 
@@ -59,4 +58,23 @@ function getRootExpression(expr: Expression) {
       }
    }
    return current;
+}
+
+
+function isKyselyType(type: Type): boolean {
+   const symbol = type.getSymbol();
+   if (!symbol) return false;
+
+   // If it's a generic instantiation, get the target type
+   const targetType = type.getTargetType() ?? type;
+
+   // Directly named Kysely
+   if (targetType.getSymbol()?.getName() === "Kysely") return true;
+
+   // Check all base types (handles subclasses)
+   for (const base of targetType.getBaseTypes()) {
+      if (isKyselyType(base)) return true;
+   }
+
+   return false;
 }
