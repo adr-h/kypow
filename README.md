@@ -12,7 +12,7 @@ Warning: I built this for my own personal usage; therefore, it may not be entire
 ## Basic usage
 
 1. Run `npx github:adr-h/kypow --dialect postgres --moduleType esm`
-2. If the Kysely instance your app uses is exported by another package (e.g: "@zurg/db-service"), you will need to pass an additional "--externalPackage" flag for that package: `npx github:adr-h/kypow --dialect postgres --moduleType esm --externalPackage "@zurg/db-service"`
+2. If the Kysely instance your app uses is exported by another package (e.g: `import {db} from "@zurg/db-service"`), you will need to pass an additional "--externalPackage" flag for that package: `npx github:adr-h/kypow --dialect postgres --moduleType esm --externalPackage "@zurg/db-service"`
 
 If you have any "Queries" in your project, they should then be picked up and listed. See [Queries](#queries) for details.
 
