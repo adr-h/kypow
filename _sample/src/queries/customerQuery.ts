@@ -23,7 +23,8 @@ export async function customerNameQuery({ name, limit, date }: Param) {
       .select('first_name')
       .select('last_name')
       .where('first_name', '==', name)
-      .limit(limit).execute();
+      .limit(limit)
+      .executeTakeFirstOrThrow();
 
    console.log('db status', dbIsOk);
    console.log('res is', res, 'a');

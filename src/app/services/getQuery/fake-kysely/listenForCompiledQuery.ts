@@ -38,7 +38,16 @@ export async function listenForCompiledQuery(callback: () => any, timeout?: numb
 }
 
 function wrapWithNamedFunction(f: Function, name: string) {
-   const wrapperFn = async () => { await f(); };
+   const wrapperFn = async () => {
+      try {
+         await f()
+      } catch(ex) {
+         // Does not actually matter if an error occurred (e.g: because of 'executeTakeFirstOrThrow'),
+         // so long as a query was triggered
+
+         // TODO: revisit, and only ignore NoResult errors? Or is it a feature-not-bug that listenForCompiledQuery will resolve so long as it gets a query event, even if there were misc errors?
+      }
+   };
    Object.defineProperty(wrapperFn, 'name', { value: name });
 
    return wrapperFn;
