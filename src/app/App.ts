@@ -5,7 +5,7 @@ import { createViteWithKyselyImposter } from "./createViteWithKyselyImposter";
 import { KyselyImposterPath } from './services/getQuery/fake-kysely';
 import type { ViteDevServer } from "vite";
 import { getQueryService } from "./services/getQuery";
-import { listQueryModulesService } from "./services/listQueryModules";
+import { listQueryModulesService, listQueryModulesServicePoc } from "./services/listQueryModules";
 import { fileURLToPath } from "url";
 import { listQueriesService } from "./services/listQueries";
 import { WatchedTypeScriptProject } from "../lib/type-system/WatchedTypeScriptProject";
@@ -86,17 +86,18 @@ export class App {
    }
 
    async listQueryModules() {
+      const tsProject = await this.watchedTsProject.safelyGetProject();
+      const modules = await listQueryModulesServicePoc({
+         tsProject
+      })
+
       return {
-         modules: await listQueryModulesService({
-            searchPaths: this.searchPaths,
-            ignorePaths: this.ignorePaths,
-            cwd: this.projectRoot
-         }),
-      }
+         modules: Object.keys(modules)
+      };
    }
 
    async listQueries({ modulePath }: { modulePath: string}) {
-      const tsProject = await this.watchedTsProject.getSafeProject();
+      const tsProject = await this.watchedTsProject.safelyGetProject();
 
       const results: string[] = await listQueriesService({
          modulePath,

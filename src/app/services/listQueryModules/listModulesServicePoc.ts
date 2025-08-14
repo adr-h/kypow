@@ -31,14 +31,13 @@ export async function listQueryModulesService({ tsProject }: Params) {
                const symbol = rootType.getSymbol();
 
                if (symbol?.getName() === "Kysely") {
+                  // console.log("Found:", node.getText());
                   const filePath = source.getFilePath();
 
                   relevantModules[filePath] = relevantModules[filePath] ? [
                      ...relevantModules[filePath],
                      f.getName() || ''
-                  ] : []
-
-                  console.log("Found:", node.getText());
+                  ] : [f.getName() || '']
                }
             }
          })
