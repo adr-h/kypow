@@ -26,10 +26,10 @@ export async function listQueryModulesService({ tsProject }: Params) {
                Node.isPropertyAccessExpression(expr)
                && ['execute', 'executeTakeFirst', 'executeTakeFirstOrThrow'].includes(expr.getName())
             ) {
-               const rootExpr = getRootExpression(expr);
-               const rootType = rootExpr.getType();
+               const receiver = expr.getExpression();
+               const receiverType = receiver.getType();
 
-               if (isKyselyType(rootType)) {
+               if (isKyselyRelevant(receiverType)) {
                   // console.log("Found:", node.getText());
                   const filePath = source.getFilePath();
 
@@ -46,34 +46,26 @@ export async function listQueryModulesService({ tsProject }: Params) {
    return relevantModules;
 }
 
-function getRootExpression(expr: Expression) {
-   let current = expr;
-   // so we can start from "execute" in `db.selectFrom().where()...execute()` and walk back up to "db"
-   while (Node.isPropertyAccessExpression(current) || Node.isCallExpression(current)) {
-      if (Node.isCallExpression(current)) {
-         current = current.getExpression();
-      }
-      if (Node.isPropertyAccessExpression(current)) {
-         current = current.getExpression();
-      }
-   }
-   return current;
-}
 
-
-function isKyselyType(type: Type): boolean {
-   const symbol = type.getSymbol();
+const KYSLEY_QUERY_BUILDERS = [
+  "SelectQueryBuilder",
+  "InsertQueryBuilder",
+  "UpdateQueryBuilder",
+  "DeleteQueryBuilder",
+  "QueryCreator"
+];
+export function isKyselyRelevant(type: Type): boolean {
+   // Handle generic instantiations: unwrap the target type
+   const targetType = type.getTargetType() ?? type;
+   const symbol = targetType.getSymbol();
    if (!symbol) return false;
 
-   // If it's a generic instantiation, get the target type
-   const targetType = type.getTargetType() ?? type;
+   const name = symbol.getName();
+   if (KYSLEY_QUERY_BUILDERS.includes(name)) return true;
 
-   // Directly named Kysely
-   if (targetType.getSymbol()?.getName() === "Kysely") return true;
-
-   // Check all base types (handles subclasses)
+   // Check base types in case of subclassing
    for (const base of targetType.getBaseTypes()) {
-      if (isKyselyType(base)) return true;
+      if (isKyselyRelevant(base)) return true;
    }
 
    return false;
