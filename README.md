@@ -19,8 +19,7 @@ If you have any "Queries" in your project, they should then be picked up and lis
 ## Queries
 A valid "Query" as defined by this tool, is any function in a module that:
    - is exported
-   - has a "@isQuery" JSDoc tag
-   - runs a Kysely instance's execute() function
+   - calls Kysely's execute() | executeTakeFirst() | executeTakeFirstOrThrow()
 
 A simple, valid query function might look like this:
 ```typescript
@@ -28,7 +27,6 @@ import { db } from 'somewhere';
 
 /**
  * customerQuery - a very, very simple query that gets a customer based on their ID.
- * @isQuery
  * @returns
  */
 export async function customerQuery({ id, limit }: { id: string; limit: number}) {
