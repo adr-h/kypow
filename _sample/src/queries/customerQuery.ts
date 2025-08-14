@@ -13,13 +13,16 @@ type Param = {
    param2: Param2;
 }
 
+function getDb() {
+   return db;
+}
+
 /**
  * customerNameQuery - a simple query that gets a customer based on their first name.
  * @isQuery
- * @returns
- */
+ *  */
 export async function customerNameQuery({ name, limit, date }: Param) {
-   const res = await db.selectFrom('Customers')
+   const res = await getDb().selectFrom('Customers')
       .select('first_name')
       .select('last_name')
       .where('first_name', '==', name)
