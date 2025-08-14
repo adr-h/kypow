@@ -2,17 +2,15 @@ import { FunctionDeclaration, Project } from "ts-morph";
 
 type SearchFunctionExportsInModuleParams = {
    modulePath: string;
-   tsconfig: string;
+   tsProject: Project;
    searchFunction: (f: FunctionDeclaration) => boolean;
 }
 
-export async function filterFunctionsInModule({ modulePath, tsconfig, searchFunction }: SearchFunctionExportsInModuleParams) {
-   const project = new Project({
-      tsConfigFilePath: tsconfig,
-   });
+export async function filterFunctionsInModule({ modulePath, tsProject, searchFunction }: SearchFunctionExportsInModuleParams) {
+   const sourceFile = tsProject.getSourceFile(modulePath);
+   if (!sourceFile) throw new Error(`Module ${sourceFile} not found!`);
 
-   const sourceFile = project.getSourceFile(modulePath);
-   const functions = sourceFile?.getFunctions() || [];
+   const functions = sourceFile.getFunctions() || [];
    const filteredFunctions = functions.filter(searchFunction)
 
    return filteredFunctions.map(f => f.getName()).filter(name => name !== undefined);
