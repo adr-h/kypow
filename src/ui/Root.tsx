@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import {render} from 'ink';
 import type { App } from '../app';
-import { ModuleBrowser } from './ModuleBrowser';
 import { ModuleDetails } from './ModuleDetails';
 import { QueryDetails } from './QueryDetails';
 import type { ScreenSelection } from './ScreenSelection';
+import { ModuleBrowserPoc } from './ModuleBrowserPoc';
 
 type RootProps = {
    app: App;
@@ -21,7 +21,7 @@ export function Root ({ app }: RootProps) {
    }
 
    if (selected.screen === 'ModuleBrowser') {
-      return <ModuleBrowser
+      return <ModuleBrowserPoc
          changeScreen={changeScreen}
          listQueryModules={app.listQueryModules.bind(app)}
       />;

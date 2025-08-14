@@ -92,7 +92,7 @@ export class App {
       })
 
       return {
-         modules: Object.keys(modules)
+         modules
       };
    }
 
