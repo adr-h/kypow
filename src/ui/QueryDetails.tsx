@@ -34,10 +34,8 @@ export function QueryDetails (props: QueryDetailsProps) {
 
 		if (key.escape) {
          props.changeScreen({
-            screen: 'ModuleDetails',
-            props: {
-               modulePath: props.modulePath
-            }
+            screen: 'ModuleBrowser',
+            props: {}
          });
 		}
 	});

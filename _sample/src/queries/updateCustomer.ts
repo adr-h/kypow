@@ -21,7 +21,5 @@ type CustomerDetails = {
 export async function updateCustomerQuery(id: string, customerDetails: CustomerDetails) {
    const res = await db.insertInto('Customers').values(customerDetails).executeTakeFirst()
 
-   return {
-
-   };
+   return res;
 }
