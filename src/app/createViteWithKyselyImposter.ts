@@ -1,4 +1,5 @@
 import { createServer } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths'
 import { redirectPackageImportPlugin } from '../lib/vite/redirectPackageImportPlugin';
 
 type Params = {
@@ -27,7 +28,8 @@ export async function createViteWithKyselyImposter({
          redirectPackageImportPlugin({
             packageName: 'kysely',
             mockPath: kyselyImposterModule
-         })
+         }),
+         tsconfigPaths()
       ]
    })
 

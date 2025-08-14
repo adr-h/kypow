@@ -1,4 +1,4 @@
-import { db, dbIsOk } from '../db';
+import { db, dbIsOk } from '@foo/db';
 import { sql } from 'kysely';
 export const sampleConst = "this is a sample export";
 
