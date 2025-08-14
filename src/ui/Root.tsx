@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {render} from 'ink';
 import type { App } from '../app';
-import { ModuleDetails } from './ModuleDetails';
 import { QueryDetails } from './QueryDetails';
 import type { ScreenSelection } from './ScreenSelection';
 import { ModuleBrowserPoc } from './ModuleBrowserPoc';
