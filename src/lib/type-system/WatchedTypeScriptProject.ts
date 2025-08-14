@@ -33,7 +33,7 @@ export class WatchedTypeScriptProject {
       this.setupListeners();
    }
 
-   async getSafeProject() {
+   async safelyGetProject() {
       await this.queue.waitForEmpty();
       return this.project;
    }
