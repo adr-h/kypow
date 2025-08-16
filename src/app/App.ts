@@ -88,7 +88,8 @@ export class App {
    async listQueryModules() {
       const tsProject = await this.watchedTsProject.safelyGetProject();
       const modules = await listQueryModulesServicePoc({
-         tsProject
+         tsProject,
+         cwd: this.projectRoot
       })
 
       return {
