@@ -13,7 +13,6 @@ class KyselyImposter<T> extends ActualKysely<T> {
 }
 
 function getOwnPath() {
-  // TODO: support CJS
   return fileURLToPath(import.meta.url);
 }
 const path = getOwnPath();
