@@ -1,1 +1,1 @@
-export { Root } from './Root';
+export { Root as RootPoc, renderRoot as renderPocRoot } from './Poc/Root';

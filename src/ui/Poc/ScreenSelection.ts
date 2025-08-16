@@ -1,6 +1,10 @@
+// TODO: use a real routing lib
+
 export type ModuleBrowserSelection = {
    screen: 'ModuleBrowser',
-   props: {}
+   props: {
+      initialModule?: string;
+   }
 };
 export type ModuleDetailsSelection = {
    screen: 'ModuleDetails',
