@@ -79,9 +79,9 @@ export class App {
       return {
          name: query.name,
          description: query.description,
-         params: query.params,
          sql: query.sql,
-         sampleSql: query.sampleSql,
+         // sampleSql: query.sampleSql,
+         // sampleParams: query.sampleParams,
       }
    }
 

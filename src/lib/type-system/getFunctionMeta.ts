@@ -1,3 +1,8 @@
+// TODO: this is a very heavy operation, as `ts-json-schema-generator` is
+// rebuilding the TS Program every single time this is called. Come back and reoptimise this
+// the way the output from tsj had to be cludged to fit into JSONSchemaFaker is also potentially very brittle.
+// if we have the time, rewrite this entirely.
+
 import * as tsj from "ts-json-schema-generator";
 import { JSONSchemaFaker }  from 'json-schema-faker';
 
@@ -10,23 +15,26 @@ type GetFunctionMetaParams = {
 type FunctionMeta = {
    name: string;
    description: string;
-   paramsMeta: ParameterMeta[];
+   functionArgsSchema: ReturnType<typeof getArgumentsSchema>;
    sampleParams: any[]
 }
 export async function getFunctionMeta(params: GetFunctionMetaParams): Promise<FunctionMeta> {
    const { modulePath, functionName, tsconfig } = params;
 
-   const functionSchema = getFunctionSchema({modulePath, functionName, tsconfig});
-   const parameterMeta = getParamMetaFromJsonSchema(functionSchema);
+   const {functionSchema, otherSchemas} = getFunctionSchema({modulePath, functionName, tsconfig});
+   const functionArgsSchema = getArgumentsSchema(functionSchema);
+
+   const sampleParams = await getSampleParams(functionArgsSchema, otherSchemas);
 
    return {
-      name: params.functionName,
+      name: functionName,
       description: functionSchema.$comment || '',
-      paramsMeta: parameterMeta,
-      sampleParams: parameterMeta.map(param => param.sample)
+      functionArgsSchema,
+      sampleParams
    };
 }
 
+// TODO: typing spaghetti
 function getFunctionSchema(params: GetFunctionMetaParams) {
    const { modulePath, functionName, tsconfig } = params;
 
@@ -40,7 +48,7 @@ function getFunctionSchema(params: GetFunctionMetaParams) {
       path: modulePath,
       tsconfig: tsconfig,
       skipTypeCheck: true,
-      sortProps: false
+      sortProps: false,
    }).createSchema(functionName);
 
    const definitions = schema.definitions;
@@ -48,38 +56,40 @@ function getFunctionSchema(params: GetFunctionMetaParams) {
       throw new Error(`Unable to find exports in module ${modulePath}`)
    }
 
-   const targetFunction = definitions[functionName];
-   if (typeof targetFunction !== 'object') {
+   const {
+      [functionName]: functionSchema,
+      ...otherSchemas
+   } = definitions;
+   if (typeof functionSchema !== 'object') {
       throw new Error(`Function ${functionName} not found in module ${modulePath}`);
    }
 
-   return targetFunction
+   return {functionSchema, otherSchemas}
 }
 
-
-type ParameterMeta = {
-   name: string;
-   type: string;
-   description: string;
-   sample: any;
-}
-function getParamMetaFromJsonSchema(functionSchema: ReturnType<typeof getFunctionSchema>): ParameterMeta[] {
+// TODO: typing spaghetti
+function getArgumentsSchema(functionSchema: any) {
    const namedArgs = functionSchema.properties?.namedArgs;
    if ( typeof namedArgs === 'boolean' || !namedArgs ) {
+      //  Why do the TSJ typehints all think its possible for this to just randomly be bool?????????
       throw new Error('what the heck is this man');
    }
 
    const argProperties = namedArgs.properties;
    if ( typeof argProperties === 'boolean' || !argProperties ) {
-      throw new Error('what the heck is this man');
+      //  Why do the TSJ typehints all think its possible for this to just randomly be bool?????????
+      throw new Error('what the heck is this man.');
    }
 
-   const output = Object.entries(argProperties).map(([name, property]) => ({
-      name,
-      type: property.type as string,
-      description: property.description as string, // the typing
-      sample: JSONSchemaFaker.generate( property )
-   }))
+   return argProperties;
+}
 
-   return output;
+// TODO: typing spaghetti
+async function getSampleParams(schema: any, definitions?: any): Promise<any[]> {
+   const { functionParams } = JSONSchemaFaker.generate({
+      functionParams: schema,
+      definitions
+   }) as any;
+
+   return Object.values(functionParams);
 }

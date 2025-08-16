@@ -33,15 +33,18 @@ export async function customerNameQuery({ name, limit, date }: Param) {
 }
 
 /**
- * Get a customer by the last order they made
- * @param order
+ * Nonsense function that get a customer by the last order they made (or the second last order, because why not)
+ * @param lastOrder
  * @returns
  */
-export async function getCustomerByLastOrder(order: Order) {
+export async function getCustomerByLastOrder(lastOrder: Order, secondLastOrder: Order) {
    const res = await getDb().selectFrom('Customers')
       .select('first_name')
       .select('last_name')
-      .where('customer_id', '==', order.customerId)
+      .where(eb => eb.or([
+         eb('customer_id', '==', lastOrder.customerId),
+         eb('customer_id', '==', secondLastOrder.customerId)
+      ]))
       .limit(AllowedLimits.ONE)
       .executeTakeFirstOrThrow();
 
