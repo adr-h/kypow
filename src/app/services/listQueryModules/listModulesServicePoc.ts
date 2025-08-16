@@ -1,11 +1,14 @@
-// wip Poc to try to list "query modules" using the Typescript AST instead of grepping for a JSDoc tag
+// TODO: wip poc to try to list "query modules" using the Typescript AST instead of grepping for a JSDoc tag
 // code will be a mess. will clean up later
+import path from "node:path";
+import { cwd } from "node:process";
 import { Node, Type, type Expression, type Project } from "ts-morph";
 
 type Params = {
-   tsProject: Project
+   tsProject: Project,
+   cwd?: string;
 }
-export async function listQueryModulesService({ tsProject }: Params) {
+export async function listQueryModulesService({ tsProject, cwd }: Params) {
    const sources = tsProject.getSourceFiles();
    const relevantModules: Record<string, string[]> = {};
 
@@ -30,8 +33,7 @@ export async function listQueryModulesService({ tsProject }: Params) {
                const receiverType = receiver.getType();
 
                if (isKyselyRelevant(receiverType)) {
-                  // console.log("Found:", node.getText());
-                  const filePath = source.getFilePath();
+                  const filePath = cwd ? path.relative(cwd, source.getFilePath()) : source.getFilePath();
 
                   relevantModules[filePath] = relevantModules[filePath] ? [
                      ...relevantModules[filePath],
