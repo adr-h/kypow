@@ -3,6 +3,9 @@
 // the way the output from tsj had to be cludged to fit into JSONSchemaFaker is also potentially very brittle.
 // if we have the time, rewrite this entirely.
 
+// TODO: this does not currently support queryFunctions that have no params at all [e.g: () => {}]
+// it will error out; need to fix this.
+
 import * as tsj from "ts-json-schema-generator";
 import { JSONSchemaFaker }  from 'json-schema-faker';
 
