@@ -33,8 +33,8 @@ export async function getQueryService({modulePath, functionName, tsconfig, sqlDi
    return {
       name: functionMeta.name,
       description: functionMeta.description,
-      params: functionMeta.paramsMeta,
       sql: parametizedSql,
-      sampleSql:interpolatedSql
+      sampleSql:interpolatedSql,
+      sampleParams: functionMeta.sampleParams
    }
 }
