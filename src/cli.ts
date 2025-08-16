@@ -3,7 +3,7 @@ import { App } from './app';
 import arg from 'arg';
 import type { Config } from './app/Config';
 import { banner } from './cliBanner';
-import { renderRoot } from './ui/Root';
+import { renderPocRoot } from './ui';
 
 async function main() {
    console.log(banner)
@@ -20,7 +20,7 @@ async function main() {
    const parsedConfig = parseConfig();
 
    const app = new App(parsedConfig);
-   renderRoot(app);
+   renderPocRoot(app);
 
    // TOOD: get from CLI
    // const modulePath = "./src/queries/customerQuery.ts";

@@ -8,9 +8,9 @@ import {useInput} from 'ink';
 type QueryMeta = {
    name: string,
    description: string,
-   params: any[],
    sql: string,
-   sampleSql: string,
+   // sampleSql: string,
+   // sampleParams: any[],
 }
 
 type QueryDetailsProps = {
@@ -24,6 +24,8 @@ type QueryDetailsProps = {
 }
 
 export function QueryDetails (props: QueryDetailsProps) {
+   const { modulePath, functionName } = props;
+
    const [ queryMeta, setQueryMeta ] = useState<QueryMeta>();
    const [ lastFetch, setLastFetch ] = useState<Date>(new Date());
 
@@ -35,14 +37,15 @@ export function QueryDetails (props: QueryDetailsProps) {
 		if (key.escape) {
          props.changeScreen({
             screen: 'ModuleBrowser',
-            props: {}
+            props: {
+               initialModule: modulePath
+            }
          });
 		}
 	});
 
-
    useEffect(() => {
-      props.getQuery({ modulePath: props.modulePath, functionName: props.functionName })
+      props.getQuery({ modulePath, functionName })
          .then((query) => {
             setQueryMeta(query);
          })
@@ -52,9 +55,7 @@ export function QueryDetails (props: QueryDetailsProps) {
    }, [lastFetch])
 
    if (!queryMeta) {
-      return <Box>
-         <Text>Query still loading.... ...</Text>
-      </Box>
+      return <Text>Query still loading ...</Text>;
    }
 
    const text = dedent
@@ -70,8 +71,6 @@ ${queryMeta.sql}
 
 // - Sample SQL:
 //    \`${queryMeta.sampleSql}\`
-
-
 	return <>
       <Text>
          <Text>Query Details:</Text>
