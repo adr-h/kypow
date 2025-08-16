@@ -50,3 +50,19 @@ export async function getCustomerByLastOrder(lastOrder: Order, secondLastOrder: 
 
    return res;
 }
+
+/**
+ * Nonsense arrow function, exported as a const
+ * @returns
+ */
+export const getBestCustomer = async (metric: number) => {
+   const res = await getDb().selectFrom('Customers')
+      .select('first_name')
+      .select('last_name')
+      .where(eb => eb.or([
+         eb('customer_id', '==', 101),
+      ]))
+      .executeTakeFirstOrThrow();
+
+   return res;
+}
