@@ -33,7 +33,10 @@ function UiApp({ app }: UiAppProps) {
 
             <ContentArea isFocused={false}>
                <Route path="/" component={Home} />
-               <Route path={'/module/:encodedModulePath/query/:encodedQueryFunction'} component={QueryDetails} />
+               <Route
+                  path={'/module/:encodedModulePath/query/:encodedFunctionName'}
+                  component={() => <QueryDetails getQuery={app.getQuery.bind(app)} />}
+               />
             </ContentArea>
          </Box>
       </Router>

@@ -15,7 +15,7 @@ type Props = {
 
 export function QueryModulesList({ height, isFocused, listQueryModules }: Props) {
    const [location, navigate] = useLocation();
-   const [loading, setLoading] = useState<LoadingState<Module[]>>({ state: 'LOADING_INIT' });
+   const [loading, setLoading] = useState<LoadingState<Module[]>>({ state: 'LOADING_IN_PROGRESS' });
    const [selectedModule, setSelectedModule] = useState<Module>();
 
    // eww. manually giving the select input list a number significantly lower than the height to accoutn for padding
@@ -33,9 +33,7 @@ export function QueryModulesList({ height, isFocused, listQueryModules }: Props)
    });
 
    useEffect(() => {
-      if (loading.state === 'LOADING_INIT') {
-         setLoading({ state: 'LOADING_IN_PROGRESS' });
-
+      if (loading.state === 'LOADING_IN_PROGRESS') {
          listQueryModules()
          .then((result) => {
             setLoading({
@@ -45,21 +43,21 @@ export function QueryModulesList({ height, isFocused, listQueryModules }: Props)
          })
          .catch((err) => {
             setLoading({
-               state:'LOADING_ERR',
-               errorMessage: err.message
+               state:'LOADING_ERROR',
+               message: err.message
             })
          });
       }
    }, [loading.state])
 
-   if (loading.state === 'LOADING_INIT' || loading.state === 'LOADING_IN_PROGRESS') {
+   if (loading.state === 'LOADING_IN_PROGRESS') {
       return <Text>Scanning modules with queries ...</Text>
    }
 
-   if (loading.state === 'LOADING_ERR' ) {
+   if (loading.state === 'LOADING_ERROR' ) {
       return <Box flexDirection='column'>
          <Text>Scanning failed!</Text>
-         <Text>{loading.errorMessage}</Text>
+         <Text>{loading.message}</Text>
       </Box>
    }
 
