@@ -19,7 +19,7 @@ export async function listQueryModulesService({ tsProject, cwd }: Params) {
          if (!f.isExported()) continue;
 
          f.forEachDescendant((node) => {
-            if(!isKyselyExecuteExpression(node)) return;
+            if (!isKyselyExecuteExpression(node)) return;
 
             const filePath = cwd ? path.relative(cwd, source.getFilePath()) : source.getFilePath();
             if (!relevantModules[filePath]) {
@@ -31,7 +31,13 @@ export async function listQueryModulesService({ tsProject, cwd }: Params) {
       }
    }
 
-   return relevantModules;
+   const modulesList = Object.entries(relevantModules)
+      .map(([module, queries]) => ({
+         modulePath: module,
+         queries
+      }))
+
+   return modulesList;
 }
 
 const KYSELY_EXECUTE_FUNCTIONS = [

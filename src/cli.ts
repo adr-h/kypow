@@ -2,25 +2,25 @@ import path from 'path';
 import { App } from './app';
 import arg from 'arg';
 import type { Config } from './app/Config';
-import { banner } from './cliBanner';
-import { renderPocRoot } from './ui';
+import { RAW_BANNER, renderUiApp } from './ui';
 
 async function main() {
-   console.log(banner)
-
    const chosenCommand = parseCommandFlags();
    if (chosenCommand === 'help') {
+      console.log(RAW_BANNER);
       return console.log('TODO: help text');
    }
 
    if (chosenCommand === 'version') {
+      console.log(RAW_BANNER);
       return console.log('TODO: version');
    }
 
    const parsedConfig = parseConfig();
 
    const app = new App(parsedConfig);
-   renderPocRoot(app);
+
+   renderUiApp(app);
 
    // TOOD: get from CLI
    // const modulePath = "./src/queries/customerQuery.ts";
