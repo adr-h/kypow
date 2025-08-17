@@ -36,6 +36,9 @@ export async function listQueryModulesService({ tsProject, cwd }: Params) {
          modulePath: module,
          queries
       }))
+      .sort((first, second) => {
+         return first.modulePath > second.modulePath ? 1 : -1
+      })
 
    return modulesList;
 }
