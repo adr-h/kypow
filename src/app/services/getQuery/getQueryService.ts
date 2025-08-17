@@ -1,12 +1,8 @@
 import type { DialectPlugin } from "../../../lib/sql";
-import { getFunctionMeta } from "../../../lib/type-system/getFunctionMeta";
+import { getFunctionMeta } from "../../../lib/type-system";
 import { getSqlForQuery } from "./getSqlForQuery";
 
 type ModuleLoader = (path: string) => Promise<Record<string, any>>;
-type ModuleListenerRegistrar = (
-   modulePath: string,
-   callback: (removeListener: Function) => void
-) => { removeListener: () => void };
 
 type GetQueryParams = {
    modulePath: string;
