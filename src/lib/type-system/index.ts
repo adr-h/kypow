@@ -1,1 +1,1 @@
-export { getQueryFunctionsDetails } from './getQueryFunctionsDetails';
+export { getFunctionMeta as getFunctionMeta } from './getFunctionMetaPoc';
