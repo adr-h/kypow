@@ -1,0 +1,1 @@
+export { QueryDetails } from './QueryDetails';
