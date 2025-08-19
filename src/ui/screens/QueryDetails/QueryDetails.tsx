@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Text } from "ink";
-import { useParams } from "wouter";
 import type { QueryMeta } from './types';
 import type { LoadingState } from '../../uiLibs';
+import { useParams } from '../../uiLibs/routing';
 
 type Props = {
    getQuery: (arg: { modulePath: string; functionName: string; }) => Promise<QueryMeta>

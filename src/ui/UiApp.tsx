@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, render, Text } from "ink";
-import { Router, Route } from "wouter";
 import { memoryLocation } from "wouter/memory-location"
 import type { App } from "../app";
 import { Sidebar } from "./components/Sidebar";
@@ -8,6 +7,7 @@ import { QueryModulesList } from "./screens/QueryModulesList";
 import { Home } from "./screens/Home";
 import { ContentArea } from "./components/ContentArea";
 import { QueryDetails } from "./screens/QueryDetails";
+import { Router, Route } from "./uiLibs/routing";
 
 const height = 15;
 
@@ -15,13 +15,8 @@ type UiAppProps = {
    app: App;
 };
 function UiApp({ app }: UiAppProps) {
-   const { hook, history, navigate } = memoryLocation({
-      path: "/",
-      record: true,
-   });
-
    return (
-      <Router hook={hook}>
+      <Router>
          <Box flexDirection="row" height={height}>
             <Sidebar isFocused={true}>
                <QueryModulesList
@@ -32,11 +27,12 @@ function UiApp({ app }: UiAppProps) {
             </Sidebar>
 
             <ContentArea isFocused={false}>
-               <Route path="/" component={Home} />
-               <Route
-                  path={'/module/:encodedModulePath/query/:encodedFunctionName'}
-                  component={() => <QueryDetails getQuery={app.getQuery.bind(app)} />}
-               />
+               <Route path="/">
+                  <Home />
+               </Route>
+               <Route path="/module/:encodedModulePath/query/:encodedFunctionName">
+                  <QueryDetails getQuery={app.getQuery.bind(app)} />
+               </Route>
             </ContentArea>
          </Box>
       </Router>

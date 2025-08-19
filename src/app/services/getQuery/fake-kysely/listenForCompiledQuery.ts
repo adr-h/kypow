@@ -42,6 +42,8 @@ function wrapWithNamedFunction(f: Function, name: string) {
       try {
          await f()
       } catch(ex) {
+         console.error('Ran into error while running query:')
+         console.error(ex);
          // Does not actually matter if an error occurred (e.g: because of 'executeTakeFirstOrThrow'),
          // so long as a query was triggered
       }
