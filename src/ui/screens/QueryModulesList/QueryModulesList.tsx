@@ -5,7 +5,7 @@ import type { Module } from './types';
 import { type LoadingState } from '../../uiLibs';
 import { QuerySelector } from './QuerySelector';
 import { ListContainer } from './ListContainer';
-import { useLocation } from 'wouter';
+import { useNavigate } from '../../uiLibs/routing';
 
 type Props = {
    height: number;
@@ -14,7 +14,7 @@ type Props = {
 }
 
 export function QueryModulesList({ height, isFocused, listQueryModules }: Props) {
-   const [location, navigate] = useLocation();
+   const navigate = useNavigate();
    const [loading, setLoading] = useState<LoadingState<Module[]>>({ state: 'LOADING_IN_PROGRESS' });
    const [selectedModule, setSelectedModule] = useState<Module>();
 

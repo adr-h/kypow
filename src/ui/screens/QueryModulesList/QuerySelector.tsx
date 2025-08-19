@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box, Text } from "ink";
 import type { Module } from "./types"
 import SelectInput from "ink-select-input";
 

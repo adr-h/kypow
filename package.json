@@ -25,6 +25,7 @@
     "ink-select-input": "^6.2.0",
     "json-schema-faker": "^0.5.9",
     "kysely": "^0.28.2",
+    "path-to-regexp": "^8.2.0",
     "react": "^19.1.0",
     "sql-formatter": "^15.6.6",
     "ts-json-schema-generator": "github:adr-h/ts-json-schema-generator#fd252f0",
@@ -32,8 +33,7 @@
     "tsx": "^4.20.3",
     "typescript": "^5.9.2",
     "vite": "^7.0.0",
-    "vite-tsconfig-paths": "^5.1.4",
-    "wouter": "^3.7.1"
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
