@@ -15,7 +15,7 @@ export async function getSqlForQuery({modulePath, queryFunctionName: functionNam
    // const importedModule = await vite.ssrLoadModule(modulePath)
    const importedModule = await loadModule(modulePath);
    const { compiledQuery } = await listenForCompiledQuery(
-      () => importedModule[functionName](params),
+      () => importedModule[functionName](...params),
       timeout
    );
 
