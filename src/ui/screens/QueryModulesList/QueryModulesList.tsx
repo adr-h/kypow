@@ -17,6 +17,7 @@ export function QueryModulesList({ height, isFocused, listQueryModules }: Props)
    const navigate = useNavigate();
    const [loading, setLoading] = useState<LoadingState<Module[]>>({ state: 'LOADING_IN_PROGRESS' });
    const [selectedModule, setSelectedModule] = useState<Module>();
+   const [initialIndex, setInitialIndex] = useState<number>(0);
 
    // eww. manually giving the select input list a number significantly lower than the height to accoutn for padding
    const safeListNumber = height - 4;
@@ -78,14 +79,21 @@ export function QueryModulesList({ height, isFocused, listQueryModules }: Props)
       );
    }
 
+   const onModuleSelected = (mod: Module) => {
+      const index = loading.result.findIndex(({modulePath}) => modulePath === mod.modulePath);
+      setInitialIndex(index);
+      setSelectedModule(mod);
+   }
+
    return (
       <ListContainer navigationTips={"[ESC] Exit | [ENTER] Select | [/] ???"}>
-         <Text>Query modules:</Text>
+         <Text>Query modules ({loading.result.length}): </Text>
          <ModuleSelector
             displayLimit={safeListNumber}
             isFocused={isFocused}
             modules={loading.result}
-            onSelect={setSelectedModule}
+            initialIndex={initialIndex}
+            onSelect={onModuleSelected}
          />
       </ListContainer>
    );

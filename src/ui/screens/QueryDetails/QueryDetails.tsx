@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Text } from "ink";
+import { Box, Newline, Text } from "ink";
 import type { QueryMeta } from './types';
 import type { LoadingState } from '../../uiLibs';
 import { useParams } from '../../uiLibs/routing';
@@ -42,14 +42,21 @@ export function QueryDetails({ getQuery }: Props) {
    const result = loading.result;
    return (
       <Box flexDirection='column'>
-         <Text>Function: {functionName}</Text>
-         <Text>Module Path: {modulePath}</Text>
+         <Text>
+            <Text bold>Function :</Text> <Text>{functionName}()</Text>
+            <Newline />
+            <Text bold>Module   : </Text><Text>{modulePath}</Text>
+            <Newline />
+            <Text bold>Docs     :</Text>
+            <Newline />
+            <Text>{result.description}</Text>
+            <Newline /> <Newline />
 
-         <Text>Description:</Text>
-         <Text>{result.description}</Text>
 
-         <Text>SQL:</Text>
-         <Text>{result.sql}</Text>
+            <Text bold>SQL      :</Text>
+            <Newline />
+            <Text>{result.sql}</Text>
+         </Text>
       </Box>
    )
 }

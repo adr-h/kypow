@@ -6,9 +6,10 @@ type Props = {
    displayLimit: number;
    isFocused: boolean;
    modules: Module[];
+   initialIndex?: number;
    onSelect: (module: Module) => void;
 }
-export function ModuleSelector({ modules, displayLimit, isFocused, onSelect }: Props) {
+export function ModuleSelector({ modules, displayLimit, isFocused, onSelect, initialIndex = 0 }: Props) {
    const items = modules.map(({ modulePath, queries }) => ({
       label: modulePath,
       key: modulePath,
@@ -18,6 +19,7 @@ export function ModuleSelector({ modules, displayLimit, isFocused, onSelect }: P
    return (
       <SelectInput
          items={items}
+         initialIndex={initialIndex}
          onSelect={(item) => onSelect(item.value)}
          limit={displayLimit}
          isFocused={isFocused}
