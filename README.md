@@ -1,9 +1,6 @@
 # Kypow
 A Storybook-like tool for Kysely-powered apps.
 
-https://github.com/user-attachments/assets/1a5111cb-481f-4ffc-92dc-8d858e748009
-
-
 ## Disclaimer
 Warning: I built this for my own personal usage; therefore, it may not be entirely ready for general prime time use yet, because:
 - all code is currently being run through `tsx` instead of being compiled
