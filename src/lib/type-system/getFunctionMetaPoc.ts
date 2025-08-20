@@ -21,6 +21,12 @@ type FunctionMeta = {
    functionArgsSchema: ReturnType<typeof getArgumentsSchema>;
    sampleParams: any[]
 }
+
+/**
+ * @deprecated
+ * @param params
+ * @returns
+ */
 export async function getFunctionMeta(params: GetFunctionMetaParams): Promise<FunctionMeta> {
    const { modulePath, functionName, tsconfig } = params;
 

@@ -67,10 +67,12 @@ export class App {
       modulePath: string;
       functionName: string;
    }) {
+      const tsProject = await this.watchedTsProject.safelyGetProject();
+
       const query = await getQueryService({
          modulePath,
          functionName,
-         tsconfig: this.tsconfig,
+         tsProject,
          sqlDialect: this.sqlDialect,
          loadModule: this.loadModule.bind(this),
          timeout: this.queryTimeout
@@ -80,8 +82,8 @@ export class App {
          name: query.name,
          description: query.description,
          sql: query.sql,
-         // sampleSql: query.sampleSql,
-         // sampleParams: query.sampleParams,
+         sampleSql: query.sampleSql,
+         sampleParams: query.sampleParams,
       }
    }
 
