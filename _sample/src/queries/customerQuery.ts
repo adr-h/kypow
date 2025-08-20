@@ -16,7 +16,7 @@ function getDb() {
 
 /**
  * customerNameQuery - a simple query that gets a customer based on their first name.
- * @isQuery
+ *
  *  */
 export async function customerNameQuery({ name, limit, date }: Param) {
    const res = await getDb().selectFrom('Customers')

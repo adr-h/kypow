@@ -14,7 +14,7 @@ type CustomerDetails = {
 /**
  * Insert a customer into the DB
  * @param customerDetails
- * @isQuery
+ *
  * @returns
  */
 export async function insertCustomerQuery(customerDetails: CustomerDetails) {

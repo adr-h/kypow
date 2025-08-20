@@ -15,7 +15,7 @@ type CustomerDetails = {
 /**
  * Insert a customer into the DB
  * @param customerDetails
- * @isQuery
+ *
  * @returns
  */
 export async function updateCustomerQuery(id: string, customerDetails: CustomerDetails) {
