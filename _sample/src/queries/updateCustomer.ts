@@ -19,7 +19,11 @@ type CustomerDetails = {
  * @returns
  */
 export async function updateCustomerQuery(id: string, customerDetails: CustomerDetails) {
-   const res = await db.insertInto('Customers').values(customerDetails).executeTakeFirst()
+   console.info('params passed:', id, customerDetails);
+
+   const res = await db.insertInto('Customers')
+      .values(customerDetails)
+      .executeTakeFirst()
 
    return res;
 }
