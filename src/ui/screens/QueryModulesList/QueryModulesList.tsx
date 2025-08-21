@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Text, useInput } from 'ink';
+import { Box, Text } from 'ink';
 import { ModuleSelector } from './ModuleSelector';
 import type { Module } from './types';
 import { type LoadingState } from '../../uiLibs';
 import { QuerySelector } from './QuerySelector';
-import { ListContainer } from './ListContainer';
 import { useNavigate } from '../../uiLibs/routing';
 
 type Props = {
    height: number;
    isFocused: boolean;
+   setTips: (arg: { key: string, desc: string }[]) => void;
    listQueryModules: () => Promise<{ modules: Module[] }>;
 }
 
-export function QueryModulesList({ height, isFocused, listQueryModules }: Props) {
+export function QueryModulesList({ height, isFocused, listQueryModules, setTips }: Props) {
    const navigate = useNavigate();
    const [loading, setLoading] = useState<LoadingState<Module[]>>({ state: 'LOADING_IN_PROGRESS' });
    const [selectedModule, setSelectedModule] = useState<Module>();
@@ -21,17 +21,6 @@ export function QueryModulesList({ height, isFocused, listQueryModules }: Props)
 
    // eww. manually giving the select input list a number significantly lower than the height to accoutn for padding
    const safeListNumber = height - 4;
-
-   useInput((input, key) => {
-      if (!isFocused) return;
-
-      if (key.escape) {
-         if (selectedModule) return setSelectedModule(undefined);
-
-         return process.exit(0);
-      };
-
-   });
 
    useEffect(() => {
       if (loading.state === 'LOADING_IN_PROGRESS') {
@@ -63,19 +52,22 @@ export function QueryModulesList({ height, isFocused, listQueryModules }: Props)
    }
 
    if (selectedModule) {
+      const deselectModule = () => setSelectedModule(undefined);
+
       return (
-         <ListContainer navigationTips={"[ESC] Back | [ENTER] Select"}>
+         <Box flexGrow={1} flexDirection='column'>
             <Text>{selectedModule.modulePath}:</Text>
             <QuerySelector
                isFocused={true}
                displayLimit={safeListNumber}
                module={selectedModule}
+               setTips={setTips}
+               onBack={deselectModule}
                onSelect={({modulePath, query}) => {
-                  // navigate(`/query?modulePath=${modulePath}&query=${query}`)
                   navigate(`/module/${encodeURIComponent(modulePath)}/query/${encodeURIComponent(query)}`)
                }}
             />
-         </ListContainer>
+         </Box>
       );
    }
 
@@ -85,16 +77,20 @@ export function QueryModulesList({ height, isFocused, listQueryModules }: Props)
       setSelectedModule(mod);
    }
 
+   const exitApp = () => process.exit(0);
+
    return (
-      <ListContainer navigationTips={"[ESC] Exit | [ENTER] Select | [/] ???"}>
+      <Box flexGrow={1} flexDirection='column'>
          <Text>Query modules ({loading.result.length}): </Text>
          <ModuleSelector
             displayLimit={safeListNumber}
             isFocused={isFocused}
             modules={loading.result}
             initialIndex={initialIndex}
+            setTips={setTips}
             onSelect={onModuleSelected}
+            onBack={exitApp}
          />
-      </ListContainer>
+      </Box>
    );
 }
