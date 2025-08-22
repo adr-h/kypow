@@ -50,7 +50,7 @@ export function QueryDetails({ getQuery, setTips, isFocused }: Props) {
       setTips([
          { key: "C", desc: "Copy SQL" },
          { key: "S", desc: "Switch SQL" },
-         { key: "P", desc: 'Select params'}
+         { key: "P", desc: 'Edit Params'}
       ])
    }, [isFocused])
 
@@ -91,15 +91,16 @@ export function QueryDetails({ getQuery, setTips, isFocused }: Props) {
             <Text bold>Function :</Text> <Text>{functionName}()</Text>
             <Newline />
             <Text bold>Module   : </Text><Text>{modulePath}</Text>
-            <Newline />
-            <Text bold>Docs     :</Text>
-            <Newline />
-            <Text>{description}</Text>
             <Newline /> <Newline />
 
             <Text bold>SQL      :</Text>
             <Newline />
             <Text>{wrap(sql, { width: 50 })}</Text>
+            <Newline /> <Newline />
+
+            <Text bold>Docs     :</Text>
+            <Newline />
+            <Text>{description}</Text>
          </Text>
       </Box>
    )
