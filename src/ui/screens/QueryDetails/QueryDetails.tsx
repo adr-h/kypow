@@ -1,16 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Newline, Text } from "ink";
+import { Box, Newline, Text, useInput } from "ink";
 import type { QueryMeta } from './types';
 import type { LoadingState } from '../../uiLibs';
 import { useParams } from '../../uiLibs/routing';
+import wrap from 'word-wrap';
+import clipboard from 'clipboardy';
 
 type Props = {
+   isFocused: boolean;
+   setTips: (arg: { key: string, desc: string }[]) => void;
    getQuery: (arg: { modulePath: string; functionName: string; }) => Promise<QueryMeta>
 }
 
-export function QueryDetails({ getQuery }: Props) {
+export function QueryDetails({ getQuery, setTips, isFocused }: Props) {
    const [loading, setLoading] = useState<LoadingState<QueryMeta>>({ state: 'LOADING_IN_PROGRESS' });
    const { functionName, modulePath } = useExtractQueryDetailsParams();
+   const [sqlMode, setSqlMode] = useState<'sql' | 'interpolatedSql'>('sql');
+
+   useInput((input, key) => {
+      if (!isFocused) return;
+      if (!(loading.state === 'LOADING_SUCCESS')) return;
+
+      if (input === 'c') {
+         console.log('Query copied to clipboard!');
+         clipboard.writeSync(loading.result[sqlMode])
+      }
+
+      if (input === 's') {
+         console.log('Sql mode switched');
+         setSqlMode(sqlMode === 'sql' ? 'interpolatedSql' : 'sql');
+      }
+   })
+
+   useEffect(() => {
+      if (!isFocused) return;
+
+      setTips([ { key: "C", desc: "Copy SQL" }, { key: "S", desc: "Switch SQL" }])
+   }, [isFocused])
 
    useEffect(() => {
       if (loading.state === 'LOADING_IN_PROGRESS') {
@@ -40,6 +66,9 @@ export function QueryDetails({ getQuery }: Props) {
    }
 
    const result = loading.result;
+   const sql = result[sqlMode];
+   const description = result.description;
+
    return (
       <Box flexDirection='column'>
          <Text>
@@ -49,13 +78,13 @@ export function QueryDetails({ getQuery }: Props) {
             <Newline />
             <Text bold>Docs     :</Text>
             <Newline />
-            <Text>{result.description}</Text>
+            <Text>{description}</Text>
             <Newline /> <Newline />
 
 
             <Text bold>SQL      :</Text>
             <Newline />
-            <Text>{result.sql}</Text>
+            <Text>{wrap(sql, { width: 50 })}</Text>
          </Text>
       </Box>
    )

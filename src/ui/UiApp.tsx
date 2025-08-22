@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, render, Text } from "ink";
+import { Box, render, Text, useInput } from "ink";
 import type { App } from "../app";
 import { Sidebar } from "./components/Sidebar";
 import { QueryModulesList } from "./screens/QueryModulesList";
@@ -17,6 +17,18 @@ type UiAppProps = {
 };
 function UiApp({ app }: UiAppProps) {
    const [tips, setTips] = useState<Tip[]>([]);
+   const [focused, setFocused] = useState<'Sidebar' | 'Content'>('Sidebar');
+
+   const toggleFocused = () => {
+      setFocused(
+         focused === 'Sidebar' ? 'Content' : 'Sidebar'
+      );
+   }
+   useInput((input, key) => {
+      if (key.tab) {
+         toggleFocused();
+      }
+   });
 
    return (
       <Router>
@@ -24,21 +36,25 @@ function UiApp({ app }: UiAppProps) {
             <NavigationTips tips={tips} />
 
             <Box flexDirection="row" height={height}>
-               <Sidebar isFocused={true}>
+               <Sidebar isFocused={focused === 'Sidebar'}>
                   <QueryModulesList
                      height={height}
                      setTips={setTips}
-                     isFocused={true}
+                     isFocused={focused === 'Sidebar'}
                      listQueryModules={app.listQueryModules.bind(app)}
                   />
                </Sidebar>
 
-               <ContentArea isFocused={false}>
+               <ContentArea isFocused={focused === 'Content'}>
                   <Route path="/">
                      <Home />
                   </Route>
                   <Route path="/module/:encodedModulePath/query/:encodedFunctionName">
-                     <QueryDetails getQuery={app.getQuery.bind(app)} />
+                     <QueryDetails
+                        setTips={setTips}
+                        isFocused={focused === 'Content'}
+                        getQuery={app.getQuery.bind(app)}
+                     />
                   </Route>
                </ContentArea>
             </Box>

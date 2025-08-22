@@ -58,7 +58,7 @@ export function QueryModulesList({ height, isFocused, listQueryModules, setTips 
          <Box flexGrow={1} flexDirection='column'>
             <Text>{selectedModule.modulePath}:</Text>
             <QuerySelector
-               isFocused={true}
+               isFocused={isFocused}
                displayLimit={safeListNumber}
                module={selectedModule}
                setTips={setTips}
@@ -76,7 +76,6 @@ export function QueryModulesList({ height, isFocused, listQueryModules, setTips 
       setInitialIndex(index);
       setSelectedModule(mod);
    }
-
    const exitApp = () => process.exit(0);
 
    return (

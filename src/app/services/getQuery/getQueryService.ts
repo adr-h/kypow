@@ -41,7 +41,7 @@ export async function getQueryService({modulePath, functionName, tsProject, sqlD
       name: functionName,
       description: docs,
       sql: parametizedSql,
-      sampleSql:interpolatedSql,
-      sampleParams: sampleParams
+      interpolatedSql:interpolatedSql,
+      paramsUsed: sampleParams
    }
 }

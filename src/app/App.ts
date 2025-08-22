@@ -82,8 +82,8 @@ export class App {
          name: query.name,
          description: query.description,
          sql: query.sql,
-         sampleSql: query.sampleSql,
-         sampleParams: query.sampleParams,
+         interpolatedSql: query.interpolatedSql,
+         paramsUsed: query.paramsUsed,
       }
    }
 
