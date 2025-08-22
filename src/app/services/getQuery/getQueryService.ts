@@ -8,30 +8,29 @@ type ModuleLoader = (path: string) => Promise<Record<string, any>>;
 type GetQueryParams = {
    modulePath: string;
    functionName: string;
+   functionParams?: any[];
    tsProject: Project;
    sqlDialect: DialectPlugin;
    loadModule: ModuleLoader;
    timeout: number;
 }
-export async function getQueryService({modulePath, functionName, tsProject, sqlDialect, timeout, loadModule}: GetQueryParams) {
-   const sampleParams = generateSampleArgs({
-      tsProject,
-      sourceFile: modulePath,
-      functionName
-   });
-
+export async function getQueryService({modulePath, functionName, functionParams, tsProject, sqlDialect, timeout, loadModule}: GetQueryParams) {
    const docs = getFunctionJsDocs({
       tsProject,
       sourceFile: modulePath,
       functionName
    });
 
-   console.info(`sampleParams:`, sampleParams);
+   const paramsForQuery = functionParams || generateSampleArgs({
+      tsProject,
+      sourceFile: modulePath,
+      functionName
+   });
 
    const { interpolatedSql, parametizedSql } = await getSqlForQuery({
       modulePath,
       queryFunctionName: functionName,
-      params: sampleParams,
+      params: paramsForQuery,
       sqlDialect,
       loadModule, // :(
       timeout
@@ -42,6 +41,6 @@ export async function getQueryService({modulePath, functionName, tsProject, sqlD
       description: docs,
       sql: parametizedSql,
       interpolatedSql:interpolatedSql,
-      paramsUsed: sampleParams
+      paramsUsed: paramsForQuery
    }
 }

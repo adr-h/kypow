@@ -9,6 +9,7 @@ import { QueryDetails } from "./screens/QueryDetails";
 import { Router, Route } from "./uiLibs/routing";
 import { NavigationTips } from "./components/NavigationTips";
 import type { Tip } from "./components/NavigationTips/NavigationTips";
+import { EditQueryParams } from "./screens/EditQueryParams";
 
 const height = 15;
 
@@ -49,11 +50,19 @@ function UiApp({ app }: UiAppProps) {
                   <Route path="/">
                      <Home />
                   </Route>
-                  <Route path="/module/:encodedModulePath/query/:encodedFunctionName">
+
+                  <Route path="/module/:encodedModulePath/query/:encodedFunctionName{/withParams/:encodedJsonFunctionParams}">
                      <QueryDetails
                         setTips={setTips}
                         isFocused={focused === 'Content'}
                         getQuery={app.getQuery.bind(app)}
+                     />
+                  </Route>
+
+                  <Route path="/module/:encodedModulePath/query/:encodedFunctionName/editParams/:encodedJsonFunctionParams">
+                     <EditQueryParams
+                        setTips={setTips}
+                        isFocused={focused === 'Content'}
                      />
                   </Route>
                </ContentArea>

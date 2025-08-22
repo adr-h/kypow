@@ -5,7 +5,7 @@ import { createViteWithKyselyImposter } from "./createViteWithKyselyImposter";
 import { KyselyImposterPath } from './services/getQuery/fake-kysely';
 import type { ViteDevServer } from "vite";
 import { getQueryService } from "./services/getQuery";
-import { listQueryModulesService, listQueryModulesServicePoc } from "./services/listQueryModules";
+import { listQueryModulesServicePoc } from "./services/listQueryModules";
 import { fileURLToPath } from "url";
 import { listQueriesService } from "./services/listQueries";
 import { WatchedTypeScriptProject } from "../lib/type-system/WatchedTypeScriptProject";
@@ -63,20 +63,26 @@ export class App {
       return vite.ssrLoadModule(modulePath);
    }
 
-   async getQuery({modulePath, functionName}: {
+   async getQuery({modulePath, functionName, functionParams }: {
       modulePath: string;
       functionName: string;
+      functionParams?: any[]
    }) {
       const tsProject = await this.watchedTsProject.safelyGetProject();
+
+      console.log('Used params:', functionParams);
 
       const query = await getQueryService({
          modulePath,
          functionName,
+         functionParams,
          tsProject,
          sqlDialect: this.sqlDialect,
          loadModule: this.loadModule.bind(this),
          timeout: this.queryTimeout
       });
+
+
 
       return {
          name: query.name,
