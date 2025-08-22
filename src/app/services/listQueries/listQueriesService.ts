@@ -1,6 +1,6 @@
 import type { Project } from "ts-morph";
 import { filterFunctionsInModule } from "../../../lib/type-system/filterFunctionsInModule";
-import { IS_QUERY_TAG } from "../../constants";
+import { isQueryFunction } from "../../appLib/query";
 
 type GetQueryFunctionsInModuleParams = {
    modulePath: string;
@@ -10,9 +10,7 @@ export async function listQueriesService({ modulePath, tsProject }: GetQueryFunc
    const functionNames = await filterFunctionsInModule({
       modulePath,
       tsProject,
-      searchFunction: (f) => {
-         return !!f.getJsDocs().find(doc => doc.getFullText().includes(IS_QUERY_TAG));
-      }
+      searchFunction: (f) => isQueryFunction(f)
    });
 
    return functionNames;
