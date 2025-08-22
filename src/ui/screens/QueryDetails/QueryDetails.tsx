@@ -2,45 +2,61 @@ import React, { useEffect, useState } from 'react';
 import { Box, Newline, Text, useInput } from "ink";
 import type { QueryMeta } from './types';
 import type { LoadingState } from '../../uiLibs';
-import { useParams } from '../../uiLibs/routing';
+import { useNavigate, useParams } from '../../uiLibs/routing';
+import * as telejson from 'telejson';
 import wrap from 'word-wrap';
 import clipboard from 'clipboardy';
 
 type Props = {
    isFocused: boolean;
    setTips: (arg: { key: string, desc: string }[]) => void;
-   getQuery: (arg: { modulePath: string; functionName: string; }) => Promise<QueryMeta>
+   getQuery: (arg: { modulePath: string; functionName: string; functionParams?: any[] }) => Promise<QueryMeta>
 }
 
 export function QueryDetails({ getQuery, setTips, isFocused }: Props) {
+   const navigateTo = useNavigate();
    const [loading, setLoading] = useState<LoadingState<QueryMeta>>({ state: 'LOADING_IN_PROGRESS' });
-   const { functionName, modulePath } = useExtractQueryDetailsParams();
-   const [sqlMode, setSqlMode] = useState<'sql' | 'interpolatedSql'>('sql');
+   const { functionName, functionParams, modulePath } = useExtractQueryDetailsParams();
+   const [sqlMode, setSqlMode] = useState<'sql' | 'interpolatedSql'>( functionParams ? 'interpolatedSql' : 'sql');
 
    useInput((input, key) => {
       if (!isFocused) return;
       if (!(loading.state === 'LOADING_SUCCESS')) return;
 
       if (input === 'c') {
-         console.log('Query copied to clipboard!');
          clipboard.writeSync(loading.result[sqlMode])
       }
 
       if (input === 's') {
-         console.log('Sql mode switched');
          setSqlMode(sqlMode === 'sql' ? 'interpolatedSql' : 'sql');
+      }
+
+      if (input === 'p') {
+         navigateTo(
+            `/module/${
+               encodeURIComponent(modulePath)
+            }/query/${
+               encodeURIComponent(functionName)
+            }/editParams/${
+               encodeURIComponent(telejson.stringify(loading.result.paramsUsed))
+            }`
+         )
       }
    })
 
    useEffect(() => {
       if (!isFocused) return;
 
-      setTips([ { key: "C", desc: "Copy SQL" }, { key: "S", desc: "Switch SQL" }])
+      setTips([
+         { key: "C", desc: "Copy SQL" },
+         { key: "S", desc: "Switch SQL" },
+         { key: "P", desc: 'Select params'}
+      ])
    }, [isFocused])
 
    useEffect(() => {
       if (loading.state === 'LOADING_IN_PROGRESS') {
-         getQuery({ functionName, modulePath })
+         getQuery({ functionName, functionParams, modulePath })
          .then((result) => {
             setLoading({ state: 'LOADING_SUCCESS', result });
          })
@@ -81,7 +97,6 @@ export function QueryDetails({ getQuery, setTips, isFocused }: Props) {
             <Text>{description}</Text>
             <Newline /> <Newline />
 
-
             <Text bold>SQL      :</Text>
             <Newline />
             <Text>{wrap(sql, { width: 50 })}</Text>
@@ -103,10 +118,15 @@ function useExtractQueryDetailsParams() {
       throw new Error(`Missing function name!`);
    }
 
+   const encodedParams = params.encodedJsonFunctionParams;
+
    const modulePath = decodeURIComponent(encodedModulePath);
    const functionName = decodeURIComponent(encodedFunctionName);
+   const functionParams = encodedParams ? telejson.parse(decodeURIComponent(encodedParams)) : undefined;
 
    return {
-      functionName, modulePath
+      functionName,
+      functionParams,
+      modulePath,
    }
 }
