@@ -13,6 +13,8 @@ import { WatchedTypeScriptProject } from "../lib/type-system/WatchedTypeScriptPr
 Error.stackTraceLimit = 1000;
 const kypowRoot = fileURLToPath(new URL('..', import.meta.url))
 
+type UpdateSubscriber = (a: { type: 'LOADING' | 'READY' }) => void;
+
 export class App {
    projectRoot: string;
    kypowRoot: any;
@@ -22,6 +24,7 @@ export class App {
    ignorePaths: string[];
    noExternal: string[];
    queryTimeout: number;
+   updateSubscribers: UpdateSubscriber[];
 
    private _vite?: ViteDevServer;
 
@@ -34,13 +37,16 @@ export class App {
       this.sqlDialect = resolveDialectPlugin(config.dialect);
       this.noExternal = config.noExternal || [];
       this.queryTimeout = config.queryTimeout;
+      this.updateSubscribers = [];
 
       // TODO: customisable
       this.searchPaths = ['**/**.ts', '**/*.js'];
       this.ignorePaths = ['node_modules']
 
       this.watchedTsProject = new WatchedTypeScriptProject({
-         tsConfigFilePath: config.tsConfigPath
+         tsConfigFilePath: config.tsConfigPath,
+         onUpdateComplete: this.onTsProjectUpdateComplete.bind(this),
+         onUpdateStart: this.onTsProjectUpdateStart.bind(this)
       });
    }
 
@@ -56,6 +62,29 @@ export class App {
       }
 
       return this._vite;
+   }
+
+   public subscribeToUpdates(f: UpdateSubscriber) {
+      this.updateSubscribers.push(f);
+   }
+
+   public unsubscribeToUpdates(f: UpdateSubscriber) {
+      const indexOf = this.updateSubscribers.indexOf(f);
+      if (indexOf === -1) return;
+
+      this.updateSubscribers.splice(indexOf);
+   }
+
+   private async onTsProjectUpdateStart() {
+      // alert subscribers
+      for (const subscriber of this.updateSubscribers) {
+         subscriber({type: 'LOADING'})
+      }
+   }
+   private async onTsProjectUpdateComplete() {
+      for (const subscriber of this.updateSubscribers) {
+         subscriber({type: 'READY'})
+      }
    }
 
    private async loadModule(modulePath: string) {
@@ -81,8 +110,6 @@ export class App {
          loadModule: this.loadModule.bind(this),
          timeout: this.queryTimeout
       });
-
-
 
       return {
          name: query.name,
