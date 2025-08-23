@@ -70,6 +70,7 @@ function UiApp({ app }: UiAppProps) {
                      <QueryDetails
                         setTips={setTips}
                         isFocused={isContentFocused}
+                        maxHeight={height}
                         getQuery={app.getQuery.bind(app)}
                      />
                   </Route>
