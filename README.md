@@ -1,4 +1,8 @@
 # Kypow
+
+https://github.com/user-attachments/assets/81095446-a38c-4a0c-8cc1-51e1aed68845
+
+
 A Storybook-like tool for Kysely-powered apps.
 
 ## Disclaimer
