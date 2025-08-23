@@ -3,23 +3,30 @@ import { Box, Newline, Text } from "ink";
 import { useNavigate, useParams } from '../../uiLibs/routing';
 import * as telejson from 'telejson';
 import TextInput from 'ink-text-input';
+import { useShortcuts } from '../../uiLibs/shortcuts';
 
 type Props = {
    isFocused: boolean;
-   setTips: (arg: { key: string, desc: string }[]) => void;
 }
 
-export function EditQueryParams({ setTips, isFocused }: Props) {
+export function EditQueryParams({ isFocused }: Props) {
    const navigate = useNavigate();
+   const { setShortcuts } = useShortcuts();
 
    const { functionParams: initialfunctionParams, functionName, modulePath } = useExtractQueryDetailsParams();
    const [functionParams, setFunctionParams] = useState<string>(telejson.stringify(initialfunctionParams));
 
    useEffect(() => {
-      setTips([
-         { key: "Enter", desc: "Submit params" }
-      ]);
-   }, [isFocused])
+      setShortcuts(
+         [{
+            input: 'return',
+            type: 'k',
+            label: 'Enter',
+            desc: 'Submit params',
+         }],
+         isFocused
+      )
+   }, [isFocused]);
 
    const onSubmit = () => {
       navigate(

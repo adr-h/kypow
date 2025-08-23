@@ -4,17 +4,18 @@ import { ModuleSelector } from './ModuleSelector';
 import type { Module } from './types';
 import { type LoadingState } from '../../uiLibs';
 import { useNavigate } from '../../uiLibs/routing';
+import { useShortcuts } from '../../uiLibs/shortcuts/shortcut';
 
 type Props = {
    maxHeight: number;
    isFocused: boolean;
-   setTips: (arg: { key: string, desc: string }[]) => void;
    switchFocusToContent: () => void;
    listQueryModules: () => Promise<{ modules: Module[] }>;
 }
 
-export function QueryModulesList({ maxHeight, isFocused, listQueryModules, switchFocusToContent, setTips }: Props) {
+export function QueryModulesList({ maxHeight, isFocused, listQueryModules, switchFocusToContent }: Props) {
    const navigate = useNavigate();
+   const { setShortcuts } = useShortcuts();
    const [loading, setLoading] = useState<LoadingState<Module[]>>({ state: 'LOADING_IN_PROGRESS' });
    const safeListNumber = maxHeight - 4;
 
@@ -37,9 +38,15 @@ export function QueryModulesList({ maxHeight, isFocused, listQueryModules, switc
    }, [loading.state])
 
    useEffect(() => {
-      if (!isFocused) return;
-
-      setTips([{ key: 'Enter', desc: 'Select' }])
+      setShortcuts(
+         [{
+            input: 'return',
+            type: 'k',
+            label: 'Enter',
+            desc: 'Select module',
+         }],
+         isFocused
+      )
    }, [isFocused]);
 
    if (loading.state === 'LOADING_IN_PROGRESS') {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Box, Newline, Text, useInput } from "ink";
 import type { QueryMeta } from './types';
 import type { LoadingState } from '../../uiLibs';
@@ -7,48 +7,55 @@ import * as telejson from 'telejson';
 import wrap from 'word-wrap';
 import clipboard from 'clipboardy';
 import { ScrollArea } from '../../components/ScrollArea';
+import { useShortcuts } from '../../uiLibs/shortcuts/shortcut';
 
 type Props = {
    isFocused: boolean;
    maxHeight: number;
-   setTips: (arg: { key: string, desc: string }[]) => void;
    getQuery: (arg: { modulePath: string; functionName: string; functionParams?: any[] }) => Promise<QueryMeta>
 }
 
-export function QueryDetails({ getQuery, setTips, maxHeight, isFocused }: Props) {
+export function QueryDetails({ getQuery, maxHeight, isFocused }: Props) {
    const navigateTo = useNavigate();
-   const [loading, setLoading] = useState<LoadingState<QueryMeta>>({ state: 'LOADING_IN_PROGRESS' });
+   const { setShortcuts } = useShortcuts();
+
    const { functionName, functionParams, modulePath } = useExtractQueryDetailsParams();
+   const [loading, setLoading] = useState<LoadingState<QueryMeta>>({ state: 'LOADING_IN_PROGRESS' });
    const [sqlMode, setSqlMode] = useState<'sql' | 'interpolatedSql'>( functionParams ? 'interpolatedSql' : 'sql');
 
-   useInput((input, key) => {
-      if (!isFocused) return;
-      if (!(loading.state === 'LOADING_SUCCESS')) return;
-
-      if (input.toLowerCase() === 'c') return clipboard.writeSync(loading.result[sqlMode])
-      if (input.toLowerCase() === 's') return setSqlMode(sqlMode === 'sql' ? 'interpolatedSql' : 'sql');
-      if (input.toLowerCase() === 'p')
-         return navigateTo(
-            `/module/${
-               encodeURIComponent(modulePath)
-            }/query/${
-               encodeURIComponent(functionName)
-            }/editParams/${
-               encodeURIComponent(telejson.stringify(loading.result.paramsUsed))
-            }`
-         )
-   })
+   const copySqlToClipboard = useCallback(() => loading.state === 'LOADING_SUCCESS' && clipboard.writeSync(loading.result[sqlMode]), [loading, sqlMode]);
+   const toggleSqlMode = useCallback(() => setSqlMode(sqlMode === 'sql' ? 'interpolatedSql' : 'sql'), [sqlMode]);
+   const editParams = useCallback(() => loading.state === 'LOADING_SUCCESS' && navigateTo(
+      `/module/${encodeURIComponent(modulePath)}/query/${encodeURIComponent(functionName)}/editParams/${encodeURIComponent(telejson.stringify(loading.result.paramsUsed))}`
+   ), [loading]);
 
    useEffect(() => {
-      if (!isFocused) return;
+      setShortcuts([
+         {
+            input: 'S',
+            type: 'i',
+            desc: 'Switch SQL',
+            handler: toggleSqlMode
+         },
+         {
+            input: 'C',
+            type: 'i',
+            desc: 'Copy SQL',
+            handler: copySqlToClipboard
+         },
+         {
+            input: "p",
+            type: 'i',
+            desc: 'Edit Params',
+            handler: editParams
+         }, {
+            input: "↑↓",
+            type: 'i',
+            desc: 'Scroll content'
+         }
+      ], isFocused);
+   }, [isFocused, toggleSqlMode, copySqlToClipboard, editParams])
 
-      setTips([
-         { key: "c", desc: "Copy SQL" },
-         { key: "s", desc: "Switch SQL" },
-         { key: "p", desc: 'Edit Params'},
-         { key: "↑↓", desc: 'Scroll content'}
-      ])
-   }, [isFocused])
 
    useEffect(() => {
       if (loading.state === 'LOADING_IN_PROGRESS') {
