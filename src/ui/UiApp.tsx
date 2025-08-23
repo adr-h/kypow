@@ -21,25 +21,19 @@ function UiApp({ app }: UiAppProps) {
    const [tips, setTips] = useState<Tip[]>([]);
    const [focused, setFocused] = useState<'Sidebar' | 'Content'>('Sidebar');
 
-   const toggleFocused = () => {
-      setFocused(focused === 'Sidebar' ? 'Content' : 'Sidebar');
-   }
+   const toggleFocused = () => setFocused(focused === 'Sidebar' ? 'Content' : 'Sidebar');
    useInput((input, key) => {
       if (key.tab) return toggleFocused();
       if (input.toLowerCase() === 'q') return process.exit(0);
    });
+   const globalTips = [ {key: "q", desc: "Quit app"}, {key: "tab", desc: "Toggle focus" } ]
 
    const isSidebarFocused = focused === 'Sidebar';
    const isContentFocused = focused === 'Content';
-
    return (
       <Router>
          <Box flexDirection="column" columnGap={0}>
-            <NavigationTips tips={[
-               {key: "q", desc: "Quit app"},
-               {key: "tab", desc: "Toggle focus" },
-               ...tips
-            ]} />
+            <NavigationTips tips={[...globalTips, ...tips]} />
 
             <Box flexDirection="row" height={height}>
                <Sidebar isFocused={isSidebarFocused}>

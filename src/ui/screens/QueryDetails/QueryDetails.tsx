@@ -26,9 +26,7 @@ export function QueryDetails({ getQuery, setTips, maxHeight, isFocused }: Props)
       if (!(loading.state === 'LOADING_SUCCESS')) return;
 
       if (input.toLowerCase() === 'c') return clipboard.writeSync(loading.result[sqlMode])
-
       if (input.toLowerCase() === 's') return setSqlMode(sqlMode === 'sql' ? 'interpolatedSql' : 'sql');
-
       if (input.toLowerCase() === 'p')
          return navigateTo(
             `/module/${
