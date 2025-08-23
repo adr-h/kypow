@@ -3,22 +3,29 @@ import SelectInput from "ink-select-input";
 import { Box, Text, useInput } from 'ink';
 import { useNavigate, useParams } from '../../uiLibs/routing';
 import type { LoadingState } from '../../uiLibs';
+import { useShortcuts } from '../../uiLibs/shortcuts/shortcut';
 
 type Props = {
    isFocused: boolean;
    maxHeight: number;
    listQueries:(a: {modulePath: string}) => Promise<string[]>
-
-   setTips: (arg: { key: string, desc: string }[]) => void;
 }
-export function ModuleDetails({ maxHeight, isFocused, setTips, listQueries }: Props) {
+export function ModuleDetails({ maxHeight, isFocused, listQueries }: Props) {
    const navigate = useNavigate();
+   const { setShortcuts } = useShortcuts();
    const { modulePath } = useModuleDetailsParams();
    const [loading, setLoading] = useState<LoadingState<string[]>>({ state: 'LOADING_IN_PROGRESS' });
 
    useEffect(() => {
-      if (!isFocused) return;
-      setTips([{ key: 'Enter', desc: 'Select' }])
+      setShortcuts(
+         [{
+            input: 'return',
+            type: 'k',
+            label: 'Enter',
+            desc: 'Select query',
+         }],
+         isFocused
+      )
    }, [isFocused]);
 
    useEffect(() => {

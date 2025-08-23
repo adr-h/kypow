@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Text } from 'ink';
 
 export type Tip = {
-   key: string;
+   label: string;
    desc: string;
 }
 
@@ -16,9 +16,9 @@ export function NavigationTips({ tips }: { tips: Tip[] }) {
       >
          <Text> Navigation - </Text>
          {
-            tips.map(({key, desc}) =>
-            <Text key={key}>
-               [{key}] {desc} |{' '}
+            tips.map(({label, desc}) =>
+            <Text key={label}>
+               [{label}] {desc} |{' '}
             </Text>
          )}
       </Box>
