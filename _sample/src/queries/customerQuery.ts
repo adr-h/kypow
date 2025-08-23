@@ -16,7 +16,7 @@ function getDb() {
 
 /**
  * customerNameQuery - a simple query that gets a customer based on their first name.
- * This is some more fluff documentation
+ * This is some more fluff documentationssss?
  * so I can fill up some additional space
  * and possibly even cause a vertical overflow
  * so we can test the scrollability of our component
@@ -25,7 +25,8 @@ export async function customerNameQuery({ name, limit, date }: Param) {
    const res = await getDb().selectFrom('Customers')
       .select('first_name')
       .select('last_name')
-      .where('first_name', '==', name)
+      .where('first_name', '=', name)
+      .orderBy('first_name', 'desc')
       .limit(limit)
       .executeTakeFirstOrThrow();
 
