@@ -3,24 +3,20 @@ import { Box, Text } from 'ink';
 import { ModuleSelector } from './ModuleSelector';
 import type { Module } from './types';
 import { type LoadingState } from '../../uiLibs';
-import { QuerySelector } from './QuerySelector';
 import { useNavigate } from '../../uiLibs/routing';
 
 type Props = {
-   height: number;
+   maxHeight: number;
    isFocused: boolean;
    setTips: (arg: { key: string, desc: string }[]) => void;
+   switchFocusToContent: () => void;
    listQueryModules: () => Promise<{ modules: Module[] }>;
 }
 
-export function QueryModulesList({ height, isFocused, listQueryModules, setTips }: Props) {
+export function QueryModulesList({ maxHeight, isFocused, listQueryModules, switchFocusToContent, setTips }: Props) {
    const navigate = useNavigate();
    const [loading, setLoading] = useState<LoadingState<Module[]>>({ state: 'LOADING_IN_PROGRESS' });
-   const [selectedModule, setSelectedModule] = useState<Module>();
-   const [initialIndex, setInitialIndex] = useState<number>(0);
-
-   // eww. manually giving the select input list a number significantly lower than the height to accoutn for padding
-   const safeListNumber = height - 4;
+   const safeListNumber = maxHeight - 4;
 
    useEffect(() => {
       if (loading.state === 'LOADING_IN_PROGRESS') {
@@ -40,6 +36,12 @@ export function QueryModulesList({ height, isFocused, listQueryModules, setTips 
       }
    }, [loading.state])
 
+   useEffect(() => {
+      if (!isFocused) return;
+
+      setTips([{ key: 'Enter', desc: 'Select' }])
+   }, [isFocused]);
+
    if (loading.state === 'LOADING_IN_PROGRESS') {
       return <Text>Scanning modules with queries ...</Text>
    }
@@ -51,32 +53,10 @@ export function QueryModulesList({ height, isFocused, listQueryModules, setTips 
       </Box>
    }
 
-   if (selectedModule) {
-      const deselectModule = () => setSelectedModule(undefined);
-
-      return (
-         <Box flexGrow={1} flexDirection='column'>
-            <Text>{selectedModule.modulePath}:</Text>
-            <QuerySelector
-               isFocused={isFocused}
-               displayLimit={safeListNumber}
-               module={selectedModule}
-               setTips={setTips}
-               onBack={deselectModule}
-               onSelect={({modulePath, query}) => {
-                  navigate(`/module/${encodeURIComponent(modulePath)}/query/${encodeURIComponent(query)}`)
-               }}
-            />
-         </Box>
-      );
-   }
-
    const onModuleSelected = (mod: Module) => {
-      const index = loading.result.findIndex(({modulePath}) => modulePath === mod.modulePath);
-      setInitialIndex(index);
-      setSelectedModule(mod);
+      navigate(`/module/${encodeURIComponent(mod.modulePath)}/details`);
+      switchFocusToContent();
    }
-   const exitApp = () => process.exit(0);
 
    return (
       <Box flexGrow={1} flexDirection='column'>
@@ -85,10 +65,7 @@ export function QueryModulesList({ height, isFocused, listQueryModules, setTips 
             displayLimit={safeListNumber}
             isFocused={isFocused}
             modules={loading.result}
-            initialIndex={initialIndex}
-            setTips={setTips}
             onSelect={onModuleSelected}
-            onBack={exitApp}
          />
       </Box>
    );

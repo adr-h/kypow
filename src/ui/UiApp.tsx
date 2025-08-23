@@ -10,6 +10,7 @@ import { Router, Route } from "./uiLibs/routing";
 import { NavigationTips } from "./components/NavigationTips";
 import type { Tip } from "./components/NavigationTips/NavigationTips";
 import { EditQueryParams } from "./screens/EditQueryParams";
+import { ModuleDetails } from "./screens/ModuleDetails";
 
 const height = 15;
 
@@ -21,40 +22,54 @@ function UiApp({ app }: UiAppProps) {
    const [focused, setFocused] = useState<'Sidebar' | 'Content'>('Sidebar');
 
    const toggleFocused = () => {
-      setFocused(
-         focused === 'Sidebar' ? 'Content' : 'Sidebar'
-      );
+      setFocused(focused === 'Sidebar' ? 'Content' : 'Sidebar');
    }
    useInput((input, key) => {
-      if (key.tab) {
-         toggleFocused();
-      }
+      if (key.tab) return toggleFocused();
+      if (input.toLowerCase() === 'q') return process.exit(0);
    });
+
+   const isSidebarFocused = focused === 'Sidebar';
+   const isContentFocused = focused === 'Content';
 
    return (
       <Router>
          <Box flexDirection="column" columnGap={0}>
-            <NavigationTips tips={tips} />
+            <NavigationTips tips={[
+               {key: "q", desc: "Quit app"},
+               {key: "tab", desc: "Toggle focus" },
+               ...tips
+            ]} />
 
             <Box flexDirection="row" height={height}>
-               <Sidebar isFocused={focused === 'Sidebar'}>
+               <Sidebar isFocused={isSidebarFocused}>
                   <QueryModulesList
-                     height={height}
+                     maxHeight={height}
                      setTips={setTips}
-                     isFocused={focused === 'Sidebar'}
+                     isFocused={isSidebarFocused}
+                     switchFocusToContent={toggleFocused}
                      listQueryModules={app.listQueryModules.bind(app)}
                   />
                </Sidebar>
 
-               <ContentArea isFocused={focused === 'Content'}>
+               <ContentArea isFocused={isContentFocused}>
                   <Route path="/">
                      <Home />
+                  </Route>
+
+                  <Route path="/module/:encodedModulePath/details">
+                     <ModuleDetails
+                        setTips={setTips}
+                        isFocused={isContentFocused}
+                        maxHeight={height}
+                        listQueries={app.listQueries.bind(app)}
+                     />
                   </Route>
 
                   <Route path="/module/:encodedModulePath/query/:encodedFunctionName{/withParams/:encodedJsonFunctionParams}">
                      <QueryDetails
                         setTips={setTips}
-                        isFocused={focused === 'Content'}
+                        isFocused={isContentFocused}
                         getQuery={app.getQuery.bind(app)}
                      />
                   </Route>
@@ -62,7 +77,7 @@ function UiApp({ app }: UiAppProps) {
                   <Route path="/module/:encodedModulePath/query/:encodedFunctionName/editParams/:encodedJsonFunctionParams">
                      <EditQueryParams
                         setTips={setTips}
-                        isFocused={focused === 'Content'}
+                        isFocused={isContentFocused}
                      />
                   </Route>
                </ContentArea>

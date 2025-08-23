@@ -23,16 +23,12 @@ export function QueryDetails({ getQuery, setTips, isFocused }: Props) {
       if (!isFocused) return;
       if (!(loading.state === 'LOADING_SUCCESS')) return;
 
-      if (input === 'c') {
-         clipboard.writeSync(loading.result[sqlMode])
-      }
+      if (input.toLowerCase() === 'c') return clipboard.writeSync(loading.result[sqlMode])
 
-      if (input === 's') {
-         setSqlMode(sqlMode === 'sql' ? 'interpolatedSql' : 'sql');
-      }
+      if (input.toLowerCase() === 's') return setSqlMode(sqlMode === 'sql' ? 'interpolatedSql' : 'sql');
 
-      if (input === 'p') {
-         navigateTo(
+      if (input.toLowerCase() === 'p')
+         return navigateTo(
             `/module/${
                encodeURIComponent(modulePath)
             }/query/${
@@ -41,16 +37,15 @@ export function QueryDetails({ getQuery, setTips, isFocused }: Props) {
                encodeURIComponent(telejson.stringify(loading.result.paramsUsed))
             }`
          )
-      }
    })
 
    useEffect(() => {
       if (!isFocused) return;
 
       setTips([
-         { key: "C", desc: "Copy SQL" },
-         { key: "S", desc: "Switch SQL" },
-         { key: "P", desc: 'Edit Params'}
+         { key: "c", desc: "Copy SQL" },
+         { key: "s", desc: "Switch SQL" },
+         { key: "p", desc: 'Edit Params'}
       ])
    }, [isFocused])
 
