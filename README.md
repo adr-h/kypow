@@ -5,11 +5,6 @@ https://github.com/user-attachments/assets/81095446-a38c-4a0c-8cc1-51e1aed68845
 
 A Storybook-like tool for Kysely-powered apps.
 
-## Disclaimer
-Warning: I built this for my own personal usage; therefore, it may not be entirely ready for general prime time use yet. Current identified issues include:
-- all code is currently being run through `tsx` instead of being compiled
-- and probably other issues
-
 ## Basic usage
 
 1. Run `npx github:adr-h/kypow --dialect postgres --moduleType esm`
@@ -29,6 +24,8 @@ If you have any "Queries" in your project, they should then be picked up and lis
 A valid "Query" as defined by this tool, is any **function** that:
    - is exported
    - calls Kysely's execute() | executeTakeFirst() | executeTakeFirstOrThrow()
+   - ideally only has a single responsibility
+     - (i.e: your function only executes a Kysely query, and does not perform file writing, sending HTTP requests, etc)
    - has simple parameters.
      - I.e, supported types for parameters include:
        - non-symbol primitives (boolean, int, string, bigint)
@@ -61,4 +58,8 @@ export async function customerQuery({ id, limit }: { id: string; limit: number})
    return res;
 }
 ```
+
+
+## Known Issues / TO-DO:
+- [ ] actually build the project, so we can remove reliance on `tsx`
 
