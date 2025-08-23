@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from "ink";
 import type { App } from "../../app";
-import { NavigationTips } from "../components/NavigationTips";
+import { NavigationTips } from "./NavigationTips";
 import { EditQueryParams } from "../screens/EditQueryParams";
 import { Home } from "../screens/Home";
 import { ModuleDetails } from "../screens/ModuleDetails";
