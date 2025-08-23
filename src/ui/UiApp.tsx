@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, render } from "ink";
 import type { App } from "../app";
 import { Router } from "./uiLibs/routing";
-import { AppReadyLoader } from "./components/AppReadyLoader";
+import { AppReadyLoader } from "./shell/AppReadyLoader";
 import { ShortcutsProvider } from "./uiLibs/shortcuts";
 import { AppShell } from "./shell";
 
