@@ -17,8 +17,16 @@ Warning: I built this for my own personal usage; therefore, it may not be entire
 
 If you have any "Queries" in your project, they should then be picked up and listed. See [Queries](#queries) for details.
 
+## Features
+- automatic detection of query functions in your project (See [Queries](#queries) for details)
+- allows you to safely view the SQL your query functions would generate without actually executing them
+- allows you to easily copy the generated SQL
+- allows you to simulate passing parameters to your query functions, and have the generated SQL update accordingly
+  - supports basic JSON serializable values for parameters, as well as Date/Map/Set/bigint via [telejson](https://www.npmjs.com/package/telejson)
+- automatically updates as you save your project files, via chokidar.
+
 ## Queries
-A valid "Query" as defined by this tool, is any function in a module that:
+A valid "Query" as defined by this tool, is any **function** that:
    - is exported
    - calls Kysely's execute() | executeTakeFirst() | executeTakeFirstOrThrow()
    - has simple parameters.
@@ -31,9 +39,9 @@ A valid "Query" as defined by this tool, is any function in a module that:
        - objects (interfaces/object-like type aliases) with properties that match any supported type
          - basic intersections of object-like types
        - basic unions where all members match any supported type
-     - Ideally, your function's parameters would all be JSON serializible; but common use cases like Date / bigint/ etc are supported.
+     - Ideally, your function's parameters would all be JSON serializible; but common use cases like Date/bigint/Map/Set etc are supported, and you can input parameters for them via [telejson](https://www.npmjs.com/package/telejson)'s format.
 
-Note that if your function includes multiple query calls, only information for the first encountered query will be displayed.
+Note that if your function includes multiple .execute() calls, only information about the first encountered .execute() will be displayed.
 
 A simple, valid query function might look like this:
 ```typescript
