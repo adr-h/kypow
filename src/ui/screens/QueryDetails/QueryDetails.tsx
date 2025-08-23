@@ -6,14 +6,16 @@ import { useNavigate, useParams } from '../../uiLibs/routing';
 import * as telejson from 'telejson';
 import wrap from 'word-wrap';
 import clipboard from 'clipboardy';
+import { ScrollArea } from '../../components/ScrollArea';
 
 type Props = {
    isFocused: boolean;
+   maxHeight: number;
    setTips: (arg: { key: string, desc: string }[]) => void;
    getQuery: (arg: { modulePath: string; functionName: string; functionParams?: any[] }) => Promise<QueryMeta>
 }
 
-export function QueryDetails({ getQuery, setTips, isFocused }: Props) {
+export function QueryDetails({ getQuery, setTips, maxHeight, isFocused }: Props) {
    const navigateTo = useNavigate();
    const [loading, setLoading] = useState<LoadingState<QueryMeta>>({ state: 'LOADING_IN_PROGRESS' });
    const { functionName, functionParams, modulePath } = useExtractQueryDetailsParams();
@@ -45,7 +47,8 @@ export function QueryDetails({ getQuery, setTips, isFocused }: Props) {
       setTips([
          { key: "c", desc: "Copy SQL" },
          { key: "s", desc: "Switch SQL" },
-         { key: "p", desc: 'Edit Params'}
+         { key: "p", desc: 'Edit Params'},
+         { key: "↑↓", desc: 'Scroll content'}
       ])
    }, [isFocused])
 
@@ -81,7 +84,7 @@ export function QueryDetails({ getQuery, setTips, isFocused }: Props) {
    const description = result.description;
 
    return (
-      <Box flexDirection='column'>
+      <ScrollArea height={maxHeight - 8} isFocused={isFocused}>
          <Text>
             <Text bold>Function :</Text> <Text>{functionName}()</Text>
             <Newline />
@@ -97,7 +100,7 @@ export function QueryDetails({ getQuery, setTips, isFocused }: Props) {
             <Newline />
             <Text>{description}</Text>
          </Text>
-      </Box>
+      </ScrollArea>
    )
 }
 
