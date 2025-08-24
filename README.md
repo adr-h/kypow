@@ -14,6 +14,7 @@ If you have any "Queries" in your project, they should then be picked up and lis
 
 ## Features
 - automatic detection of query functions in your project (See [Queries](#queries) for details)
+- zero project-footprint; you do not need to install `kypow` to your project, or create any special files (e.g: like Storybook's `.stories`)
 - allows you to safely view the SQL your query functions would generate without actually executing them
 - allows you to easily copy the generated SQL
 - allows you to simulate passing parameters to your query functions, and have the generated SQL update accordingly
