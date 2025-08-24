@@ -1,17 +1,13 @@
 import React from 'react';
+
 import { Box } from "ink";
 import type { App } from "../../app";
 import { NavigationTips } from "./NavigationTips";
-import { EditQueryParams } from "../screens/EditQueryParams";
-import { Home } from "../screens/Home";
-import { ModuleDetails } from "../screens/ModuleDetails";
-import { QueryDetails } from "../screens/QueryDetails";
 import { QueryModulesList } from "../screens/QueryModulesList";
-import { Route } from "../uiLibs/routing";
 import { useShortcuts } from "../uiLibs/shortcuts";
-import { QueryExecution } from '../screens/QueryExecution';
+import { Routes } from './routes';
 
-const height = 15;
+const height = 15; // TODO: listen to process.stdout for max height instead of hardcoding
 
 type ShellProps = {
    focused: 'Sidebar' | 'Content';
@@ -25,7 +21,7 @@ export function AppShell({ app, focused, toggleFocused }: ShellProps) {
       <NavigationTips tips={shortcuts.enabledTips} />
       <Box flexDirection="row" height={height}>
          <Sidebar app={app} isFocused={focused === 'Sidebar'} toggleFocused={toggleFocused} />
-         <Routes app={app} isFocused={focused === 'Content'} />
+         <Content app={app} isFocused={focused === 'Content'} />
       </Box>
    </>
 }
@@ -34,7 +30,7 @@ type ContentProps = {
    app: App;
    isFocused: boolean;
 }
-function Routes({ app, isFocused }: ContentProps) {
+function Content({ app, isFocused }: ContentProps) {
    return <Box
       flexDirection="column"
       flexGrow={1}
@@ -42,40 +38,9 @@ function Routes({ app, isFocused }: ContentProps) {
       borderStyle="round"
       borderColor={isFocused ? "green" : "white"}
    >
-      <Route path="/">
-         <Home />
-      </Route>
-
-      <Route path="/module/:encodedModulePath/details">
-         <ModuleDetails
-            isFocused={isFocused}
-            maxHeight={height}
-            listQueries={app.listQueries.bind(app)}
-         />
-      </Route>
-
-      <Route path="/module/:encodedModulePath/query/:encodedFunctionName/execute/:encodedJsonFunctionParams">
-         <QueryExecution
-            isFocused={isFocused}
-            maxHeight={height}
-            executeQuery={app.executeQuery.bind(app)}
-         />
-      </Route>
-
-      <Route path="/module/:encodedModulePath/query/:encodedFunctionName{/withParams/:encodedJsonFunctionParams}">
-         <QueryDetails
-            isFocused={isFocused}
-            maxHeight={height}
-            getQuery={app.getQuery.bind(app)}
-         />
-      </Route>
-
-      <Route path="/module/:encodedModulePath/query/:encodedFunctionName/editParams/:encodedJsonFunctionParams">
-         <EditQueryParams isFocused={isFocused} />
-      </Route>
+      <Routes app={app} isFocused={isFocused} maxHeight={height} />
    </Box>
 }
-
 
 type SidebarProps = {
    isFocused: boolean;
