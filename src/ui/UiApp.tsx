@@ -11,6 +11,7 @@ type UiAppProps = {
 };
 function UiApp({ app }: UiAppProps) {
    const [focused, setFocused] = useState<'Sidebar' | 'Content'>('Sidebar');
+
    const toggleFocused = () => setFocused(focused === 'Sidebar' ? 'Content' : 'Sidebar');
    const exitApp = () => process.exit(0);
 

@@ -2,8 +2,7 @@ import type { Project } from "ts-morph";
 import type { DialectPlugin } from "../../../lib/sql";
 import { generateSampleArgs, getFunctionJsDocs } from "../../../lib/type-system";
 import { getSqlForQuery } from "./getSqlForQuery";
-
-type ModuleLoader = (path: string) => Promise<Record<string, any>>;
+import type { ViteDevServer } from "vite";
 
 type GetQueryParams = {
    modulePath: string;
@@ -11,15 +10,19 @@ type GetQueryParams = {
    functionParams?: any[];
    tsProject: Project;
    sqlDialect: DialectPlugin;
-   loadModule: ModuleLoader;
+   vite: ViteDevServer;
    timeout: number;
 }
-export async function getQueryService({modulePath, functionName, functionParams, tsProject, sqlDialect, timeout, loadModule}: GetQueryParams) {
+export async function getQueryService({modulePath, functionName, functionParams, tsProject, sqlDialect, timeout, vite}: GetQueryParams) {
    const docs = getFunctionJsDocs({
       tsProject,
       sourceFile: modulePath,
       functionName
    });
+
+   const loadModule = async (modulePath: string) => {
+      return vite.ssrLoadModule(modulePath);
+   }
 
    const paramsForQuery = functionParams || generateSampleArgs({
       tsProject,
