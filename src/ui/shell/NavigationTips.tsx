@@ -14,13 +14,14 @@ export function NavigationTips({ tips }: { tips: Tip[] }) {
          borderStyle="round"
          borderColor={"yellow"}
       >
-         <Text> Navigation - </Text>
+         <Text> Navigation: </Text>
          {
             tips.map(({label, desc}) =>
-            <Text key={label}>
-               [{label}] {desc} |{' '}
-            </Text>
-         )}
+               <Text key={label}>
+                  [{label}] {desc} |{' '}
+               </Text>
+            )
+         }
       </Box>
    )
 }
