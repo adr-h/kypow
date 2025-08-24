@@ -17,13 +17,13 @@ type ShellProps = {
 export function AppShell({ app, focused, toggleFocused }: ShellProps) {
    const shortcuts = useShortcuts();
 
-   return <>
+   return <Box flexDirection="column" columnGap={0}>
       <NavigationTips tips={shortcuts.enabledTips} />
       <Box flexDirection="row" height={height}>
          <Sidebar app={app} isFocused={focused === 'Sidebar'} toggleFocused={toggleFocused} />
          <Content app={app} isFocused={focused === 'Content'} />
       </Box>
-   </>
+   </Box>
 }
 
 type ContentProps = {

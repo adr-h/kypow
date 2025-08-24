@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Box, render } from "ink";
+import { render } from "ink";
 import type { App } from "../app";
 import { Router } from "./uiLibs/routing";
-import { AppReadyLoader } from "./shell/AppReadyLoader";
+import { AppReadyLoader } from "./AppReadyLoader";
 import { ShortcutsProvider } from "./uiLibs/shortcuts";
 import { AppShell } from "./shell";
 
@@ -17,18 +17,16 @@ function UiApp({ app }: UiAppProps) {
    return (
       <Router>
          <AppReadyLoader app={app}>
-            <Box flexDirection="column" columnGap={0}>
-               <ShortcutsProvider globalShortcuts={[
-                  { input: "q", type: "i", desc: "Quit app", handler: exitApp },
-                  { input: "tab", type: "k", desc: "Toggle focus", handler: toggleFocused }
-               ]}>
-                  <AppShell
-                     app={app}
-                     focused={focused}
-                     toggleFocused={toggleFocused}
-                  />
-               </ShortcutsProvider>
-            </Box>
+            <ShortcutsProvider globalShortcuts={[
+               { input: "q", type: "i", desc: "Quit app", handler: exitApp },
+               { input: "tab", type: "k", desc: "Toggle focus", handler: toggleFocused }
+            ]}>
+               <AppShell
+                  app={app}
+                  focused={focused}
+                  toggleFocused={toggleFocused}
+               />
+            </ShortcutsProvider>
          </AppReadyLoader>
       </Router>
    );
