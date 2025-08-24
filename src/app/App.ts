@@ -9,6 +9,8 @@ import { listQueryModulesServicePoc } from "./services/listQueryModules";
 import { fileURLToPath } from "url";
 import { listQueriesService } from "./services/listQueries";
 import { WatchedTypeScriptProject } from "../lib/type-system/WatchedTypeScriptProject";
+import { createPlainVite } from "./createPlainVite";
+import { runQueryService } from "./services/runQuery";
 
 Error.stackTraceLimit = 1000;
 const kypowRoot = fileURLToPath(new URL('..', import.meta.url))
@@ -26,7 +28,8 @@ export class App {
    queryTimeout: number;
    updateSubscribers: UpdateSubscriber[];
 
-   private _vite?: ViteDevServer;
+   private _viteWithKyselyImposter?: ViteDevServer;
+   private _plainVite?: ViteDevServer;
 
    private watchedTsProject: WatchedTypeScriptProject;
 
@@ -50,10 +53,18 @@ export class App {
       });
    }
 
-   private async getVite() {
-      if (!this._vite) {
+   private async getPlainVite() {
+      if (!this._plainVite) {
+         this._plainVite = await createPlainVite({projectRoot: this.projectRoot,})
+      }
+
+      return this._plainVite;
+   }
+
+   private async getViteWithKyselyImposter() {
+      if (!this._viteWithKyselyImposter) {
          // const watcher = createWatcher({ searchPaths, ignorePaths, cwd: projectRoot });
-         this._vite = await createViteWithKyselyImposter({
+         this._viteWithKyselyImposter = await createViteWithKyselyImposter({
             projectRoot: this.projectRoot,
             kypowRoot: this.kypowRoot,
             noExternal: this.noExternal,
@@ -61,7 +72,7 @@ export class App {
          })
       }
 
-      return this._vite;
+      return this._viteWithKyselyImposter;
    }
 
    public subscribeToUpdates(f: UpdateSubscriber) {
@@ -87,19 +98,16 @@ export class App {
       }
    }
 
-   private async loadModule(modulePath: string) {
-      const vite = await this.getVite();
-      return vite.ssrLoadModule(modulePath);
-   }
-
    async getQuery({modulePath, functionName, functionParams }: {
       modulePath: string;
       functionName: string;
       functionParams?: any[]
    }) {
       const tsProject = await this.watchedTsProject.safelyGetProject();
-
-      console.log('Used params:', functionParams);
+      const loadModule = async (modulePath: string) => {
+         const vite = await this.getViteWithKyselyImposter();
+         return vite.ssrLoadModule(modulePath);
+      }
 
       const query = await getQueryService({
          modulePath,
@@ -107,7 +115,7 @@ export class App {
          functionParams,
          tsProject,
          sqlDialect: this.sqlDialect,
-         loadModule: this.loadModule.bind(this),
+         loadModule,
          timeout: this.queryTimeout
       });
 
@@ -118,6 +126,17 @@ export class App {
          interpolatedSql: query.interpolatedSql,
          paramsUsed: query.paramsUsed,
       }
+   }
+
+   async executeQuery({modulePath, functionName, functionParams }: {
+      modulePath: string;
+      functionName: string;
+      functionParams?: any[]
+   }) {
+      const vite = await this.getPlainVite();
+      const { result } =  await runQueryService({ modulePath, functionName, functionParams, vite });
+
+      return { result };
    }
 
    async listQueryModules() {

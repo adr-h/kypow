@@ -23,10 +23,11 @@ type Param = {
  * limit
  *  */
 export async function getCustomerByName({ name, limit }: Param) {
-   const res = await getDb().selectFrom('Customers')
+   const db = await getDb();
+   const res = await db.selectFrom('Customers')
       .select('first_name')
-      .select('Customers.customer_id')
-      .select('Customers.city')
+      .select('Customers.password_hash')
+      .select('city')
       .where('first_name', '=', name)
       .limit(limit)
       .execute();

@@ -28,6 +28,9 @@ export function QueryDetails({ getQuery, maxHeight, isFocused }: Props) {
    const editParams = useCallback(() => loading.state === 'LOADING_SUCCESS' && navigateTo(
       `/module/${encodeURIComponent(modulePath)}/query/${encodeURIComponent(functionName)}/editParams/${encodeURIComponent(telejson.stringify(loading.result.paramsUsed))}`
    ), [loading]);
+   const executeQuery = useCallback(() => loading.state === 'LOADING_SUCCESS' && navigateTo(
+      `/module/${encodeURIComponent(modulePath)}/query/${encodeURIComponent(functionName)}/execute/${encodeURIComponent(telejson.stringify(loading.result.paramsUsed))}`
+   ), [loading]);
 
    useEffect(() => {
       setShortcuts([
@@ -48,13 +51,20 @@ export function QueryDetails({ getQuery, maxHeight, isFocused }: Props) {
             type: 'i',
             desc: 'Edit Params',
             handler: editParams
-         }, {
+         },
+         {
+            input: 'x',
+            type: 'i',
+            desc: 'Exec query',
+            handler: executeQuery,
+         },
+         {
             input: "↑↓",
             type: 'i',
             desc: 'Scroll content'
          }
       ], isFocused);
-   }, [isFocused, toggleSqlMode, copySqlToClipboard, editParams])
+   }, [isFocused, toggleSqlMode, copySqlToClipboard, editParams, executeQuery])
 
 
    useEffect(() => {
@@ -91,6 +101,9 @@ export function QueryDetails({ getQuery, maxHeight, isFocused }: Props) {
    return (
       <ScrollArea height={maxHeight - 8} isFocused={isFocused}>
          <Text>
+            <Text bold underline>Query Details</Text>
+            <Newline />
+
             <Text bold>Function :</Text> <Text>{functionName}()</Text>
             <Newline />
             <Text bold>Module   : </Text><Text>{modulePath}</Text>
