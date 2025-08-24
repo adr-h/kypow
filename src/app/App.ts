@@ -83,7 +83,7 @@ export class App {
       const indexOf = this.updateSubscribers.indexOf(f);
       if (indexOf === -1) return;
 
-      this.updateSubscribers.splice(indexOf);
+      this.updateSubscribers.splice(indexOf, 1);
    }
 
    private async onTsProjectUpdateStart() {
@@ -104,10 +104,7 @@ export class App {
       functionParams?: any[]
    }) {
       const tsProject = await this.watchedTsProject.safelyGetProject();
-      const loadModule = async (modulePath: string) => {
-         const vite = await this.getViteWithKyselyImposter();
-         return vite.ssrLoadModule(modulePath);
-      }
+      const vite = await this.getViteWithKyselyImposter();
 
       const query = await getQueryService({
          modulePath,
@@ -115,7 +112,7 @@ export class App {
          functionParams,
          tsProject,
          sqlDialect: this.sqlDialect,
-         loadModule,
+         vite,
          timeout: this.queryTimeout
       });
 
