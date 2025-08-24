@@ -41,7 +41,7 @@ export function EditQueryParams({ isFocused }: Props) {
    }
 
    return <Box flexDirection='column'>
-      <Text>Update Params for {functionName}:</Text>
+      <Text bold underline>Edit Params for {functionName}:</Text>
       <Newline />
       <TextInput value={functionParams} onChange={setFunctionParams} onSubmit={onSubmit} showCursor focus={isFocused} />
    </Box>

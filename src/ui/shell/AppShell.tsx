@@ -9,6 +9,7 @@ import { QueryDetails } from "../screens/QueryDetails";
 import { QueryModulesList } from "../screens/QueryModulesList";
 import { Route } from "../uiLibs/routing";
 import { useShortcuts } from "../uiLibs/shortcuts";
+import { QueryExecution } from '../screens/QueryExecution';
 
 const height = 15;
 
@@ -50,6 +51,14 @@ function Routes({ app, isFocused }: ContentProps) {
             isFocused={isFocused}
             maxHeight={height}
             listQueries={app.listQueries.bind(app)}
+         />
+      </Route>
+
+      <Route path="/module/:encodedModulePath/query/:encodedFunctionName/execute/:encodedJsonFunctionParams">
+         <QueryExecution
+            isFocused={isFocused}
+            maxHeight={height}
+            executeQuery={app.executeQuery.bind(app)}
          />
       </Route>
 
