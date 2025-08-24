@@ -22,7 +22,11 @@ function UiApp({ app }: UiAppProps) {
                   { input: "q", type: "i", desc: "Quit app", handler: exitApp },
                   { input: "tab", type: "k", desc: "Toggle focus", handler: toggleFocused }
                ]}>
-                  <AppShell app={app} focused={focused} toggleFocused={toggleFocused} />
+                  <AppShell
+                     app={app}
+                     focused={focused}
+                     toggleFocused={toggleFocused}
+                  />
                </ShortcutsProvider>
             </Box>
          </AppReadyLoader>
