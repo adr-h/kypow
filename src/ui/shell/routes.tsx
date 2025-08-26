@@ -44,7 +44,7 @@ export function Routes({ app, isFocused, maxHeight }: ContentProps) {
       </Route>
 
       <Route path="/module/:encodedModulePath/query/:encodedFunctionName/editParams/:encodedJsonFunctionParams">
-         <EditQueryParams isFocused={isFocused} />
+         <EditQueryParams isFocused={isFocused} maxHeight={maxHeight} />
       </Route>
    </>
 }

@@ -81,11 +81,13 @@ export function QueryExecution({ executeQuery, maxHeight, isFocused }: Props) {
             <Newline /> <Newline />
 
             <Text bold>Params used :</Text>
-            <Text>{wrap(telejson.stringify(functionParams), { width: 50 })}</Text>
+            <Newline />
+            <Text>{telejson.stringify(functionParams, { space: 2 })}</Text>
             <Newline /> <Newline />
 
             <Text bold>Result      :</Text>
-            <Text>{wrap(telejson.stringify(result), { width: 50 })}</Text>
+            <Newline />
+            <Text>{telejson.stringify(result, { space: 2 })}</Text>
          </Text>
       </ScrollArea>
    )
