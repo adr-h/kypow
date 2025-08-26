@@ -7,9 +7,10 @@ import { useShortcuts } from '../../uiLibs/shortcuts';
 
 type Props = {
    isFocused: boolean;
+   maxHeight: number;
 }
 
-export function EditQueryParams({ isFocused }: Props) {
+export function EditQueryParams({ isFocused, maxHeight }: Props) {
    const navigate = useNavigate();
    const { setShortcuts } = useShortcuts();
 
@@ -43,7 +44,9 @@ export function EditQueryParams({ isFocused }: Props) {
    return <Box flexDirection='column'>
       <Text bold underline>Edit Params for {functionName}:</Text>
       <Newline />
-      <TextInput value={functionParams} onChange={setFunctionParams} onSubmit={onSubmit} showCursor focus={isFocused} />
+      <Box flexWrap='wrap'>
+         <TextInput value={functionParams} onChange={setFunctionParams} onSubmit={onSubmit} showCursor focus={isFocused} />
+      </Box>
    </Box>
 }
 

@@ -6,6 +6,7 @@ import { NavigationTips } from "./NavigationTips";
 import { QueryModulesList } from "../screens/QueryModulesList";
 import { useShortcuts } from "../uiLibs/shortcuts";
 import { Routes } from './routes';
+import { AppReadyLoader } from '../AppReadyLoader';
 
 const height = 15; // TODO: listen to process.stdout for max height instead of hardcoding
 
@@ -38,7 +39,9 @@ function Content({ app, isFocused }: ContentProps) {
       borderStyle="round"
       borderColor={isFocused ? "green" : "white"}
    >
-      <Routes app={app} isFocused={isFocused} maxHeight={height} />
+      <AppReadyLoader app={app}>
+         <Routes app={app} isFocused={isFocused} maxHeight={height} />
+      </AppReadyLoader>
    </Box>
 }
 
@@ -55,12 +58,14 @@ function Sidebar({ app, isFocused, toggleFocused }: SidebarProps) {
          borderStyle="round"
          borderColor={isFocused ? "green" : "white"}
       >
-         <QueryModulesList
-            maxHeight={height}
-            isFocused={isFocused}
-            switchFocusToContent={toggleFocused}
-            listQueryModules={app.listQueryModules.bind(app)}
-         />
+         <AppReadyLoader app={app}>
+            <QueryModulesList
+               maxHeight={height}
+               isFocused={isFocused}
+               switchFocusToContent={toggleFocused}
+               listQueryModules={app.listQueryModules.bind(app)}
+            />
+         </AppReadyLoader>
       </Box>
    );
 };
