@@ -58,14 +58,12 @@ function Sidebar({ app, isFocused, toggleFocused }: SidebarProps) {
          borderStyle="round"
          borderColor={isFocused ? "green" : "white"}
       >
-         {/* <AppReadyLoader app={app}> */}
          <QueryModulesList
             maxHeight={height}
             isFocused={isFocused}
             switchFocusToContent={toggleFocused}
             listQueryModules={app.listQueryModules.bind(app)}
          />
-         {/* </AppReadyLoader> */}
       </Box>
    );
 };
