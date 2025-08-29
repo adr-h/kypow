@@ -9,7 +9,7 @@ import { Routes } from './routes';
 import { AppReadyLoader } from '../AppReadyLoader';
 import { ModuleSearch } from '../screens/ModuleSearch';
 
-const height = 15; // TODO: listen to process.stdout for max height instead of hardcoding
+const height = 20; // TODO: listen to process.stdout for max height instead of hardcoding
 
 type ShellProps = {
    focused: 'Sidebar' | 'Content';
