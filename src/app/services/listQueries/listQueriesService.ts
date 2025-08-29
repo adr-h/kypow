@@ -7,11 +7,13 @@ type GetQueryFunctionsInModuleParams = {
    tsProject: Project;
 }
 export async function listQueriesService({ modulePath, tsProject }: GetQueryFunctionsInModuleParams) {
+   console.time('List queries');
    const functionNames = await filterFunctionsInModule({
       modulePath,
       tsProject,
       searchFunction: (f) => isQueryFunction(f)
    });
+   console.timeEnd('List queries');
 
    return functionNames;
 }
