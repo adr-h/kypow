@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import type { App } from "../../app"
+import type { App } from "../app"
 import { Box, Text } from "ink";
 
 
