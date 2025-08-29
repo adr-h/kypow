@@ -11,6 +11,7 @@ import { listQueriesService } from "./services/listQueries";
 import { WatchedTypeScriptProject } from "../lib/type-system/WatchedTypeScriptProject";
 import { createPlainVite } from "./createPlainVite";
 import { runQueryService } from "./services/runQuery";
+import { searchModulesService } from "./services/searchModules";
 
 Error.stackTraceLimit = 1000;
 const kypowRoot = fileURLToPath(new URL('..', import.meta.url))
@@ -142,6 +143,15 @@ export class App {
          tsProject,
          cwd: this.projectRoot
       })
+
+      return {
+         modules
+      };
+   }
+
+   async searchModules({ searchInput }: { searchInput: string }) {
+      const tsProject = await this.watchedTsProject.safelyGetProject();
+      const modules = await searchModulesService({ tsProject, cwd: this.projectRoot, searchInput });
 
       return {
          modules
