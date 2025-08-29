@@ -9,7 +9,8 @@ import { ModuleSearch } from '../screens/ModuleSearch';
 import { AppReadyLoader } from '../AppReadyLoader';
 import { useTerminalSize } from '../uiLibs/useTerminalSize';
 
-// const height = 20; // TODO: listen to process.stdout for max height instead of hardcoding
+const MINIMUM_HEIGHT = 18;
+const HEIGHT_PADDING = 1; // using the full terminal height sometimes causes clipping
 
 type ShellProps = {
    focused: 'Sidebar' | 'Content';
@@ -19,7 +20,7 @@ type ShellProps = {
 export function AppShell({ app, focused, toggleFocused }: ShellProps) {
    const shortcuts = useShortcuts();
    const { rows } = useTerminalSize();
-   const maxHeight = Math.max(rows - 1, 18);
+   const maxHeight = Math.max(rows - HEIGHT_PADDING, MINIMUM_HEIGHT);
 
    return <Box flexDirection="column" columnGap={0} height={maxHeight}>
       <NavigationTips tips={shortcuts.enabledTips}/>
