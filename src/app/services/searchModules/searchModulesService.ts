@@ -11,7 +11,7 @@ export async function searchModulesService({ tsProject, cwd, searchInput }: Para
    const sources = tsProject.getSourceFiles();
    const filepaths = sources.map(s => cwd ? path.relative(cwd, s.getFilePath()) : s.getFilePath());
 
-   const searchResults = fuzzysort.go(searchInput, filepaths);
+   const searchResults = fuzzysort.go(searchInput, filepaths).map(r => r.target);
 
    return searchResults;
 }
