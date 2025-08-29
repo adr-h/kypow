@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import Spinner from 'ink-spinner';
 import SelectInput from "ink-select-input";
 import { Box, Text, useInput } from 'ink';
 import { useNavigate, useParams } from '../../uiLibs/routing';
 import type { LoadingState } from '../../uiLibs';
 import { useShortcuts } from '../../uiLibs/shortcuts/shortcut';
+import { DancinGuy } from '../../components/DancinGuy';
 
 type Props = {
    isFocused: boolean;
@@ -42,7 +44,14 @@ export function ModuleDetails({ maxHeight, isFocused, listQueries }: Props) {
 
    if (loading.state === 'LOADING_IN_PROGRESS') {
       return (
-         <Box flexDirection='column'><Text> Loading module ... </Text></Box>
+         <Box flexDirection='column'>
+            <Text> Loading module ... </Text>
+            <Box flexDirection='row'>
+               <DancinGuy />
+               <DancinGuy />
+               <DancinGuy />
+            </Box>
+         </Box>
       )
    }
 
