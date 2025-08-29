@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import SelectInput from "ink-select-input";
-import { Box, Text, useInput } from 'ink';
+import { Box, Text } from 'ink';
 import { useNavigate, useParams } from '../../uiLibs/routing';
 import type { LoadingState } from '../../uiLibs';
 import { useShortcuts } from '../../uiLibs/shortcuts/shortcut';
+import { ThisIsFine } from '../../components/ThisIsFine';
 
 type Props = {
    isFocused: boolean;
@@ -42,7 +43,10 @@ export function ModuleDetails({ maxHeight, isFocused, listQueries }: Props) {
 
    if (loading.state === 'LOADING_IN_PROGRESS') {
       return (
-         <Box flexDirection='column'><Text> Loading module ... </Text></Box>
+         <Box flexDirection='column'>
+            <Text>Loading module ... </Text>
+            <ThisIsFine />
+         </Box>
       )
    }
 
