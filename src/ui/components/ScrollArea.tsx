@@ -95,7 +95,7 @@ export function ScrollArea({ height, children, isFocused }: ScrollAreaProps) {
   });
 
   return (
-    <Box height={height} borderStyle="single" flexDirection="column" flexGrow={1} overflow="hidden">
+    <Box height={height} flexDirection="column" flexGrow={1} overflow="hidden">
       <Box ref={innerRef} flexShrink={0} flexDirection="column" marginTop={-state.scrollTop}>
         {children}
       </Box>
