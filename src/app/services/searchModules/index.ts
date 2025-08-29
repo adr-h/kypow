@@ -1,0 +1,1 @@
+export { searchModulesService } from './searchModulesService';
