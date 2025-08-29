@@ -14,7 +14,13 @@ export class WatchedTypeScriptProject {
    private queue: SimpleQueue;
 
    constructor({ tsConfigFilePath, onUpdateComplete, onUpdateStart }: ConstructorProps) {
-      this.project = new TsMorphProject({ tsConfigFilePath });
+      console.time('Starting TS Project');
+      this.project = new TsMorphProject({
+         tsConfigFilePath,
+         skipFileDependencyResolution: true,
+      });
+      console.timeEnd('Starting TS Project');
+
       this.queue = new SimpleQueue({
          onRunning: onUpdateStart,
          onEmpty: onUpdateComplete

@@ -18,8 +18,12 @@ async function main() {
 
    const parsedConfig = parseConfig();
 
+   console.time("Initialising app");
    console.log("⌛ Initialising app ...");
    const app = new App(parsedConfig);
+
+   console.timeEnd("Initialising app");
+
 
    renderUiApp(app);
 
