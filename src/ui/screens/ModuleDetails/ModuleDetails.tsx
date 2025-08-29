@@ -45,7 +45,7 @@ export function ModuleDetails({ maxHeight, isFocused, listQueries }: Props) {
    if (loading.state === 'LOADING_IN_PROGRESS') {
       return (
          <Box flexDirection='column'>
-            <Text> Loading module ... </Text>
+            <Text> <Spinner /> Loading module ... </Text>
             <Box flexDirection='row'>
                <DancinGuy />
                <DancinGuy />
