@@ -10,7 +10,7 @@ import { AppReadyLoader } from '../AppReadyLoader';
 import { useTerminalSize } from '../uiLibs/useTerminalSize';
 
 const MINIMUM_HEIGHT = 18;
-const HEIGHT_PADDING = 1; // using the full terminal height sometimes causes clipping
+const HEIGHT_PADDING = 2; // using the full terminal height sometimes causes clipping
 
 type ShellProps = {
    focused: 'Sidebar' | 'Content';
