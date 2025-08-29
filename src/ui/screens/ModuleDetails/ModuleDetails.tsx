@@ -59,15 +59,29 @@ export function ModuleDetails({ maxHeight, isFocused, listQueries }: Props) {
       value: query
    }));
 
-   const onSelect = (query: string) => {
+
+   const navigateToQuery = (query: string) => {
       navigate(`/module/${encodeURIComponent(modulePath)}/query/${encodeURIComponent(query)}`)
+   }
+
+   const hasNoQueries = items.length === 0;
+   if (hasNoQueries) {
+      return <Box flexDirection='column'>
+         <Text>No queries found in `{modulePath}.`</Text>
+      </Box>
+   }
+
+   const hasOnlyOneQuery = items.length === 1;
+   if (hasOnlyOneQuery) {
+      navigateToQuery(items[0].value);
+      return null;
    }
 
    return <Box flexDirection='column'>
       <Text>Queries in `{modulePath}`:</Text>
       <SelectInput
          items={items}
-         onSelect={(item) => onSelect(item.value)}
+         onSelect={(item) => navigateToQuery(item.value)}
          limit={maxHeight - 4}
          isFocused={isFocused}
       >
