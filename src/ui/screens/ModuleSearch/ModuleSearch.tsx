@@ -52,7 +52,13 @@ export function ModuleSearch({ maxHeight, isFocused, searchModules, switchFocusT
             type: 'k',
             label: 'Enter',
             desc: 'Select module',
-         }],
+         },
+         {
+            input: "↑↓",
+            type: 'i',
+            desc: 'Scroll results'
+         }
+         ],
          isFocused
       )
    }, [isFocused]);
@@ -71,7 +77,7 @@ export function ModuleSearch({ maxHeight, isFocused, searchModules, switchFocusT
             initialQuery={searchInput}
             onQueryChange={setSearchInput}
             renderItem={
-               ({item, highlighted, index}) => <Text inverse={highlighted} key={index}> { item } </Text>
+               ({ item, highlighted, index }) => <Text inverse={highlighted} key={index}> {item} </Text>
             }
             maxHeight={safeListNumber}
             focus={isFocused}
@@ -81,7 +87,7 @@ export function ModuleSearch({ maxHeight, isFocused, searchModules, switchFocusT
             (loading.state === 'LOADING_IN_PROGRESS') && <Text>Searching modules ...</Text>
          }
          {
-            loading.state ==='LOADING_ERROR' && <>
+            loading.state === 'LOADING_ERROR' && <>
                <Text>Search failed!</Text>
                <Text>{loading.message}</Text>
             </>
