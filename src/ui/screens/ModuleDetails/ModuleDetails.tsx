@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Spinner from 'ink-spinner';
 import SelectInput from "ink-select-input";
-import { Box, Text, useInput } from 'ink';
+import { Box, Text } from 'ink';
 import { useNavigate, useParams } from '../../uiLibs/routing';
 import type { LoadingState } from '../../uiLibs';
 import { useShortcuts } from '../../uiLibs/shortcuts/shortcut';
@@ -45,7 +44,7 @@ export function ModuleDetails({ maxHeight, isFocused, listQueries }: Props) {
    if (loading.state === 'LOADING_IN_PROGRESS') {
       return (
          <Box flexDirection='column'>
-            <Text> <Spinner /> Loading module ... </Text>
+            <Text>Loading module ... </Text>
             <ThisIsFine />
          </Box>
       )
