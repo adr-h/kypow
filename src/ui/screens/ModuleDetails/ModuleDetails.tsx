@@ -5,7 +5,7 @@ import { Box, Text, useInput } from 'ink';
 import { useNavigate, useParams } from '../../uiLibs/routing';
 import type { LoadingState } from '../../uiLibs';
 import { useShortcuts } from '../../uiLibs/shortcuts/shortcut';
-import { DancinGuy } from '../../components/DancinGuy';
+import { ThisIsFine } from '../../components/ThisIsFine';
 
 type Props = {
    isFocused: boolean;
@@ -46,11 +46,7 @@ export function ModuleDetails({ maxHeight, isFocused, listQueries }: Props) {
       return (
          <Box flexDirection='column'>
             <Text> <Spinner /> Loading module ... </Text>
-            <Box flexDirection='row'>
-               <DancinGuy />
-               <DancinGuy />
-               <DancinGuy />
-            </Box>
+            <ThisIsFine />
          </Box>
       )
    }
