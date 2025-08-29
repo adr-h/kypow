@@ -64,7 +64,7 @@ export function ComboBox<T>({ items, initialQuery = "", filter, onQueryChange, o
    const visibleItems = filtered.slice(scrollOffset, scrollOffset + maxHeight);
 
    return (
-      <Box flexDirection="column">
+      <Box flexDirection="column" gap={0}>
          <Box flexDirection="row" borderStyle={"round"}>
             <Text>{' 🔎 '}</Text>
             <TextInput
