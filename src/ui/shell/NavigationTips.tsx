@@ -10,9 +10,9 @@ export function NavigationTips({ tips }: { tips: Tip[] }) {
    return (
       <Box
          flexDirection="row"
-         flexGrow={1}
          borderStyle="round"
          borderColor={"yellow"}
+         gap={0}
       >
          <Text> Navigation: </Text>
          {
