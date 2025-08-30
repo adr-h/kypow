@@ -65,7 +65,7 @@ export function ComboBox<T>({ items, initialQuery = "", filter, onQueryChange, o
 
    return (
       <Box flexDirection="column" gap={0}>
-         <Box flexDirection="row" borderStyle={"round"}>
+         <Box flexDirection="row" borderStyle="single">
             <Text>{' 🔎 '}</Text>
             <TextInput
                value={query}
