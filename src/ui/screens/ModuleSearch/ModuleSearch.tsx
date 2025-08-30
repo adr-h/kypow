@@ -84,6 +84,10 @@ export function ModuleSearch({ maxHeight, isFocused, searchModules, switchFocusT
          />
 
          {
+            (loading.state === 'LOADING_SUCCESS') && Boolean(loading.result.length === 0) && <Text>No results found in project</Text>
+         }
+
+         {
             (loading.state === 'LOADING_IN_PROGRESS') && <Text>Searching modules ...</Text>
          }
          {
