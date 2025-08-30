@@ -17,7 +17,7 @@ function UiApp({ app }: UiAppProps) {
    return (
       <Router>
          <ShortcutsProvider globalShortcuts={[
-            { input: "escape", label: 'esc', type: "k", desc: "Quit app", handler: exitApp },
+            { input: "escape", label: 'esc', type: "k", desc: "Quit", handler: exitApp },
             { input: "tab", type: "k", desc: "Toggle focus", handler: toggleFocused }
          ]}>
             <AppShell

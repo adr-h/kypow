@@ -45,6 +45,7 @@ export function ModuleDetails({ maxHeight, isFocused, listQueries }: Props) {
       return (
          <Box flexDirection='column'>
             <Text>Loading module ... </Text>
+            <Text>Note: The first module you load might be slow. This is normal. Subsequent loads will be much quicker. </Text>
             <ThisIsFine />
          </Box>
       )

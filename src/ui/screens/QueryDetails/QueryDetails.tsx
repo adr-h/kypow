@@ -35,13 +35,13 @@ export function QueryDetails({ getQuery, maxHeight, isFocused }: Props) {
    useEffect(() => {
       setShortcuts([
          {
-            input: 'S',
+            input: 's',
             type: 'i',
             desc: 'Switch SQL',
             handler: toggleSqlMode
          },
          {
-            input: 'C',
+            input: 'c',
             type: 'i',
             desc: 'Copy SQL',
             handler: copySqlToClipboard
@@ -61,7 +61,7 @@ export function QueryDetails({ getQuery, maxHeight, isFocused }: Props) {
          {
             input: "↑↓",
             type: 'i',
-            desc: 'Scroll content'
+            desc: 'Scroll'
          }
       ], isFocused);
    }, [isFocused, toggleSqlMode, copySqlToClipboard, editParams, executeQuery])

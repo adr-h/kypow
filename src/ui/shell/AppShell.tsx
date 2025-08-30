@@ -22,12 +22,12 @@ export function AppShell({ app, focused, toggleFocused }: ShellProps) {
    const { rows } = useTerminalSize();
    const maxHeight = Math.max(rows - HEIGHT_PADDING, MINIMUM_HEIGHT);
 
-   return <Box flexDirection="column" columnGap={0} height={maxHeight}>
-      <NavigationTips tips={shortcuts.enabledTips}/>
-      <Box flexDirection="row" flexGrow={1}>
+   return <Box flexDirection="column" gap={0} height={maxHeight}>
+      <Box flexDirection="row" flexGrow={1} gap={0}>
          <Sidebar app={app} isFocused={focused === 'Sidebar'} toggleFocused={toggleFocused} maxHeight={maxHeight}/>
          <Content app={app} isFocused={focused === 'Content'} maxHeight={maxHeight}/>
       </Box>
+      <NavigationTips tips={shortcuts.enabledTips}/>
    </Box>
 }
 
@@ -41,7 +41,7 @@ function Content({ app, isFocused, maxHeight }: ContentProps) {
       flexDirection="column"
       flexGrow={1}
       paddingX={2}
-      borderStyle="round"
+      borderStyle="single"
       borderColor={isFocused ? "green" : "white"}
    >
       <AppReadyLoader app={app}>
@@ -61,7 +61,7 @@ function Sidebar({ app, isFocused, toggleFocused, maxHeight }: SidebarProps) {
       <Box
          flexDirection="column"
          paddingX={1}
-         borderStyle="round"
+         borderStyle="single"
          borderColor={isFocused ? "green" : "white"}
       >
          <ModuleSearch

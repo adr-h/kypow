@@ -19,7 +19,7 @@ export function ModuleSearch({ maxHeight, isFocused, searchModules, switchFocusT
 
    const [loading, setLoading] = useState<LoadingState<string[]>>({ state: 'LOADING_IN_PROGRESS' });
    const [searchInput, setSearchInput] = useDebouncedState<string>('query', 300);
-   const safeListNumber = maxHeight - 10;
+   const safeListNumber = maxHeight - 8;
 
    useEffect(() => {
       if (loading.state === 'LOADING_IN_PROGRESS') {
@@ -56,7 +56,7 @@ export function ModuleSearch({ maxHeight, isFocused, searchModules, switchFocusT
          {
             input: "↑↓",
             type: 'i',
-            desc: 'Scroll results'
+            desc: 'Scroll'
          }
          ],
          isFocused

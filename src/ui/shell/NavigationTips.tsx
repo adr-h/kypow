@@ -10,15 +10,13 @@ export function NavigationTips({ tips }: { tips: Tip[] }) {
    return (
       <Box
          flexDirection="row"
-         borderStyle="round"
-         borderColor={"yellow"}
          gap={0}
       >
-         <Text> Navigation: </Text>
+         <Text bold> Navigation: </Text>
          {
             tips.map(({label, desc}) =>
                <Text key={label}>
-                  [{label}] {desc} |{' '}
+                  [{label}] {desc}{' | '}
                </Text>
             )
          }

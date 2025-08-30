@@ -39,7 +39,7 @@ export function QueryExecution({ executeQuery, maxHeight, isFocused }: Props) {
          {
             input: "↑↓",
             type: 'i',
-            desc: 'Scroll content'
+            desc: 'Scroll'
          }
       ], isFocused);
    }, [isFocused, editParams])
@@ -75,19 +75,19 @@ export function QueryExecution({ executeQuery, maxHeight, isFocused }: Props) {
          <Text>
             <Text bold underline>Execution Results</Text>
             <Newline />
-            <Text bold>Function :</Text> <Text>{functionName}()</Text>
+            <Text bold>Query Func  :</Text> <Text>{functionName}()</Text>
             <Newline />
-            <Text bold>Module   : </Text><Text>{modulePath}</Text>
-            <Newline /> <Newline />
-
-            <Text bold>Params used :</Text>
-            <Newline />
-            <Text>{telejson.stringify(functionParams, { space: 2 })}</Text>
+            <Text bold>Module      : </Text><Text>{modulePath}</Text>
             <Newline /> <Newline />
 
             <Text bold>Result      :</Text>
             <Newline />
             <Text>{telejson.stringify(result, { space: 2 })}</Text>
+            <Newline /> <Newline />
+
+            <Text bold>Params used :</Text>
+            <Newline />
+            <Text>{telejson.stringify(functionParams, { space: 2 })}</Text>
          </Text>
       </ScrollArea>
    )
