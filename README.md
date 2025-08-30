@@ -38,7 +38,7 @@ A valid "Query" as defined by this tool, is any **function** that:
        - basic unions where all members match any supported type
      - Ideally, your function's parameters would all be JSON serializible; but common use cases like Date/bigint/Map/Set etc are supported, and you can input parameters for them via [telejson](https://www.npmjs.com/package/telejson)'s format.
 
-Note: 
+Note:
 - if your function includes multiple .execute() calls, only information about the first encountered .execute() will be displayed.
 
 A simple, valid query function might look like this:
@@ -52,7 +52,7 @@ import { db } from 'somewhere';
 export async function customerQuery({ id, limit }: { id: string; limit: number}) {
    const res = await db.selectFrom('Customers')
       .select('first_name')
-      .where('id', '==', id)
+      .where('id', '=', id)
       .limit(limit)
       .execute();
 
