@@ -20,6 +20,7 @@
     "clipboardy": "^4.0.0",
     "fast-glob": "^3.3.3",
     "fuzzysort": "^3.1.0",
+    "grapheme-splitter": "^1.0.4",
     "ink": "^6.1.1",
     "ink-markdown": "^1.0.4",
     "ink-select-input": "^6.2.0",
