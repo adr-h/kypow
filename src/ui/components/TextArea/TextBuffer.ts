@@ -33,20 +33,28 @@ export class TextBuffer {
       return splitter.splitGraphemes(this.lines[rowIndex]);
    }
 
-   private lastColumnIndex(rowIndex: number) {
-      return this.getColumnsForRow(rowIndex).length - 1;
+   private lastColumnPosition(rowIndex: number) {
+      // a cursor can be "after the last column", hence why length instead of length - 1
+      // e.g with | as cursor:
+      // |abcd => position 0 (typing here adds text BFORE abcd)
+      // a|bcd => position 1 (typing here adds text BETWEEN a and b)
+      // abc|d => position 2
+      // abcd| => position 3 (typing here adds text AFTER abcd)
+      // final index ('d') is 3, but the final place a cursor can be is actually 4
+      return this.getColumnsForRow(rowIndex).length;
    }
 
-   private lastRowIndex(){
+   private lastRowPosition() {
+      // a cursor cannot be "after the last row", hence why length - 1
       return this.lines.length - 1;
    }
 
    private isValidCursor({ col, row }: Cursor) {
-      if (row > this.lastRowIndex() || row < 0) {
+      if (row > this.lastRowPosition() || row < 0) {
          return false;
       }
 
-      if (col > this.lastColumnIndex(row) || col < 0) {
+      if (col > this.lastColumnPosition(row) || col < 0) {
          return false;
       }
 
@@ -69,7 +77,7 @@ export class TextBuffer {
          if (isFirstRow) return; // at 0, 0; nothing to do, just return.
 
          const newRowIndex = this.cursor.row - 1;
-         const newColIndex = this.lastColumnIndex(newRowIndex);
+         const newColIndex = this.lastColumnPosition(newRowIndex);
 
          return this.moveCursorTo({
             row: newRowIndex,
@@ -84,8 +92,8 @@ export class TextBuffer {
    }
 
    moveCursorRight() {
-      const isEndOfRow = this.cursor.col === this.lastColumnIndex(this.cursor.row);
-      const isLastRow = this.cursor.row === this.lastRowIndex();
+      const isEndOfRow = this.cursor.col === this.lastColumnPosition(this.cursor.row);
+      const isLastRow = this.cursor.row === this.lastRowPosition();
 
       if (isEndOfRow) {
          if (isLastRow) return; //at the very last col of the very last row; nowhere else to go
@@ -106,16 +114,16 @@ export class TextBuffer {
    }
 
    moveCursorDown() {
-      const isLastRow = this.cursor.row === this.lastRowIndex();
+      const isLastRow = this.cursor.row === this.lastRowPosition();
       if (isLastRow) {
          return this.moveCursorTo({
             row: this.cursor.row,
-            col: this.lastColumnIndex(this.cursor.row)
+            col: this.lastColumnPosition(this.cursor.row)
          });
       };
 
       const newRowIndex = this.cursor.row + 1;
-      const newColIndex = Math.min(this.cursor.col, this.lastColumnIndex(newRowIndex));
+      const newColIndex = Math.min(this.cursor.col, this.lastColumnPosition(newRowIndex));
 
       return this.moveCursorTo({
          col: newColIndex,
@@ -133,7 +141,7 @@ export class TextBuffer {
       };
 
       const newRowIndex = this.cursor.row - 1;
-      const newColIndex = Math.min(this.cursor.col, this.lastColumnIndex(newRowIndex));
+      const newColIndex = Math.min(this.cursor.col, this.lastColumnPosition(newRowIndex));
 
       return this.moveCursorTo({
          col: newColIndex,
