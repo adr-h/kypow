@@ -1,0 +1,153 @@
+import { TextBuffer } from './TextBuffer';
+import { describe, it, expect } from 'vitest'
+
+describe('TextBuffer', () => {
+  describe('constructor', () => {
+    it('should initialize with a given value', () => {
+      const buffer = new TextBuffer({ initialValue: 'hello\nworld' });
+      expect(buffer.lines).toEqual(['hello', 'world']);
+    });
+
+    it('should initialize cursor at 0,0 by default', () => {
+      const buffer = new TextBuffer({ initialValue: 'hello' });
+      expect(buffer.cursor).toEqual({ row: 0, col: 0 });
+    });
+
+    it('should initialize with a given cursor position', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'hello',
+        initialCursor: { row: 0, col: 2 },
+      });
+      expect(buffer.cursor).toEqual({ row: 0, col: 2 });
+    });
+  });
+
+  describe('moveCursorLeft', () => {
+    it('should move cursor left on the same line', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'hello',
+        initialCursor: { row: 0, col: 2 },
+      });
+      buffer.moveCursorLeft();
+      expect(buffer.cursor).toEqual({ row: 0, col: 1 });
+    });
+
+    it('should not move cursor if at the beginning of the first line', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'hello',
+        initialCursor: { row: 0, col: 0 },
+      });
+      buffer.moveCursorLeft();
+      expect(buffer.cursor).toEqual({ row: 0, col: 0 });
+    });
+
+    it('should wrap to the end of the previous line', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'first\nsecond',
+        initialCursor: { row: 1, col: 0 },
+      });
+
+      buffer.moveCursorLeft();
+      expect(buffer.cursor).toEqual({ row: 0, col: 4 });
+    });
+  });
+
+  describe('moveCursorRight', () => {
+    const initialValue = 'ab\ncd';
+    it('should move cursor right on the same line', () => {
+      const buffer = new TextBuffer({
+        initialValue,
+        initialCursor: { row: 0, col: 0 },
+      });
+      buffer.moveCursorRight();
+      expect(buffer.cursor).toEqual({ row: 0, col: 1 });
+    });
+
+    it('should move cursor to the beginning of the next line', () => {
+      const buffer = new TextBuffer({
+        initialValue,
+        initialCursor: { row: 0, col: 1 }, // at the 'b' of 'ab'
+      });
+      buffer.moveCursorRight();
+      expect(buffer.cursor).toEqual({ row: 1, col: 0 });
+    });
+
+    it('should not move cursor if at the end of the buffer', () => {
+        const buffer = new TextBuffer({
+            initialValue: 'ab\ncd',
+            initialCursor: { row: 1, col: 1 },
+        });
+
+        buffer.moveCursorRight();
+        expect(buffer.cursor).toEqual({ row: 1, col: 1 });
+    });
+  });
+
+  describe('moveCursorUp', () => {
+    const initialValue = 'long line\nshort';
+
+    it('should move cursor up to the previous line, same column', () => {
+      const buffer = new TextBuffer({
+        initialValue,
+        initialCursor: { row: 1, col: 2 },
+      });
+
+      buffer.moveCursorUp();
+      expect(buffer.cursor).toEqual({ row: 0, col: 2 });
+    });
+
+    it('should move cursor up, clamping column to end of shorter line', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'short\nlong line',
+        initialCursor: { row: 1, col: 7 },
+      });
+
+      buffer.moveCursorUp();
+      expect(buffer.cursor).toEqual({ row: 0, col: 4 });
+    });
+
+    it('should move to column 0 if on the first row', () => {
+      const buffer = new TextBuffer({
+        initialValue,
+        initialCursor: { row: 0, col: 5 },
+      });
+
+      buffer.moveCursorUp();
+      expect(buffer.cursor).toEqual({ row: 0, col: 0 });
+    });
+  });
+
+  describe('moveCursorDown', () => {
+    const initialValue = 'short\nlong line';
+
+    it('should move cursor down to the next line, same column', () => {
+      const buffer = new TextBuffer({
+        initialValue,
+        initialCursor: { row: 0, col: 2 },
+      });
+
+      buffer.moveCursorDown();
+      expect(buffer.cursor).toEqual({ row: 1, col: 2 });
+    });
+
+    it('should move cursor down, clamping column to end of shorter line', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'long line\nshort',
+        initialCursor: { row: 0, col: 7 },
+      });
+
+      buffer.moveCursorDown();
+      expect(buffer.cursor).toEqual({ row: 1, col: 4 });
+    });
+
+    it('should move to the end of the line if on the last line', () => {
+        const buffer = new TextBuffer({
+            initialValue: 'short\nlong line',
+            initialCursor: { row: 1, col: 2 },
+        });
+
+        buffer.moveCursorDown();
+        expect(buffer.cursor).toEqual({ row: 1, col: 8 });
+    });
+  });
+});
