@@ -48,7 +48,7 @@ describe('TextBuffer', () => {
       });
 
       buffer.moveCursorLeft();
-      expect(buffer.cursor).toEqual({ row: 0, col: 4 });
+      expect(buffer.cursor).toEqual({ row: 0, col: 5 });
     });
   });
 
@@ -66,7 +66,7 @@ describe('TextBuffer', () => {
     it('should move cursor to the beginning of the next line', () => {
       const buffer = new TextBuffer({
         initialValue,
-        initialCursor: { row: 0, col: 1 }, // at the 'b' of 'ab'
+        initialCursor: { row: 0, col: 2 }, // at the end of 'ab'
       });
       buffer.moveCursorRight();
       expect(buffer.cursor).toEqual({ row: 1, col: 0 });
@@ -75,11 +75,11 @@ describe('TextBuffer', () => {
     it('should not move cursor if at the end of the buffer', () => {
         const buffer = new TextBuffer({
             initialValue: 'ab\ncd',
-            initialCursor: { row: 1, col: 1 },
+            initialCursor: { row: 1, col: 2 },
         });
 
         buffer.moveCursorRight();
-        expect(buffer.cursor).toEqual({ row: 1, col: 1 });
+        expect(buffer.cursor).toEqual({ row: 1, col: 2 });
     });
   });
 
@@ -103,7 +103,7 @@ describe('TextBuffer', () => {
       });
 
       buffer.moveCursorUp();
-      expect(buffer.cursor).toEqual({ row: 0, col: 4 });
+      expect(buffer.cursor).toEqual({ row: 0, col: 5 });
     });
 
     it('should move to column 0 if on the first row', () => {
@@ -137,7 +137,7 @@ describe('TextBuffer', () => {
       });
 
       buffer.moveCursorDown();
-      expect(buffer.cursor).toEqual({ row: 1, col: 4 });
+      expect(buffer.cursor).toEqual({ row: 1, col: 5 });
     });
 
     it('should move to the end of the line if on the last line', () => {
@@ -147,7 +147,67 @@ describe('TextBuffer', () => {
         });
 
         buffer.moveCursorDown();
-        expect(buffer.cursor).toEqual({ row: 1, col: 8 });
+        expect(buffer.cursor).toEqual({ row: 1, col: 9 });
+    });
+  });
+
+  describe('Grapheme cluster support', () => {
+    it('should treat multi-byte characters as a single unit when moving left', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'a👍c',
+        initialCursor: { row: 0, col: 2 },
+      });
+      buffer.moveCursorLeft();
+      expect(buffer.cursor).toEqual({ row: 0, col: 1 });
+      buffer.moveCursorLeft();
+      expect(buffer.cursor).toEqual({ row: 0, col: 0 });
+    });
+
+    it('should treat multi-byte characters as a single unit when moving right', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'a👍c',
+        initialCursor: { row: 0, col: 0 },
+      });
+      buffer.moveCursorRight();
+      expect(buffer.cursor).toEqual({ row: 0, col: 1 });
+      buffer.moveCursorRight();
+      expect(buffer.cursor).toEqual({ row: 0, col: 2 });
+    });
+
+    it('should handle complex emoji graphemes when moving left', () => {
+      const buffer = new TextBuffer({
+        initialValue: '👨‍👩‍👧‍👦',
+        initialCursor: { row: 0, col: 1 },
+      });
+      buffer.moveCursorLeft();
+      expect(buffer.cursor).toEqual({ row: 0, col: 0 });
+    });
+
+    it('should handle complex emoji graphemes when moving right', () => {
+      const buffer = new TextBuffer({
+        initialValue: '👨‍👩‍👧‍👦',
+        initialCursor: { row: 0, col: 0 },
+      });
+      buffer.moveCursorRight();
+      expect(buffer.cursor).toEqual({ row: 0, col: 1 });
+    });
+
+    it('should wrap to previous line correctly with multi-byte chars', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'abc👍\ndef',
+        initialCursor: { row: 1, col: 0 },
+      });
+      buffer.moveCursorLeft();
+      expect(buffer.cursor).toEqual({ row: 0, col: 4 });
+    });
+
+    it('should wrap to next line correctly with multi-byte chars', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'abc👍\ndef',
+        initialCursor: { row: 0, col: 4 },
+      });
+      buffer.moveCursorRight();
+      expect(buffer.cursor).toEqual({ row: 1, col: 0 });
     });
   });
 });
