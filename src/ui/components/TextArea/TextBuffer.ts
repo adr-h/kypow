@@ -64,7 +64,7 @@ export class TextBuffer {
    // TODO: maybe just use class setter?
    private moveCursorTo({ col, row }:{ col: number, row: number }) {
       if (!this.isValidCursor({ col, row })) {
-         throw new Error(`Destination ${{col, row}} is out of bounds!`)
+         throw new Error(`Destination is out of bounds!`)
       }
       this.cursor = { col, row };
    }

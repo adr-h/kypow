@@ -20,6 +20,13 @@ describe('TextBuffer', () => {
       });
       expect(buffer.cursor).toEqual({ row: 0, col: 2 });
     });
+
+    it('should throw if given out-of-bounds cursor', () => {
+      expect(() => new TextBuffer({
+        initialValue: 'hello',
+        initialCursor: { row: -10, col: 20 },
+      })).toThrowError('Destination is out of bounds!')
+    });
   });
 
   describe('moveCursorLeft', () => {
