@@ -1,5 +1,5 @@
 import { TextBuffer } from './TextBuffer';
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 
 describe('TextBuffer', () => {
   describe('constructor', () => {
@@ -304,6 +304,43 @@ describe('TextBuffer', () => {
     });
 
   });
+
+  describe('onChange', () => {
+    it('should call onChange when the cursor is moved', () =>{
+      const onChange = vi.fn(() => 0);
+      const buffer = new TextBuffer({
+        initialValue: 'hello',
+        initialCursor: { row: 0, col: 2 },
+        onChange
+      });
+      buffer.moveCursorLeft();
+
+      expect(onChange).toHaveBeenCalledWith({
+        cursor: {
+          row: 0, col: 1
+        },
+        renderedValue: "hello "
+      })
+    })
+
+    it('should call onChange when the value is updated', () =>{
+      const onChange = vi.fn(() => 0);
+      const buffer = new TextBuffer({
+        initialValue: 'hello',
+        initialCursor: { row: 0, col: 2 },
+        onChange
+      });
+      buffer.insertAtCursor('hi there');
+
+      expect(onChange).toHaveBeenCalledWith({
+        cursor: {
+          row: 0, col: 10
+        },
+        renderedValue: "hehi therello "
+      })
+    })
+
+  })
 
   describe('Grapheme cluster support', () => {
     it('should treat multi-byte characters as a single unit when moving left', () => {
