@@ -247,6 +247,64 @@ describe('TextBuffer', () => {
 
   });
 
+  describe('removeAtCursor', () => {
+
+    it('should remove when at the middle of a line, and move cursor accordingly', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'first line\nsecond line\nthird line',
+        initialCursor: { row: 1, col: 6 },
+      });
+
+      buffer.removeAtCursor();
+
+      expect(buffer.lines.join('\n')).toEqual(
+        `first line\nsecon line\nthird line`
+      )
+
+      expect(buffer.cursor).toEqual({
+        col: 5,
+        row: 1
+      })
+    })
+
+    it('should concatenate the current and preceeding lines when at the beginning of a line, and move cursor accordingly', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'first line\nsecond line\nthird line',
+        initialCursor: { row: 1, col: 0 },
+      });
+
+      buffer.removeAtCursor();
+
+      expect(buffer.lines.join('\n')).toEqual(
+        `first linesecond line\nthird line`
+      )
+
+      expect(buffer.cursor).toEqual({
+        col: 21,
+        row: 0
+      })
+    });
+
+    it('should abort when at beginning of the first line, and not move cursor', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'first line\nsecond line\nthird line',
+        initialCursor: { row: 0, col: 0 },
+      });
+
+      buffer.removeAtCursor();
+
+      expect(buffer.lines.join('\n')).toEqual(
+        'first line\nsecond line\nthird line'
+      )
+
+      expect(buffer.cursor).toEqual({
+        col: 0,
+        row: 0
+      })
+    });
+
+  });
+
   describe('Grapheme cluster support', () => {
     it('should treat multi-byte characters as a single unit when moving left', () => {
       const buffer = new TextBuffer({

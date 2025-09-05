@@ -1,4 +1,5 @@
 import GraphemeSplitter from 'grapheme-splitter';
+import type { L } from 'vitest/dist/chunks/reporters.d.BFLkQcL6.js';
 
 type Cursor = {
    col: number;
@@ -178,9 +179,39 @@ export class TextBuffer {
       }
    }
 
+   removeAtCursor() {
+      const { col, row } = this.cursor;
+      const isFirstCol = col === 0;
+      const isFirstRow = row === 0
+
+      if (isFirstCol) {
+         // first col of first row; nowhere to go. Abort.
+         if (isFirstRow) return;
+
+         const currentLine = this.lines[row];
+         const preceedingLineIndex = row - 1;
+         const preceedingLine = this.lines[preceedingLineIndex];
+
+         // remove both the preceding line + current line; replace them with a concat of the two
+         this.lines.splice(preceedingLineIndex, 2, preceedingLine + currentLine)
+
+         this.moveCursorTo({
+            col: (preceedingLine + currentLine).length,
+            row: preceedingLineIndex
+         })
+         return;
+      }
+
+      this.lines[row] = this.getColumnsForRow(row)
+                        .toSpliced(this.cursor.col - 1, 1)
+                        .join('');
+      this.moveCursorLeft();
+
+      return;
+   }
+
    /**
     * TODO:
-    * removeAtCursor
     * render
     * renderWithCursor
     * triggerChangeHook
