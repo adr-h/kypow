@@ -158,6 +158,95 @@ describe('TextBuffer', () => {
     });
   });
 
+  describe('insertAtCursor', () => {
+    it('should be able to insert multi-line input at the beginning, and move cursor accordingly', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'first line\nsecond line\nthird line',
+        initialCursor: { row: 0, col: 10 },
+      });
+
+      buffer.insertAtCursor('_this should\nslot between\ndalines_')
+
+      expect(buffer.lines.join('\n')).toEqual(
+        `first line_this should\nslot between\ndalines_\nsecond line\nthird line`
+      )
+
+      expect(buffer.cursor).toEqual({
+        col: 8,
+        row: 2
+      })
+    })
+
+    it('should be able to insert single-line input at the beginning and move cursor accordingly', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'first line\nsecond line\nthird line',
+        initialCursor: { row: 0, col: 10 },
+      });
+
+      buffer.insertAtCursor('_this should be on the first line_')
+      expect(buffer.lines.join('\n')).toEqual(
+        `first line_this should be on the first line_\nsecond line\nthird line`
+      )
+
+      expect(buffer.cursor).toEqual({
+        row: 0,
+        col: 44
+      })
+    })
+
+    it('should be able to insert multi-line input at the middle and move cursor accordingly', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'first line\nsecond line\nthird line',
+        initialCursor: { row: 0, col: 5 },
+      });
+
+      buffer.insertAtCursor('_this should\nslot between\ndalines_')
+      expect(buffer.lines.join('\n')).toEqual(
+        `first_this should\nslot between\ndalines_ line\nsecond line\nthird line`
+      )
+
+      expect(buffer.cursor).toEqual({
+        row: 2,
+        col: 8
+      })
+    });
+
+    it('should be able to insert single-line input at the end and move cursor accordingly', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'first line\nsecond line\nthird line',
+        initialCursor: { row: 2, col: 10 },
+      });
+
+      buffer.insertAtCursor('_this should_stay_')
+      expect(buffer.lines.join('\n')).toEqual(
+        'first line\nsecond line\nthird line_this should_stay_'
+      )
+
+      expect(buffer.cursor).toEqual({
+        row: 2,
+        col: 28
+      })
+    });
+
+    it('should be able to insert multi-line input at the end and move cursor accordingly', () => {
+      const buffer = new TextBuffer({
+        initialValue: 'first line\nsecond line\nthird line',
+        initialCursor: { row: 2, col: 10 },
+      });
+
+      buffer.insertAtCursor('_this should\nslot between\ndalines_')
+      expect(buffer.lines.join('\n')).toEqual(
+        'first line\nsecond line\nthird line_this should\nslot between\ndalines_'
+      )
+
+      expect(buffer.cursor).toEqual({
+        row: 4,
+        col: 8
+      })
+    });
+
+  });
+
   describe('Grapheme cluster support', () => {
     it('should treat multi-byte characters as a single unit when moving left', () => {
       const buffer = new TextBuffer({
