@@ -11,14 +11,14 @@ const splitter = new GraphemeSplitter();
 export class TextBuffer {
    cursor: Cursor;
    lines: string[];
-   onChange?: (p: {renderedValue: string, cursor: Cursor}) => void;
+   onChange?: (p: {value: string, renderedValue: string, cursor: Cursor}) => void;
 
    constructor(
       { initialValue, onChange, initialCursor } :
       {
          initialValue: string,
          initialCursor?: Cursor;
-         onChange?: (p: {renderedValue: string, cursor: Cursor}) => void
+         onChange?: (p: {value: string, renderedValue: string, cursor: Cursor}) => void
       }
    ) {
       this.lines = initialValue.split('\n');
@@ -78,8 +78,9 @@ export class TextBuffer {
 
    private triggerEvents() {
       this.onChange?.({
+         value: this.lines.join('\n'),
          renderedValue: this.renderWithCursor(),
-         cursor: this.cursor
+         cursor: this.cursor,
       });
    }
 
