@@ -1,5 +1,5 @@
 import GraphemeSplitter from 'grapheme-splitter';
-import type { L } from 'vitest/dist/chunks/reporters.d.BFLkQcL6.js';
+import chalk from 'chalk';
 
 type Cursor = {
    col: number;
@@ -11,14 +11,14 @@ const splitter = new GraphemeSplitter();
 export class TextBuffer {
    cursor: Cursor;
    lines: string[];
-   onChange?: (renderedValue: string) => void;
+   onChange?: (p: {renderedValue: string, cursor: Cursor}) => void;
 
    constructor(
       { initialValue, onChange, initialCursor } :
       {
          initialValue: string,
          initialCursor?: Cursor;
-         onChange?: (renderedValue: string) => void
+         onChange?: (p: {renderedValue: string, cursor: Cursor}) => void
       }
    ) {
       this.lines = initialValue.split('\n');
@@ -72,6 +72,29 @@ export class TextBuffer {
          throw new Error(`Destination is out of bounds!`)
       }
       this.cursor = { col, row };
+
+      this.triggerEvents();
+   }
+
+   private triggerEvents() {
+      this.onChange?.({
+         renderedValue: this.renderWithCursor(),
+         cursor: this.cursor
+      });
+   }
+
+   private renderWithCursor() {
+      const { row, col } = this.cursor;
+
+      return this.lines.map((line, i) => {
+         if (i !== row ) return line;
+
+         // always render an extra space, to represent the cursor if it's at the end of the line
+         const cols = this.getColumnsForRow(i).concat([' ']);
+         cols[col] = chalk.inverse(cols[col]);
+
+         return cols.join('');
+      }).join('\n');
    }
 
    moveCursorLeft() {
@@ -192,7 +215,7 @@ export class TextBuffer {
          const preceedingLineIndex = row - 1;
          const preceedingLine = this.lines[preceedingLineIndex];
 
-         // remove both the preceding line + current line; replace them with a concat of the two
+         // remove both the preceeding line + current line; replace them with a concat of the two
          this.lines.splice(preceedingLineIndex, 2, preceedingLine + currentLine)
 
          this.moveCursorTo({
