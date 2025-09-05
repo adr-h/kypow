@@ -29,12 +29,16 @@ export class TextBuffer {
       }
    }
 
+   private getGraphemeCount(s: string) {
+      return splitter.countGraphemes(s);
+   }
+
    private getColumnsForRow(rowIndex: number) {
       return splitter.splitGraphemes(this.lines[rowIndex]);
    }
 
    private lastColumnPosition(rowIndex: number) {
-      // a cursor can be "after the last column", hence why length instead of length - 1
+      // a cursor can be "after the last column", hence why `length` instead of `length - 1`
       // e.g with | as cursor:
       // |abcd => position 0 (typing here adds text BFORE abcd)
       // a|bcd => position 1 (typing here adds text BETWEEN a and b)
@@ -149,9 +153,33 @@ export class TextBuffer {
       });
    }
 
+   insertAtCursor(input: string) {
+      const insertLines = input.split('\n');
+      const lastInsertLineLength = this.getGraphemeCount(insertLines[insertLines.length -1]);
+
+      const currentLine = this.getColumnsForRow(this.cursor.row);
+      const startOfCurrentLine = currentLine.slice(0, this.cursor.col).join('');
+      const restOfCurrentLine = currentLine.slice(this.cursor.col).join('');
+
+      insertLines[0] = startOfCurrentLine + insertLines[0];
+      insertLines[insertLines.length - 1] = insertLines[insertLines.length - 1] + restOfCurrentLine;
+      this.lines.splice(this.cursor.row, 1, ...insertLines);
+
+      if (insertLines.length > 1) {
+         this.moveCursorTo({
+            col: lastInsertLineLength,
+            row: this.cursor.row + (insertLines.length - 1),
+         });
+      } else {
+         this.moveCursorTo({
+            col: this.cursor.col + lastInsertLineLength,
+            row: this.cursor.row
+         })
+      }
+   }
+
    /**
     * TODO:
-    * insertAtCursor
     * removeAtCursor
     * render
     * renderWithCursor
