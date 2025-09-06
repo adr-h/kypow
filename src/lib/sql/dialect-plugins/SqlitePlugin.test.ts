@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { SqlitePlugin } from './SqlitePlugin';
 
 describe('SqlitePlugin', () => {

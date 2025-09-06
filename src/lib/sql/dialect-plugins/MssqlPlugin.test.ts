@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { MssqlPlugin } from './MssqlPlugin';
 
 describe('MssqlPlugin', () => {
