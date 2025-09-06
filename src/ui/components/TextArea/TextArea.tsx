@@ -57,6 +57,10 @@ export function TextArea({ value, onChange }: Props) {
          return textBuffer.insertAtCursor('\n');
       }
 
+      if (key.tab) {
+         return textBuffer.insertAtCursor('\t');
+      }
+
       if (input) {
          return textBuffer.insertAtCursor(input);
       }
