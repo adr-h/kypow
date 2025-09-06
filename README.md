@@ -65,4 +65,4 @@ export async function customerQuery({ id, limit }: { id: string; limit: number})
 - [ ] actually build the project, so we can remove reliance on `tsx`
 - [ ] rewrite <Router> component and it's associated libs; the current pseudo-web-URL nature of it is not necessary in this context, and only complicates routing.
   - [ ] use something akin to `{ key: string, prop: Record<string, any> }`
-
+- [ ] run `App` on a separate worker thread so heavy operations don't block the UI
