@@ -9,7 +9,7 @@
  * - whenever the user presses "backspace", delete the previous character. And also shift the row up if at col 0 (probably happens automatically, given we split by \n ?)
  * - whenever the user presses "enter", insert a newline \n
  */
-
+import React from 'react';
 import { Text, useInput } from "ink";
 import { useEffect, useState } from "react";
 import { TextBuffer } from "./TextBuffer";
@@ -79,13 +79,11 @@ export function TextArea({ value, onChange, visibleHeight }: Props) {
          return textBuffer.insertAtCursor('\n');
       }
 
-      if (key.tab) {
-         return textBuffer.insertAtCursor('\t');
-      }
-
       if (input) {
          return textBuffer.insertAtCursor(input);
       }
+
+      return;
    });
 
    return <Text>{renderedText.split('\n').slice(visibleArea.start, visibleArea.end).join('\n')}</Text>
