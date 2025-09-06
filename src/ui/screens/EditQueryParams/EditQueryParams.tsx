@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Newline, Text } from "ink";
+import { Box, Newline, Text, useInput } from "ink";
 import { useNavigate, useParams } from '../../uiLibs/routing';
 import * as telejson from 'telejson';
-import TextInput from 'ink-text-input';
 import { useShortcuts } from '../../uiLibs/shortcuts';
+import { TextArea } from '../../components/TextArea';
 
 type Props = {
    isFocused: boolean;
@@ -15,19 +15,7 @@ export function EditQueryParams({ isFocused, maxHeight }: Props) {
    const { setShortcuts } = useShortcuts();
 
    const { functionParams: initialfunctionParams, functionName, modulePath } = useExtractQueryDetailsParams();
-   const [functionParams, setFunctionParams] = useState<string>(telejson.stringify(initialfunctionParams));
-
-   useEffect(() => {
-      setShortcuts(
-         [{
-            input: 'return',
-            type: 'k',
-            label: 'Enter',
-            desc: 'Submit params',
-         }],
-         isFocused
-      )
-   }, [isFocused]);
+   const [functionParams, setFunctionParams] = useState<string>(telejson.stringify(initialfunctionParams, { space: 2 }));
 
    const onSubmit = () => {
       navigate(
@@ -41,11 +29,29 @@ export function EditQueryParams({ isFocused, maxHeight }: Props) {
       )
    }
 
+   useEffect(() => {
+      setShortcuts([],isFocused)
+   }, [isFocused]);
+
+   // todo: shortcuts should be able to support chorded inputs
+   useInput((input, key) => {
+      if (key.ctrl && input === 'x') {
+         onSubmit();
+      }
+   })
+
    return <Box flexDirection='column'>
-      <Text bold underline>Edit Params for {functionName}:</Text>
-      <Newline />
-      <Box flexWrap='wrap'>
-         <TextInput value={functionParams} onChange={setFunctionParams} onSubmit={onSubmit} showCursor focus={isFocused} />
+      <Text>
+         <Text bold underline>Edit Params for {functionName}:</Text>
+         <Newline />
+         <Text>Press [ctrl + x] to submit these params</Text>
+      </Text>
+      <Box flexWrap='wrap' borderStyle='single'>
+         <TextArea
+            value={functionParams}
+            onChange={setFunctionParams}
+            visibleHeight={10}
+         />
       </Box>
    </Box>
 }
