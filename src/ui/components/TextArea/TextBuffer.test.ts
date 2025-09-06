@@ -280,7 +280,7 @@ describe('TextBuffer', () => {
       )
 
       expect(buffer.cursor).toEqual({
-        col: 21,
+        col: 10,
         row: 0
       })
     });
@@ -319,7 +319,8 @@ describe('TextBuffer', () => {
         cursor: {
           row: 0, col: 1
         },
-        renderedValue: "hello "
+        renderedValue: "hello",
+        value: "hello"
       })
     })
 
@@ -336,7 +337,8 @@ describe('TextBuffer', () => {
         cursor: {
           row: 0, col: 10
         },
-        renderedValue: "hehi therello "
+        renderedValue: "hehi therello",
+        value: "hehi therello"
       })
     })
 

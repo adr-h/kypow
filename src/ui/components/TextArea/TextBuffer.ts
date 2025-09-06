@@ -88,13 +88,16 @@ export class TextBuffer {
       const { row, col } = this.cursor;
 
       return this.lines.map((line, i) => {
-         if (i !== row ) return line;
+         if (i !== row) return line;
 
-         // always render an extra space, to represent the cursor if it's at the end of the line
-         const cols = this.getColumnsForRow(i).concat([' ']);
-         cols[col] = chalk.inverse(cols[col]);
-
-         return cols.join('');
+         const graphemes = this.getColumnsForRow(i);
+         if (col < graphemes.length) {
+            graphemes[col] = chalk.inverse(graphemes[col]);
+            return graphemes.join('');
+         } else {
+            // Cursor is at the end of the line, so append an inverted space
+            return line + chalk.inverse(' ');
+         }
       }).join('\n');
    }
 
@@ -212,15 +215,16 @@ export class TextBuffer {
          // first col of first row; nowhere to go. Abort.
          if (isFirstRow) return;
 
-         const currentLine = this.lines[row];
+         // const currentLine = this.lines[row];
          const preceedingLineIndex = row - 1;
-         const preceedingLine = this.lines[preceedingLineIndex];
+         const currentLineCols = this.getColumnsForRow(row);
+         const preceedingLineCols = this.getColumnsForRow(preceedingLineIndex);
 
          // remove both the preceeding line + current line; replace them with a concat of the two
-         this.lines.splice(preceedingLineIndex, 2, preceedingLine + currentLine)
+         this.lines.splice(preceedingLineIndex, 2, preceedingLineCols.join('') + currentLineCols.join(''))
 
          this.moveCursorTo({
-            col: (preceedingLine + currentLine).length,
+            col: preceedingLineCols.length,
             row: preceedingLineIndex
          })
          return;
