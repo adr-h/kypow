@@ -28,6 +28,10 @@ export function QueryExecution({ executeQuery, maxHeight, isFocused }: Props) {
       `/module/${encodeURIComponent(modulePath)}/query/${encodeURIComponent(functionName)}/editParams/${encodeURIComponent(telejson.stringify(functionParams))}`
    ), [loading]);
 
+   const details = useCallback(() => navigateTo(
+      `/module/${encodeURIComponent(modulePath)}/query/${encodeURIComponent(functionName)}/withParams/${encodeURIComponent(telejson.stringify(functionParams))}`
+   ), [loading]);
+
    useEffect(() => {
       setShortcuts([
          {
@@ -35,6 +39,12 @@ export function QueryExecution({ executeQuery, maxHeight, isFocused }: Props) {
             type: 'i',
             desc: 'Edit Params',
             handler: editParams
+         },
+         {
+            input: 'd',
+            type: 'i',
+            desc: 'Back to Details',
+            handler: details
          },
          {
             input: "↑↓",
