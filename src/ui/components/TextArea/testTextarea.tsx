@@ -8,10 +8,14 @@ const TestApp = () => {
 dsadsd
 line dsadasd
 is asd
-here asdasdasd`
+here asdasdasd
+blah blah blah
+even more text
+lots of text
+so much text`
 );
    return <Box flexDirection="column">
-      <TextArea value={value} onChange={setValue} />
+      <TextArea value={value} onChange={setValue} visibleHeight={3} />
       <Text>
          {'------------------\n'}
          {'Actual value:\n'}

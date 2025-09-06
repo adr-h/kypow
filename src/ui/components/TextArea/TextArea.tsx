@@ -11,25 +11,47 @@
  */
 
 import { Text, useInput } from "ink";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextBuffer } from "./TextBuffer";
 
 type Props = {
    value: string;
    onChange: (s: string) => void;
+   visibleHeight: number;
 }
 
-export function TextArea({ value, onChange }: Props) {
-   const [renderedText, setRenderedText ] = useState<string>(value);
-   const [textBuffer] = useState<TextBuffer>(
+export function TextArea({ value, onChange, visibleHeight }: Props) {
+   const [ cursor, setCursor ] = useState<{col: number, row: number}>({ col: 0, row: 0 });
+   const [ renderedText, setRenderedText ] = useState<string>(value);
+
+   const [ textBuffer] = useState<TextBuffer>(
       new TextBuffer({
          initialValue: value,
-         onChange: ({ renderedValue, value }) => {
+         onChange: ({ renderedValue, value, cursor }) => {
             setRenderedText(renderedValue);
+            setCursor(cursor);
             onChange(value);
          }
       })
    );
+   const [visibleArea, setVisibleArea] = useState<{start: number, end: number}>({
+      start: 0,
+      end: Math.min(visibleHeight, renderedText.split('\n').length)
+   });
+
+   useEffect(() => {
+      if (cursor.row <= visibleArea.start) {
+         const start = cursor.row;
+         const end = Math.min((start + visibleHeight), renderedText.split('\n').length)
+         return setVisibleArea({ start, end });
+      }
+
+      if (cursor.row >= visibleArea.end) {
+         const start = visibleArea.start + 1;
+         const end = Math.min((start + visibleHeight), renderedText.split('\n').length)
+         return setVisibleArea({ start, end });
+      }
+   }, [cursor.row])
 
    useInput((input, key) => {
       if (key.upArrow) {
@@ -66,5 +88,5 @@ export function TextArea({ value, onChange }: Props) {
       }
    });
 
-   return <Text>{renderedText}</Text>
+   return <Text>{renderedText.split('\n').slice(visibleArea.start, visibleArea.end).join('\n')}</Text>
 }
